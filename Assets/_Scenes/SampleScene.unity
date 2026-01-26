@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 180966521}
   - component: {fileID: 180966520}
   - component: {fileID: 180966522}
+  - component: {fileID: 180966523}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -190,8 +191,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d1578fa2159a84693b9d92b3742744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerMovementController
-  characterController: {fileID: 0}
+  characterController: {fileID: 180966520}
   moveSpeed: 5
+--- !u!114 &180966523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180966519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b937dcb59404f2d4a90f1c9c723ae9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerAnimationController
+  animator: {fileID: 1283493971}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +762,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95787105524477528, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b7528e6c4c94fc243bfbfe297650e453, type: 2}
+    - target: {fileID: 95787105524477528, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -756,6 +778,11 @@ PrefabInstance:
 --- !u!4 &1283493970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+  m_PrefabInstance: {fileID: 1283493969}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1283493971 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95787105524477528, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
   m_PrefabInstance: {fileID: 1283493969}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1399181779

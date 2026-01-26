@@ -15,6 +15,7 @@ namespace TwinStickShooter.PlayerControllers
         private void SetMoveInput(Vector2 moveInput)
         {
             _moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+            Debug.Log($"Move Direction:{_moveDirection}");
         }
 
         private void Move()
