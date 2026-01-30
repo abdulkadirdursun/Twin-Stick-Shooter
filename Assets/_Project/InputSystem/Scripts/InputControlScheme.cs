@@ -71,6 +71,7 @@ namespace TwinStickShooter.InputSystem
             if (!_inputUserCreated)
             {
                 _inputUser = InputUser.PerformPairingWithDevice(device);
+                _inputUserCreated = true;
                 return;
             }
 
