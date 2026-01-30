@@ -6,7 +6,7 @@ namespace TwinStickShooter.InputSystem
 {
     /*# Why am I registering to input events but not unregister
      *Player inputs object will never disable once game session start.
-     *We are registering on beginning of the session and dispose the player inputs actions on the end 
+     *We are registering on beginning of the session and dispose the player inputs actions on the end
      */
     public class PlayerInputs : MonoBehaviour
     {
@@ -17,13 +17,15 @@ namespace TwinStickShooter.InputSystem
         #endregion
 
         private PlayerInputActions _playerInputActions;
+        private InputControlScheme _inputControlScheme;
 
         private void Initialize()
         {
             _playerInputActions = new PlayerInputActions();
+            _inputControlScheme = new InputControlScheme(_playerInputActions);
             //Gameplay
             _playerInputActions.Gameplay.Movement.performed += ReadMovementInput;
-            
+
             _playerInputActions.Gameplay.Enable();
         }
 
@@ -46,6 +48,7 @@ namespace TwinStickShooter.InputSystem
 
         private void OnDestroy()
         {
+            _inputControlScheme.Dispose();
             _playerInputActions.Dispose();
         }
 
