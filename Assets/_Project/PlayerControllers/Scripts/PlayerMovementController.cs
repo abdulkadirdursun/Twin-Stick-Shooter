@@ -1,5 +1,4 @@
-using System;
-using TwinStickShooter.InputSystem;
+using TwinStickShooter.PlayerControllers.FSM;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerControllers
@@ -9,37 +8,27 @@ namespace TwinStickShooter.PlayerControllers
     {
         [SerializeField] private CharacterController characterController;
         [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float rotateSpeed = 180f;
 
-        private Vector3 _moveDirection;
-
-        private void SetMoveInput(Vector2 moveInput)
-        {
-            _moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-            Debug.Log($"Move Direction:{_moveDirection}");
-        }
-
-        private void Move()
-        {
-            var movement = _moveDirection * (moveSpeed * Time.deltaTime);
-            characterController.Move(movement);
-        }
+        private PlayerMovementStateMachine _playerMovementStateMachine;
 
         #region MonoBehaviour Methods
 
-        private void OnEnable()
+        private void Awake()
         {
-            PlayerInputs.OnMove += SetMoveInput;
+            var blackboard = new PlayerMovementBlackboard(characterController, moveSpeed, rotateSpeed);
+            _playerMovementStateMachine = new PlayerMovementStateMachine(blackboard);
         }
 
         private void Update()
         {
-            if (_moveDirection == Vector3.zero) return;
-            Move();
-        }
+            if (_playerMovementStateMachine == null)
+            {
+                Debug.LogError("Player Movement State Machine is null!!!");
+                return;
+            }
 
-        private void OnDisable()
-        {
-            PlayerInputs.OnMove -= SetMoveInput;
+            _playerMovementStateMachine.CallStateUpdate();
         }
 
         #endregion
