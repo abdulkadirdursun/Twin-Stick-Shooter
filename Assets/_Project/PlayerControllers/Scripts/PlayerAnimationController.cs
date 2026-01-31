@@ -1,3 +1,4 @@
+using System;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace TwinStickShooter.PlayerControllers
         #region Movement
 
         private bool _isMoving;
+        private Vector3 _moveDirection;
 
         private static readonly int IsMovingId = Animator.StringToHash("IsMoving");
         private static readonly int MoveSpeedId = Animator.StringToHash("MoveSpeed");
@@ -19,9 +21,7 @@ namespace TwinStickShooter.PlayerControllers
         private void ReadMoveInputInput(Vector2 moveInput)
         {
             SetMoveState(moveInput != Vector2.zero);
-            animator.SetFloat(MoveSpeedId, moveInput.magnitude);
-            animator.SetFloat(MoveDirectionXId, moveInput.x);
-            animator.SetFloat(MoveDirectionYId, moveInput.y);
+            _moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         }
 
         private void SetMoveState(bool isMoving)
@@ -38,6 +38,17 @@ namespace TwinStickShooter.PlayerControllers
         private void OnEnable()
         {
             PlayerInputs.MoveInput += ReadMoveInputInput;
+        }
+
+        private void Update()
+        {
+            if (_isMoving)
+            {
+                var localMoveDirection = transform.InverseTransformDirection(_moveDirection);
+                animator.SetFloat(MoveSpeedId, _moveDirection.magnitude);
+                animator.SetFloat(MoveDirectionXId, localMoveDirection.x);
+                animator.SetFloat(MoveDirectionYId, localMoveDirection.z);
+            }
         }
 
         private void OnDisable()
