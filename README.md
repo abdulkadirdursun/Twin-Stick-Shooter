@@ -6,6 +6,7 @@
 - Object Pooling
 - Factory Pattern
 - Observer Pattern
+- State Machine
 
 ### Tecnologies
 - Unity Input System

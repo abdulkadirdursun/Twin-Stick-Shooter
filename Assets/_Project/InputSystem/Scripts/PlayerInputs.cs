@@ -10,12 +10,6 @@ namespace TwinStickShooter.InputSystem
      */
     public class PlayerInputs : MonoBehaviour
     {
-        #region Static
-
-        public static event Action<Vector2> OnMove;
-
-        #endregion
-
         private PlayerInputActions _playerInputActions;
         private InputControlScheme _inputControlScheme;
 
@@ -25,19 +19,12 @@ namespace TwinStickShooter.InputSystem
             _inputControlScheme = new InputControlScheme(_playerInputActions);
             //Gameplay
             _playerInputActions.Gameplay.Movement.performed += ReadMovementInput;
+            _playerInputActions.Gameplay.MouseAimTrigger.performed += OnMouseRightClickPerformed;
+            _playerInputActions.Gameplay.MouseAimTrigger.canceled += OnMouseRightClickCancelled;
+            _playerInputActions.Gameplay.Aim.performed += ReadAim;
 
             _playerInputActions.Gameplay.Enable();
         }
-
-        #region Gameplay Inputs
-
-        private void ReadMovementInput(InputAction.CallbackContext context)
-        {
-            var movementInput = context.ReadValue<Vector2>();
-            OnMove?.Invoke(movementInput);
-        }
-
-        #endregion
 
         #region MonoBehaviour Methods
 
@@ -50,6 +37,46 @@ namespace TwinStickShooter.InputSystem
         {
             _inputControlScheme.Dispose();
             _playerInputActions.Dispose();
+        }
+
+        #endregion
+
+
+        #region Gameplay Inputs
+
+        public static event Action<Vector2> MoveInput;
+        public static event Action OnStartAiming;
+        public static event Action OnStopAiming;
+        public static event Action<Vector2> AimPositionInput;
+
+        private void ReadMovementInput(InputAction.CallbackContext context)
+        {
+            var movementInput = context.ReadValue<Vector2>();
+            MoveInput?.Invoke(movementInput);
+        }
+
+        private void OnMouseRightClickPerformed(InputAction.CallbackContext context)
+        {
+            OnStartAiming?.Invoke();
+        }
+        private void OnMouseRightClickCancelled(InputAction.CallbackContext context)
+        {
+            OnStopAiming?.Invoke();
+        }
+
+        private void ReadAim(InputAction.CallbackContext context)
+        {
+            
+            var aimPosition = context.ReadValue<Vector2>();
+            if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
+            {
+                if (aimPosition == Vector2.zero)
+                    OnStopAiming?.Invoke();
+                else
+                    OnStartAiming?.Invoke();
+            }
+            
+            AimPositionInput?.Invoke(aimPosition);
         }
 
         #endregion

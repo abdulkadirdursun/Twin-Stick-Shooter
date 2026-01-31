@@ -16,7 +16,7 @@ namespace TwinStickShooter.PlayerControllers
         private static readonly int MoveDirectionXId = Animator.StringToHash("MoveDirectionX");
         private static readonly int MoveDirectionYId = Animator.StringToHash("MoveDirectionY");
 
-        private void ReadMoveInput(Vector2 moveInput)
+        private void ReadMoveInputInput(Vector2 moveInput)
         {
             SetMoveState(moveInput != Vector2.zero);
             animator.SetFloat(MoveSpeedId, moveInput.magnitude);
@@ -37,12 +37,12 @@ namespace TwinStickShooter.PlayerControllers
 
         private void OnEnable()
         {
-            PlayerInputs.OnMove += ReadMoveInput;
+            PlayerInputs.MoveInput += ReadMoveInputInput;
         }
 
         private void OnDisable()
         {
-            PlayerInputs.OnMove -= ReadMoveInput;
+            PlayerInputs.MoveInput -= ReadMoveInputInput;
         }
 
         #endregion
