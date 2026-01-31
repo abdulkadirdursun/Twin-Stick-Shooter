@@ -25,7 +25,7 @@ namespace TwinStickShooter.PlayerControllers.FSM
 
         public void StateEnter()
         {
-            Debug.LogWarning($"[{GetType().Name}] State Enter");
+            Debug.Log($"<color=green>[{GetType().Name}] </color>State Enter");
             PlayerInputs.MoveInput += ReadMoveInputInput;
             OnStateEnter();
         }
@@ -38,7 +38,7 @@ namespace TwinStickShooter.PlayerControllers.FSM
 
         public void StateExit()
         {
-            Debug.LogError($"[{GetType().Name}] State Exit");
+            Debug.Log($"<color=magenta>[{GetType().Name}]</color> State Exit");
             PlayerInputs.MoveInput -= ReadMoveInputInput;
             OnStateExit();
         }

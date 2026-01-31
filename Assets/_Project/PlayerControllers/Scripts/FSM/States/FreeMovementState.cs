@@ -14,7 +14,6 @@ namespace TwinStickShooter.PlayerControllers.FSM
 
         #endregion
 
-
         protected override Vector3 LookDirection => MoveDirection;
 
         protected override void OnStateEnter()
