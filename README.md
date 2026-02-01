@@ -4,14 +4,17 @@
 
 ### Design Patterns
 - Object Pooling
+    - Ammo, enemies etc.
 - Factory Pattern
 - Observer Pattern
 - State Machine
+    - Character Movement
 
 ### Tecnologies
 - Unity Input System
 - Scriptable Objects
 - Cinemachine
+- PrimeTween
 
 ## Q/A
 - Why am I registering to input events but not unregister (PlayerInputs.cs)
