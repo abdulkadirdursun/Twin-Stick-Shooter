@@ -1,14 +1,15 @@
 using PrimeTween;
 using TwinStickShooter.InteractionSystem;
 using TwinStickShooter.InteractionSystem.Interfaces;
-using TwinStickShooter.WeaponControlSystem;
+using TwinStickShooter.WeaponSlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
     public class WeaponStand : MonoBehaviour, IInteractable
     {
-        [SerializeField] private PlayerWeaponEquipmentData playerWeaponEquipmentData;
+        [SerializeField] private PlayerWeaponSlotsData playerWeaponSlotsData;
+        [Header("Showcased Weapon")]
         [SerializeField] private BaseWeaponData weaponData;
         [SerializeField] private Transform previewParent;
         [Header("Animation")]
@@ -21,7 +22,7 @@ namespace TwinStickShooter.WeaponSystem
 
         public void Interact()
         {
-            playerWeaponEquipmentData.TryToEquip(weaponData);
+            playerWeaponSlotsData.TryToEquip(weaponData);
         }
 
         #region MonoBehaviour Methods

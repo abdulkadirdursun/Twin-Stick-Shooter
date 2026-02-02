@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9802f55a7d410f44e950e76046f586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponStand
+  playerWeaponEquipmentData: {fileID: 11400000, guid: 904445c67560021419550c651d0c4820, type: 2}
   weaponData: {fileID: 0}
   previewParent: {fileID: 200230379479268273}
   animationEase: 1
