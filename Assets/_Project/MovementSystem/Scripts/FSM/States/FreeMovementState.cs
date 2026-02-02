@@ -1,7 +1,7 @@
 ﻿using TwinStickShooter.InputSystem;
 using UnityEngine;
 
-namespace TwinStickShooter.PlayerControllers.FSM
+namespace TwinStickShooter.MovementSystem.FSM
 {
     public class FreeMovementState : BaseMovementState
     {

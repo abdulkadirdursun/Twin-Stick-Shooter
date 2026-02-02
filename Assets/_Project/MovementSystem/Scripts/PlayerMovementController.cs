@@ -1,7 +1,7 @@
-using TwinStickShooter.PlayerControllers.FSM;
+using TwinStickShooter.MovementSystem.FSM;
 using UnityEngine;
 
-namespace TwinStickShooter.PlayerControllers
+namespace TwinStickShooter.MovementSystem
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovementController : MonoBehaviour

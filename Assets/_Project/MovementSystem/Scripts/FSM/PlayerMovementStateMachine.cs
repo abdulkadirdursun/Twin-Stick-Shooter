@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TwinStickShooter.StateMachineSystem;
 
-namespace TwinStickShooter.PlayerControllers.FSM
+namespace TwinStickShooter.MovementSystem.FSM
 {
     public sealed class PlayerMovementStateMachine : StateMachine<BaseMovementState>
     {

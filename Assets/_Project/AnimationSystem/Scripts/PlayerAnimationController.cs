@@ -1,8 +1,7 @@
-using System;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 
-namespace TwinStickShooter.PlayerControllers
+namespace TwinStickShooter.AnimationSystem
 {
     public class PlayerAnimationController : MonoBehaviour
     {

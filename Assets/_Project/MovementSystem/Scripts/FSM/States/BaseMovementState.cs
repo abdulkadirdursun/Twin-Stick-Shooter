@@ -2,7 +2,7 @@
 using TwinStickShooter.StateMachineSystem;
 using UnityEngine;
 
-namespace TwinStickShooter.PlayerControllers.FSM
+namespace TwinStickShooter.MovementSystem.FSM
 {
     public abstract class BaseMovementState : IState
     {
