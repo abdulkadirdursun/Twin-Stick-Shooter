@@ -1,9 +1,11 @@
 using PrimeTween;
+using TwinStickShooter.InteractionSystem;
+using TwinStickShooter.InteractionSystem.Interfaces;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
-    public class WeaponStand : MonoBehaviour
+    public class WeaponStand : MonoBehaviour, IInteractable
     {
         [SerializeField] private BaseWeaponData weaponData;
         [SerializeField] private Transform previewParent;
@@ -13,12 +15,30 @@ namespace TwinStickShooter.WeaponSystem
 
         private Tween _previewRotationTween;
 
+        public Vector3 Position => transform.position;
+
+        public void Interact()
+        {
+        }
+
         #region MonoBehaviour Methods
 
         private void Awake()
         {
             Instantiate(weaponData.WeaponPreviewPrefab, previewParent);
             _previewRotationTween = Tween.LocalEulerAngles(previewParent, Vector3.zero, Vector3.up * 360f, animationTime, animationEase, -1);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.TryGetComponent(out InteractionManager interactionManager)) return;
+            interactionManager.AddInteractable(this);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.TryGetComponent(out InteractionManager interactionManager)) return;
+            interactionManager.RemoveInteractable(this);
         }
 
         private void OnDestroy()
