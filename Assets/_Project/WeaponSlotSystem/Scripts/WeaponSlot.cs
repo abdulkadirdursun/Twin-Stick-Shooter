@@ -8,12 +8,12 @@ namespace TwinStickShooter.WeaponSlotSystem
     {
         public BaseWeaponData WeaponData { get; private set; }
 
-        public event Action OnWeaponEquipped;
+        public event Action OnSlotChanged;
 
         public void EquipWeapon(BaseWeaponData weaponData)
         {
             WeaponData = weaponData;
-            OnWeaponEquipped?.Invoke();
+            OnSlotChanged?.Invoke();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace TwinStickShooter.WeaponSlotSystem
     [CreateAssetMenu(fileName = "PlayerWeaponSlotsData", menuName = "Twin Stick Shooter/Weapon Control System/Player Weapon Slots Data")]
     public class PlayerWeaponSlotsData : ScriptableObject
     {
-        public WeaponSlot[] WeaponSlots { get; } = new WeaponSlot[]
+        private WeaponSlot[] WeaponSlots { get; } = new WeaponSlot[]
         {
             new WeaponSlot(),
             new WeaponSlot(),
@@ -44,6 +44,11 @@ namespace TwinStickShooter.WeaponSlotSystem
             }
 
             return false;
+        }
+
+        public WeaponSlot GetWeaponSlot(int index)
+        {
+            return index >= WeaponSlots.Length ? null : WeaponSlots[index];
         }
     }
 }
