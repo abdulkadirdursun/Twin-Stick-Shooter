@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 5504683666321661143}
   - component: {fileID: 7838296733699128736}
   m_Layer: 0
-  m_Name: InputIcons
+  m_Name: UIInputIcons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

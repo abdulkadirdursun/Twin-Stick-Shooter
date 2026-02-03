@@ -1,4 +1,5 @@
 using PrimeTween;
+using TwinStickShooter.InputSystem.View;
 using TwinStickShooter.InteractionSystem;
 using TwinStickShooter.WeaponSlotSystem;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace TwinStickShooter.WeaponSystem
         [Header("Animation")]
         [SerializeField] private Ease animationEase = Ease.Linear;
         [SerializeField] private float animationTime = 4f;
+        [Header("Button View")]
+        [SerializeField] private SpriteIconChanger spriteIconChanger; 
 
         private Tween _previewRotationTween;
 
@@ -22,6 +25,16 @@ namespace TwinStickShooter.WeaponSystem
         public void Interact()
         {
             playerWeaponSlotsData.TryToEquip(weaponData);
+        }
+
+        public void ShowInteractableIndicator()
+        {
+            spriteIconChanger.Show();
+        }
+
+        public void HideInteractableIndicator()
+        {
+            spriteIconChanger.Hide();
         }
 
         #region MonoBehaviour Methods

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using AKD.Toolkit.Extensions;
 using UnityEngine;
 
-namespace TwinStickShooter.InputSystem.UI
+namespace TwinStickShooter.InputSystem.View
 {
-    public class IconChanger : MonoBehaviour
+    public class UIIconChanger : MonoBehaviour
     {
         #region Struct
 
