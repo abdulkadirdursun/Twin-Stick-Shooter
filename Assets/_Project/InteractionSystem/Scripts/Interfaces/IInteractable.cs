@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TwinStickShooter.InteractionSystem.Interfaces
+namespace TwinStickShooter.InteractionSystem
 {
     public interface IInteractable
     {

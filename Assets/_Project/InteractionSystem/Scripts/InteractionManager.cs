@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TwinStickShooter.InteractionSystem.Interfaces;
+using TwinStickShooter.InputSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.InteractionSystem
@@ -39,5 +39,19 @@ namespace TwinStickShooter.InteractionSystem
                 return distA.CompareTo(distB);
             }
         }
+
+        #region MonoBehaviour Methods
+
+        private void OnEnable()
+        {
+            PlayerInputs.Interact += Interact;
+        }
+
+        private void OnDisable()
+        {
+            PlayerInputs.Interact -= Interact;
+        }
+
+        #endregion
     }
 }
