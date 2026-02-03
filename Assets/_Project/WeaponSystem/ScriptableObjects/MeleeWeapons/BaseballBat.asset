@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseballBat
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.MeleeWeaponData
   weaponName: Baseball Bat
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 21300000, guid: 11bac76e893e6e14b884f1ffd688c686, type: 3}
   attackRate: 1
   damage: 1
   weaponPreviewPrefab: {fileID: 1720152226819544, guid: 133f932775f5bff43a09e7bcb2f346dc, type: 3}
