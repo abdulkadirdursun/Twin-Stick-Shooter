@@ -7,7 +7,7 @@ namespace TwinStickShooter.WeaponSlotSystem.UI
 {
     public class SlotView : MonoBehaviour
     {
-        [SerializeField] private PlayerWeaponSlotsData slotData;
+        [SerializeField] private PlayerWeaponSlots slot;
         [SerializeField] private int slotIndex;
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup iconCanvasGroup;
@@ -36,7 +36,7 @@ namespace TwinStickShooter.WeaponSlotSystem.UI
 
         private void Awake()
         {
-            _slot = slotData.GetWeaponSlot(slotIndex);
+            _slot = slot.GetWeaponSlot(slotIndex);
             if (_slot == null)
             {
                 gameObject.SetActive(false);

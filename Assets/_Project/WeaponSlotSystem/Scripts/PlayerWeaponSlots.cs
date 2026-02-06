@@ -1,17 +1,13 @@
-﻿using TwinStickShooter.WeaponSystem;
+﻿using AKD.Toolkit.Singleton;
+using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSlotSystem
 {
-    [CreateAssetMenu(fileName = "PlayerWeaponSlotsData", menuName = "Twin Stick Shooter/Weapon Control System/Player Weapon Slots Data")]
-    public class PlayerWeaponSlotsData : ScriptableObject
+    public class PlayerWeaponSlots : Singleton<PlayerWeaponSlots>
     {
-        private WeaponSlot[] WeaponSlots { get; } = new WeaponSlot[]
-        {
-            new WeaponSlot(),
-            new WeaponSlot(),
-            new WeaponSlot()
-        };
+        [SerializeField] private Transform weaponParent;
+        private WeaponSlot[] _weaponSlots;
 
         public bool TryToEquip(BaseWeaponData weaponData)
         {
@@ -21,10 +17,13 @@ namespace TwinStickShooter.WeaponSlotSystem
             emptySlot.EquipWeapon(weaponData);
             return true;
         }
-
+        public WeaponSlot GetWeaponSlot(int index)
+        {
+            return index >= _weaponSlots.Length ? null : _weaponSlots[index];
+        }
         private bool TryToGetEmptySlot(out WeaponSlot emptySlot)
         {
-            foreach (var weaponSlot in WeaponSlots)
+            foreach (var weaponSlot in _weaponSlots)
             {
                 if (weaponSlot.WeaponData) continue;
                 emptySlot = weaponSlot;
@@ -34,10 +33,9 @@ namespace TwinStickShooter.WeaponSlotSystem
             emptySlot = null;
             return false;
         }
-
         private bool HasTheWeapon(BaseWeaponData weaponData)
         {
-            foreach (var weaponSlot in WeaponSlots)
+            foreach (var weaponSlot in _weaponSlots)
             {
                 if (weaponSlot.WeaponData && weaponSlot.WeaponData == weaponData)
                     return true;
@@ -45,10 +43,19 @@ namespace TwinStickShooter.WeaponSlotSystem
 
             return false;
         }
+        
+        #region MonoBehaviour Methods
 
-        public WeaponSlot GetWeaponSlot(int index)
+        private void Awake()
         {
-            return index >= WeaponSlots.Length ? null : WeaponSlots[index];
+            _weaponSlots = new WeaponSlot[]
+            {
+                new WeaponSlot(weaponParent),
+                new WeaponSlot(weaponParent),
+                new WeaponSlot(weaponParent)
+            };
         }
+
+        #endregion
     }
 }
