@@ -1,4 +1,5 @@
 ﻿using AKD.Toolkit.Singleton;
+using TwinStickShooter.InputSystem;
 using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace TwinStickShooter.WeaponSlotSystem
             if (HasTheWeapon(weaponData) || !TryToGetEmptySlot(out var emptySlot))
                 return false;
 
-            emptySlot.EquipWeapon(weaponData, ActiveSlot == emptySlot);
+            emptySlot.EquipWeapon(weaponData);
             return true;
         }
 
@@ -48,6 +49,21 @@ namespace TwinStickShooter.WeaponSlotSystem
             return false;
         }
 
+        private void OnSlotSelected(int slotNumber)
+        {
+            var index = slotNumber - 1;
+            SelectActiveSlot(index);
+        }
+
+        private void SelectActiveSlot(int slotIndex)
+        {
+            var selectedSlot = _weaponSlots[slotIndex];
+            if (selectedSlot.IsActive) return;
+            ActiveSlot?.SetActive(false);
+            ActiveSlot = selectedSlot;
+            ActiveSlot?.SetActive(true);
+        }
+
         #region MonoBehaviour Methods
 
         protected override void OnAwake()
@@ -58,8 +74,18 @@ namespace TwinStickShooter.WeaponSlotSystem
                 new WeaponSlot(weaponParent),
                 new WeaponSlot(weaponParent)
             };
+            
+            SelectActiveSlot(0);
+        }
 
-            ActiveSlot = _weaponSlots[0];
+        private void OnEnable()
+        {
+            PlayerInputs.OnWeaponSlotSelected += OnSlotSelected;
+        }
+
+        private void OnDisable()
+        {
+            PlayerInputs.OnWeaponSlotSelected -= OnSlotSelected;
         }
 
         #endregion

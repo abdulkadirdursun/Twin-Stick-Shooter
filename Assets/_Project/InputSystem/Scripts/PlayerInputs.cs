@@ -23,6 +23,9 @@ namespace TwinStickShooter.InputSystem
             _playerInputActions.Gameplay.MouseAimTrigger.canceled += OnMouseRightClickCancelled;
             _playerInputActions.Gameplay.Aim.performed += ReadAim;
             _playerInputActions.Gameplay.Interact.performed += OnInteractButtonClicked;
+            _playerInputActions.Gameplay.WeaponSlot1.performed += OnWeaponSlot1Selected;
+            _playerInputActions.Gameplay.WeaponSlot2.performed += OnWeaponSlot2Selected;
+            _playerInputActions.Gameplay.WeaponSlot3.performed += OnWeaponSlot3Selected;
 
             _playerInputActions.Gameplay.Enable();
         }
@@ -50,6 +53,7 @@ namespace TwinStickShooter.InputSystem
         public static event Action OnStopAiming;
         public static event Action<Vector2> AimPositionInput;
         public static event Action Interact;
+        public static event Action<int> OnWeaponSlotSelected; 
 
         private void ReadMovementInput(InputAction.CallbackContext context)
         {
@@ -84,6 +88,21 @@ namespace TwinStickShooter.InputSystem
         private void OnInteractButtonClicked(InputAction.CallbackContext context)
         {
             Interact?.Invoke();
+        }
+
+        private void OnWeaponSlot1Selected(InputAction.CallbackContext context)
+        {
+            OnWeaponSlotSelected?.Invoke(1);
+        }
+        
+        private void OnWeaponSlot2Selected(InputAction.CallbackContext context)
+        {
+            OnWeaponSlotSelected?.Invoke(2);
+        }
+        
+        private void OnWeaponSlot3Selected(InputAction.CallbackContext context)
+        {
+            OnWeaponSlotSelected?.Invoke(3);
         }
 
         #endregion

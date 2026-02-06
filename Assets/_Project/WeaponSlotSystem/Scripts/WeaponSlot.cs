@@ -21,15 +21,16 @@ namespace TwinStickShooter.WeaponSlotSystem
         public BaseWeapon Weapon { get; private set; }
 
         private Transform _weaponParent;
+        public bool IsActive { get; private set; }
 
         public event Action OnSlotChanged;
 
-        public void EquipWeapon(BaseWeaponData weaponData, bool isActive)
+        public void EquipWeapon(BaseWeaponData weaponData)
         {
             WeaponData = weaponData;
             if (WeaponData)
             {
-                SpawnWeapon(isActive);
+                SpawnWeapon();
             }
             else if (Weapon)
             {
@@ -39,14 +40,22 @@ namespace TwinStickShooter.WeaponSlotSystem
             OnSlotChanged?.Invoke();
         }
 
-        private void SpawnWeapon(bool isActive)
+        public void SetActive(bool isActive)
+        {
+            if(IsActive==isActive)return;
+            IsActive = isActive;
+            Weapon?.gameObject.SetActive(IsActive);
+
+        }
+
+        private void SpawnWeapon()
         {
             //TODO: Use Pool
             Weapon = Object.Instantiate(WeaponData.WeaponPrefab, _weaponParent, true);
             var rotationDifference = Quaternion.FromToRotation(Weapon.HoldTransform.forward, _weaponParent.forward);
             Weapon.transform.localRotation *= rotationDifference;
             Weapon.transform.localPosition = Weapon.HoldTransform.localPosition;
-            Weapon.gameObject.SetActive(isActive);
+            Weapon.gameObject.SetActive(IsActive);
         }
 
         private void DestroyWeapon()

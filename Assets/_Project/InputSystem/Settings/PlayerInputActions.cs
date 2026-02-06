@@ -136,6 +136,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WeaponSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a8b3444-5c8b-44eb-b0bb-9478d94f93fa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WeaponSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9362e23-7eeb-4b0b-a737-62ed8d2f36e7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WeaponSlot3"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f1efb6c-b70a-44c1-80c1-57f711219bc5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -325,6 +352,72 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33f1456c-88bd-4d97-8078-061c02f02e81"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""WeaponSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55945c13-2ae7-4bfd-b801-7e0f3faa0b69"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""WeaponSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4ea93f1-f89f-4e23-9288-6a3bb8a0bddd"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""WeaponSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""010d405c-63f8-465a-83d7-0b2d15afb2aa"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""WeaponSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6fb51e3-1a5d-493d-8dff-49c48b29084c"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""WeaponSlot3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""841c3f6c-9d0c-4da5-9822-baac67f43145"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""WeaponSlot3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -366,6 +459,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_MouseAimTrigger = m_Gameplay.FindAction("MouseAimTrigger", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_WeaponSlot1 = m_Gameplay.FindAction("WeaponSlot1", throwIfNotFound: true);
+        m_Gameplay_WeaponSlot2 = m_Gameplay.FindAction("WeaponSlot2", throwIfNotFound: true);
+        m_Gameplay_WeaponSlot3 = m_Gameplay.FindAction("WeaponSlot3", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -451,6 +547,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_MouseAimTrigger;
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_WeaponSlot1;
+    private readonly InputAction m_Gameplay_WeaponSlot2;
+    private readonly InputAction m_Gameplay_WeaponSlot3;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -482,6 +581,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/WeaponSlot1".
+        /// </summary>
+        public InputAction @WeaponSlot1 => m_Wrapper.m_Gameplay_WeaponSlot1;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/WeaponSlot2".
+        /// </summary>
+        public InputAction @WeaponSlot2 => m_Wrapper.m_Gameplay_WeaponSlot2;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/WeaponSlot3".
+        /// </summary>
+        public InputAction @WeaponSlot3 => m_Wrapper.m_Gameplay_WeaponSlot3;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -523,6 +634,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @WeaponSlot1.started += instance.OnWeaponSlot1;
+            @WeaponSlot1.performed += instance.OnWeaponSlot1;
+            @WeaponSlot1.canceled += instance.OnWeaponSlot1;
+            @WeaponSlot2.started += instance.OnWeaponSlot2;
+            @WeaponSlot2.performed += instance.OnWeaponSlot2;
+            @WeaponSlot2.canceled += instance.OnWeaponSlot2;
+            @WeaponSlot3.started += instance.OnWeaponSlot3;
+            @WeaponSlot3.performed += instance.OnWeaponSlot3;
+            @WeaponSlot3.canceled += instance.OnWeaponSlot3;
         }
 
         /// <summary>
@@ -549,6 +669,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @WeaponSlot1.started -= instance.OnWeaponSlot1;
+            @WeaponSlot1.performed -= instance.OnWeaponSlot1;
+            @WeaponSlot1.canceled -= instance.OnWeaponSlot1;
+            @WeaponSlot2.started -= instance.OnWeaponSlot2;
+            @WeaponSlot2.performed -= instance.OnWeaponSlot2;
+            @WeaponSlot2.canceled -= instance.OnWeaponSlot2;
+            @WeaponSlot3.started -= instance.OnWeaponSlot3;
+            @WeaponSlot3.performed -= instance.OnWeaponSlot3;
+            @WeaponSlot3.canceled -= instance.OnWeaponSlot3;
         }
 
         /// <summary>
@@ -650,5 +779,26 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WeaponSlot1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWeaponSlot1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WeaponSlot2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWeaponSlot2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WeaponSlot3" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWeaponSlot3(InputAction.CallbackContext context);
     }
 }
