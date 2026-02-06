@@ -43,17 +43,12 @@ namespace TwinStickShooter.WeaponSlotSystem.UI
                 Debug.LogError($"Player Slot Index {slotIndex} is not available!!");
                 yield break;
             }
+            _slot.OnSlotChanged += SetView;
 
             SetView();
         }
 
-        private void OnEnable()
-        {
-            if (_slot == null) return;
-            _slot.OnSlotChanged += SetView;
-        }
-
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (_slot == null) return;
             _slot.OnSlotChanged -= SetView;
