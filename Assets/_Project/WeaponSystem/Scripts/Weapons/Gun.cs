@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
@@ -6,10 +7,43 @@ namespace TwinStickShooter.WeaponSystem
     {
         [SerializeField] private GunData gunData;
         protected override float AttackRate => gunData.AttackRate;
+        protected override bool RapidAttack => gunData.IsAutomatic;
+        private int _currentAmmo;
+        private bool _reloading;
+        private WaitForSeconds _waitForSecond;
+        protected bool HasAmmo => _currentAmmo > 0;
 
-        protected override bool TryToAttack()
+        public override void OnEquipped()
         {
-            return false;
+            _currentAmmo = gunData.AmmoCapacity;
+            _waitForSecond ??= new WaitForSeconds(gunData.ReloadTime);
+        }
+
+        public override bool TryToAttack()
+        {
+            return HasAmmo && base.TryToAttack();
+        }
+
+        public void Reload()
+        {
+            if (_reloading) return;
+            StartCoroutine(ReloadCoroutine());
+        }
+
+        protected override void Attack()
+        {
+            //Fire projectile
+            _currentAmmo--;
+            if (!HasAmmo)
+                Reload();
+        }
+
+        private IEnumerator ReloadCoroutine()
+        {
+            _reloading = true;
+            yield return _waitForSecond;
+            _currentAmmo = gunData.AmmoCapacity;
+            _reloading = false;
         }
     }
 }

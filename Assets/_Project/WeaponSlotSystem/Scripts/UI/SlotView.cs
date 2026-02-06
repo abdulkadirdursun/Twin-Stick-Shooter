@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using AKD.Toolkit.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +7,6 @@ namespace TwinStickShooter.WeaponSlotSystem.UI
 {
     public class SlotView : MonoBehaviour
     {
-        [SerializeField] private PlayerWeaponSlots slot;
         [SerializeField] private int slotIndex;
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup iconCanvasGroup;
@@ -34,14 +33,15 @@ namespace TwinStickShooter.WeaponSlotSystem.UI
 
         #region MonoBehaviour Methods
 
-        private void Awake()
+        private IEnumerator Start()
         {
-            _slot = slot.GetWeaponSlot(slotIndex);
+            yield return new WaitUntil(() => PlayerWeaponSlots.IsInstanceExist);
+            _slot = PlayerWeaponSlots.Instance.GetWeaponSlot(slotIndex);
             if (_slot == null)
             {
                 gameObject.SetActive(false);
                 Debug.LogError($"Player Slot Index {slotIndex} is not available!!");
-                return;
+                yield break;
             }
 
             SetView();

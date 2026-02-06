@@ -8,6 +8,7 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private Sprite weaponIcon;
         [SerializeField] private float attackRate = 0.35f;
         [SerializeField] private float damage = 1;
+        
         [Header("Prefabs")]
         [SerializeField] private GameObject weaponPreviewPrefab;
         [SerializeField] private BaseWeapon weaponPrefab;
