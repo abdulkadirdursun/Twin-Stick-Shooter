@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TwinStickShooter.AnimationSystem.Enums;
+using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
@@ -8,7 +9,8 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private Sprite weaponIcon;
         [SerializeField] private float attackRate = 0.35f;
         [SerializeField] private float damage = 1;
-        
+        [Header("Animator")]
+        [SerializeField] private AnimatorLayer animatorLayer;
         [Header("Prefabs")]
         [SerializeField] private GameObject weaponPreviewPrefab;
         [SerializeField] private BaseWeapon weaponPrefab;
@@ -17,6 +19,8 @@ namespace TwinStickShooter.WeaponSystem
         public Sprite WeaponIcon => weaponIcon;
         public float AttackRate => attackRate;
         public float Damage => damage;
+
+        public AnimatorLayer AnimatorLayer => animatorLayer;
 
         public GameObject WeaponPreviewPrefab => weaponPreviewPrefab;
         public BaseWeapon WeaponPrefab => weaponPrefab;

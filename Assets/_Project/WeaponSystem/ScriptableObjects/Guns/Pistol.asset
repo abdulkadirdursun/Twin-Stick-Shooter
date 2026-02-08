@@ -16,7 +16,9 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: dcaca193433202d46b80180d1bbde5eb, type: 3}
   attackRate: 0.35
   damage: 2
+  animatorLayer: 1
   weaponPreviewPrefab: {fileID: 1347901682671290, guid: b017a00e018b1bc4f9ef2a84e5644a92, type: 3}
   weaponPrefab: {fileID: 9178563589898968017, guid: 6b519bc748d740a4f844de725d371d02, type: 3}
+  isAutomatic: 0
   ammoCapacity: 7
   reloadTime: 1.5
