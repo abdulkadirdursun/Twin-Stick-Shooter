@@ -1,4 +1,5 @@
-﻿using AKD.Toolkit.Singleton;
+﻿using System;
+using AKD.Toolkit.Singleton;
 using TwinStickShooter.InputSystem;
 using TwinStickShooter.WeaponSystem;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace TwinStickShooter.WeaponSlotSystem
         [SerializeField] private Transform weaponParent;
         private WeaponSlot[] _weaponSlots;
         public WeaponSlot ActiveSlot { get; private set; }
+        public event Action<WeaponSlot> OnActiveSlotChanged;
 
         public bool TryToEquip(BaseWeaponData weaponData)
         {
@@ -62,6 +64,7 @@ namespace TwinStickShooter.WeaponSlotSystem
             ActiveSlot?.SetActive(false);
             ActiveSlot = selectedSlot;
             ActiveSlot?.SetActive(true);
+            OnActiveSlotChanged?.Invoke(ActiveSlot);
         }
 
         #region MonoBehaviour Methods
@@ -74,7 +77,7 @@ namespace TwinStickShooter.WeaponSlotSystem
                 new WeaponSlot(weaponParent),
                 new WeaponSlot(weaponParent)
             };
-            
+
             SelectActiveSlot(0);
         }
 

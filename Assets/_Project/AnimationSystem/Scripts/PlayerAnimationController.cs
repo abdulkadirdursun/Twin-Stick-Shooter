@@ -1,3 +1,4 @@
+using System;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace TwinStickShooter.AnimationSystem
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator animator;
+
+        private AnimatorLayerController _animatorLayerController;
 
         #region Movement
 
@@ -34,6 +37,11 @@ namespace TwinStickShooter.AnimationSystem
 
         #region MonoBehaviour Methods
 
+        private void Start()
+        {
+            _animatorLayerController = new AnimatorLayerController(animator);
+        }
+
         private void OnEnable()
         {
             PlayerInputs.MoveInput += ReadMoveInputInput;
@@ -53,6 +61,11 @@ namespace TwinStickShooter.AnimationSystem
         private void OnDisable()
         {
             PlayerInputs.MoveInput -= ReadMoveInputInput;
+        }
+
+        private void OnDestroy()
+        {
+            _animatorLayerController?.Dispose();
         }
 
         #endregion
