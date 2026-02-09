@@ -1,4 +1,3 @@
-using System;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 
@@ -35,6 +34,24 @@ namespace TwinStickShooter.AnimationSystem
 
         #endregion
 
+        #region Combat
+
+        private static readonly int AimId = Animator.StringToHash("Aim");
+        private static readonly int ReloadId = Animator.StringToHash("Reload");
+        private static readonly int AttackId = Animator.StringToHash("Attack");
+
+        private void PlayAimAnimation()
+        {
+            animator.SetBool(AimId, true);
+        }
+
+        private void StopAimAnimation()
+        {
+            animator.SetBool(AimId, false);
+        }
+
+        #endregion
+
         #region MonoBehaviour Methods
 
         private void Start()
@@ -45,6 +62,8 @@ namespace TwinStickShooter.AnimationSystem
         private void OnEnable()
         {
             PlayerInputs.MoveInput += ReadMoveInputInput;
+            PlayerInputs.OnStartAiming += PlayAimAnimation;
+            PlayerInputs.OnStopAiming += StopAimAnimation;
         }
 
         private void Update()
@@ -61,6 +80,8 @@ namespace TwinStickShooter.AnimationSystem
         private void OnDisable()
         {
             PlayerInputs.MoveInput -= ReadMoveInputInput;
+            PlayerInputs.OnStartAiming -= PlayAimAnimation;
+            PlayerInputs.OnStopAiming -= StopAimAnimation;
         }
 
         private void OnDestroy()
