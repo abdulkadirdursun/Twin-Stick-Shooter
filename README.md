@@ -23,3 +23,8 @@
 ## Assets
 ### 3D
 - POLYGON - Prototype Pack
+
+### Animations
+- Human Soldier Animations FREE
+- Mixamo
+- Omni Animation - Core Loicomotion Pack
