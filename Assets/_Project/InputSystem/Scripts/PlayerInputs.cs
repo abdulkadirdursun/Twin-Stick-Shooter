@@ -26,25 +26,11 @@ namespace TwinStickShooter.InputSystem
             _playerInputActions.Gameplay.WeaponSlot1.performed += OnWeaponSlot1Selected;
             _playerInputActions.Gameplay.WeaponSlot2.performed += OnWeaponSlot2Selected;
             _playerInputActions.Gameplay.WeaponSlot3.performed += OnWeaponSlot3Selected;
+            _playerInputActions.Gameplay.Attack.performed += AttackInputPerformed;
+            _playerInputActions.Gameplay.Attack.canceled += AttackInputCancelled;
 
             _playerInputActions.Gameplay.Enable();
         }
-
-        #region MonoBehaviour Methods
-
-        private void Awake()
-        {
-            Initialize();
-        }
-
-        private void OnDestroy()
-        {
-            _inputControlScheme.Dispose();
-            _playerInputActions.Dispose();
-        }
-
-        #endregion
-
 
         #region Gameplay Inputs
 
@@ -53,7 +39,9 @@ namespace TwinStickShooter.InputSystem
         public static event Action OnStopAiming;
         public static event Action<Vector2> AimPositionInput;
         public static event Action Interact;
-        public static event Action<int> OnWeaponSlotSelected; 
+        public static event Action<int> OnWeaponSlotSelected;
+        public static event Action OnStartAttacking;
+        public static event Action OnStopAttacking;
 
         private void ReadMovementInput(InputAction.CallbackContext context)
         {
@@ -94,15 +82,40 @@ namespace TwinStickShooter.InputSystem
         {
             OnWeaponSlotSelected?.Invoke(1);
         }
-        
+
         private void OnWeaponSlot2Selected(InputAction.CallbackContext context)
         {
             OnWeaponSlotSelected?.Invoke(2);
         }
-        
+
         private void OnWeaponSlot3Selected(InputAction.CallbackContext context)
         {
             OnWeaponSlotSelected?.Invoke(3);
+        }
+
+        private void AttackInputPerformed(InputAction.CallbackContext context)
+        {
+            OnStartAttacking?.Invoke();
+        }
+
+        private void AttackInputCancelled(InputAction.CallbackContext context)
+        {
+            OnStopAttacking?.Invoke();
+        }
+
+        #endregion
+
+        #region MonoBehaviour Methods
+
+        private void Awake()
+        {
+            Initialize();
+        }
+
+        private void OnDestroy()
+        {
+            _inputControlScheme.Dispose();
+            _playerInputActions.Dispose();
         }
 
         #endregion
