@@ -129,9 +129,10 @@ GameObject:
   m_Component:
   - component: {fileID: 180966521}
   - component: {fileID: 180966520}
-  - component: {fileID: 180966522}
-  - component: {fileID: 180966523}
   - component: {fileID: 180966524}
+  - component: {fileID: 180966526}
+  - component: {fileID: 180966527}
+  - component: {fileID: 180966523}
   - component: {fileID: 180966525}
   m_Layer: 6
   m_Name: Player
@@ -181,21 +182,6 @@ Transform:
   - {fileID: 1283493970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &180966522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180966519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d1578fa2159a84693b9d92b3742744, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerMovementController
-  characterController: {fileID: 180966520}
-  moveSpeed: 5
-  rotateSpeed: 180
 --- !u!114 &180966523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +221,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
   weaponParent: {fileID: 1344364754}
+--- !u!114 &180966526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180966519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b3d355b39794a129a74df383015e80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
+  movementController: {fileID: 180966527}
+--- !u!114 &180966527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180966519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a0bc95895e4565adb18bdaabbf023e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.MovementSystem.MovementController
+  characterController: {fileID: 180966520}
+  moveSpeed: 5
+  rotateSpeed: 180
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
