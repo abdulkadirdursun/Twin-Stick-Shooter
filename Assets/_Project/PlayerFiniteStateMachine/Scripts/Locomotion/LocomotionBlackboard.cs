@@ -1,5 +1,6 @@
 ﻿using TwinStickShooter.AnimationSystem;
 using TwinStickShooter.MovementSystem;
+using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
 {
@@ -14,8 +15,11 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         }
 
         #endregion
-        
+
         public MovementController MovementController { get; }
         public AnimationController AnimationController { get; }
+
+        public Vector3 MoveDirection { get; set; }
+        public Vector3 LookDirection { get; set; }
     }
 }

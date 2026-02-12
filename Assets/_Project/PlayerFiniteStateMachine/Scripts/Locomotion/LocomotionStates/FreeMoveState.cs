@@ -14,12 +14,16 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
 
         #endregion
 
-        protected override Vector3 LookDirection => MoveDirection;
-
         public override void StateEnter()
         {
             base.StateEnter();
             PlayerInputs.OnStartAiming += ChangeToAimingState;
+        }
+
+        public override void StateUpdate()
+        {
+            Blackboard.LookDirection = Blackboard.MoveDirection;
+            base.StateUpdate();
         }
 
         public override void StateExit()
@@ -27,7 +31,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             base.StateExit();
             PlayerInputs.OnStartAiming -= ChangeToAimingState;
         }
-        
+
         private void ChangeToAimingState()
         {
             StateMachine.ChangeState<AimMoveState>();

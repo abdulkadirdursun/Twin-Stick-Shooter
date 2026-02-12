@@ -15,9 +15,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         #endregion
 
         private readonly Camera _mainCamera;
-        private Vector3 _lookDirection;
         private const float GroundHeight = 0f;
-        protected override Vector3 LookDirection => _lookDirection;
 
         public override void StateEnter()
         {
@@ -37,14 +35,14 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         {
             if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
             {
-                _lookDirection = new Vector3(input.x, 0f, input.y);
+                Blackboard.LookDirection = new Vector3(input.x, 0f, input.y);
                 return;
             }
 
             var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
             var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
             var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
-            _lookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
+            Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
         }
 
         private void ChangeToFreeMovementState()
