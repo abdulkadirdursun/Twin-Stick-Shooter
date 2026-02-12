@@ -1,5 +1,6 @@
 ﻿using TwinStickShooter.AnimationSystem;
 using TwinStickShooter.MovementSystem;
+using TwinStickShooter.PlayerFiniteStateMachine.Combat;
 using TwinStickShooter.PlayerFiniteStateMachine.Locomotion;
 using UnityEngine;
 
@@ -7,21 +8,15 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
 {
     public class PlayerBrain : MonoBehaviour
     {
-        [Header("Locomotion")]
-        [SerializeField] private MovementController movementController;
+        [Header("Common Components")]
         [SerializeField] private AnimationController animationController;
+        [Header("Locomotion Components")]
+        [SerializeField] private MovementController movementController;
 
         private LocomotionStateMachine _locomotionStateMachine;
+        private CombatStateMachine _combatStateMachine;
 
-        #region MonoBehaviour Methods
-
-        private void Awake()
-        {
-            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController);
-            _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
-        }
-
-        private void Update()
+        private void UpdateLocomotionState()
         {
             if (_locomotionStateMachine == null)
             {
@@ -30,6 +25,33 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
             }
 
             _locomotionStateMachine.CallStateUpdate();
+        }
+
+        private void UpdateCombatState()
+        {
+            if (_combatStateMachine == null)
+            {
+                Debug.LogError("Combat State Machine is null!!!");
+                return;
+            }
+
+            _combatStateMachine.CallStateUpdate();
+        }
+
+        #region MonoBehaviour Methods
+
+        private void Awake()
+        {
+            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController);
+            _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
+            var combatBlackboard = new CombatBlackboard(animationController);
+            _combatStateMachine = new CombatStateMachine(combatBlackboard);
+        }
+
+        private void Update()
+        {
+            UpdateLocomotionState();
+            UpdateCombatState();
         }
 
         #endregion
