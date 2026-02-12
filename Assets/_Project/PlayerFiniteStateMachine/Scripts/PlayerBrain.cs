@@ -1,4 +1,5 @@
-﻿using TwinStickShooter.MovementSystem;
+﻿using TwinStickShooter.AnimationSystem;
+using TwinStickShooter.MovementSystem;
 using TwinStickShooter.PlayerFiniteStateMachine.Locomotion;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
     {
         [Header("Locomotion")]
         [SerializeField] private MovementController movementController;
+        [SerializeField] private AnimationController animationController;
 
         private LocomotionStateMachine _locomotionStateMachine;
 
@@ -15,7 +17,8 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
 
         private void Awake()
         {
-            _locomotionStateMachine = new LocomotionStateMachine(movementController);
+            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController);
+            _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
         }
 
         private void Update()

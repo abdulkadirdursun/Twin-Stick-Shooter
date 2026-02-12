@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
   movementController: {fileID: 180966527}
+  animationController: {fileID: 180966523}
 --- !u!114 &180966527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.MovementSystem.MovementController
   characterController: {fileID: 180966520}
   moveSpeed: 5
-  rotateSpeed: 180
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,7 @@ namespace TwinStickShooter.StateMachineSystem
         private T _currentState;
 
         protected Dictionary<Type, T> AvailableStates;
-
-        public abstract void InitializeStateMachine();
-
+        
         public void ChangeState<TState>() where TState : T
         {
             if (!AvailableStates.TryGetValue(typeof(TState), out T state))

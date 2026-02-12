@@ -27,5 +27,10 @@ namespace TwinStickShooter.MovementSystem
             var targetRotation = Quaternion.Euler(0f, smoothTargetRotation, 0f);
             transform.rotation = targetRotation;
         }
+
+        public Vector3 LocalMoveDirection(Vector3 worldMoveDirection)
+        {
+            return transform.InverseTransformDirection(worldMoveDirection);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
     {
         #region Constructor
 
-        public FreeMoveState(LocomotionStateMachine stateMachine) : base(stateMachine)
+        public FreeMoveState(LocomotionStateMachine stateMachine, LocomotionBlackboard blackboard) : base(stateMachine, blackboard)
         {
         }
 

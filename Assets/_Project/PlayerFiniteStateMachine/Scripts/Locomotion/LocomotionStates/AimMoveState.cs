@@ -7,7 +7,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
     {
         #region Constructor
 
-        public AimMoveState(LocomotionStateMachine stateMachine) : base(stateMachine)
+        public AimMoveState(LocomotionStateMachine stateMachine, LocomotionBlackboard blackboard) : base(stateMachine, blackboard)
         {
             _mainCamera = Camera.main;
         }
@@ -44,7 +44,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
             var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
             var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
-            _lookDirection = (mouseWorldPosition - StateMachine.MovementController.Position).normalized;
+            _lookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
         }
 
         private void ChangeToFreeMovementState()
