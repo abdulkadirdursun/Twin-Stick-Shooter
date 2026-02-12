@@ -60,11 +60,13 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         private void OnAttackStarted()
         {
             _isAttacking = true;
+            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.StartAttacking();
         }
 
         private void OnAttackStopped()
         {
             _isAttacking = false;
+            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.StopAttacking();
         }
     }
 }

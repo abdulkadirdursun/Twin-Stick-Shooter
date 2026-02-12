@@ -15,19 +15,27 @@ namespace TwinStickShooter.WeaponSystem
 
         public virtual void StartAttacking()
         {
+            if (IsAttacking) return;
             IsAttacking = true;
         }
 
         public virtual void StopAttacking()
         {
+            if (!IsAttacking) return;
             IsAttacking = false;
         }
 
         public virtual bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
-            if (!IsAttacking || !CanAttack)
+            if (!CanAttack)
             {
                 failedAttackReason = FailedAttackReason.Cooldown;
+                return false;
+            }
+
+            if (!IsAttacking)
+            {
+                failedAttackReason = FailedAttackReason.None;
                 return false;
             }
 
