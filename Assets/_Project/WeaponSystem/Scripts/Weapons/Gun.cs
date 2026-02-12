@@ -19,9 +19,15 @@ namespace TwinStickShooter.WeaponSystem
             _waitForSecond ??= new WaitForSeconds(gunData.ReloadTime);
         }
 
-        public override bool TryToAttack()
+        public override bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
-            return HasAmmo && base.TryToAttack();
+            if (!HasAmmo)
+            {
+                failedAttackReason = FailedAttackReason.NoAmmo;
+                return false;
+            }
+
+            return base.TryToAttack(out failedAttackReason);
         }
 
         public void Reload()

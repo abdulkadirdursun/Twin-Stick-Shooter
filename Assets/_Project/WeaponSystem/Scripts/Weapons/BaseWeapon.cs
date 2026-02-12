@@ -23,9 +23,13 @@ namespace TwinStickShooter.WeaponSystem
             IsAttacking = false;
         }
 
-        public virtual bool TryToAttack()
+        public virtual bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
-            if (!IsAttacking || !CanAttack) return false;
+            if (!IsAttacking || !CanAttack)
+            {
+                failedAttackReason = FailedAttackReason.Cooldown;
+                return false;
+            }
 
             Attack();
             if (!RapidAttack)
@@ -34,6 +38,7 @@ namespace TwinStickShooter.WeaponSystem
             }
 
             _timeSinceLastShot = 0f;
+            failedAttackReason = FailedAttackReason.None;
             return true;
         }
 
