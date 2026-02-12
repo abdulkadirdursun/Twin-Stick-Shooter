@@ -7,9 +7,10 @@ namespace TwinStickShooter.StateMachineSystem
     public abstract class StateMachine<T> where T : IState
     {
         private T _currentState;
+        private T _previousState;
 
         protected Dictionary<Type, T> AvailableStates;
-        
+
         public void ChangeState<TState>() where TState : T
         {
             if (!AvailableStates.TryGetValue(typeof(TState), out T state))
@@ -18,16 +19,36 @@ namespace TwinStickShooter.StateMachineSystem
                 return;
             }
 
-            if (_currentState != null)
-                _currentState.StateExit();
-            _currentState = state;
-            _currentState.StateEnter();
+            ChangeState(state);
         }
 
         public void CallStateUpdate()
         {
             if (_currentState == null) return;
             _currentState.StateUpdate();
+        }
+
+        /// <typeparam name="TState">Default State Type in case of previous state is null</typeparam>
+        public void ReturnToPreviousState<TState>() where TState : T
+        {
+            if (_previousState == null)
+            {
+                ChangeState<TState>();
+                return;
+            }
+
+            if (_previousState.Equals(_currentState)) return;
+
+            ChangeState(_previousState);
+        }
+
+        private void ChangeState(T newState)
+        {
+            if (_currentState != null)
+                _currentState.StateExit();
+            _previousState = _currentState;
+            _currentState = newState;
+            _currentState.StateEnter();
         }
     }
 }
