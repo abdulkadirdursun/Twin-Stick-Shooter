@@ -23,12 +23,6 @@ namespace TwinStickShooter.AnimationSystem
             animator.SetTrigger(id);
         }
 
-        #region Combat
-
-        private static readonly int AttackId = Animator.StringToHash("Attack");
-
-        #endregion
-
         #region MonoBehaviour Methods
 
         private void Start()

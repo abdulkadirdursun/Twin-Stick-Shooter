@@ -2,6 +2,7 @@
 using TwinStickShooter.MovementSystem;
 using TwinStickShooter.PlayerFiniteStateMachine.Combat;
 using TwinStickShooter.PlayerFiniteStateMachine.Locomotion;
+using TwinStickShooter.WeaponSlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine
@@ -12,6 +13,8 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
         [SerializeField] private AnimationController animationController;
         [Header("Locomotion Components")]
         [SerializeField] private MovementController movementController;
+        [Header("Combat Components")]
+        [SerializeField] private PlayerWeaponSlots playerWeaponSlots;
 
         private LocomotionStateMachine _locomotionStateMachine;
         private CombatStateMachine _combatStateMachine;
@@ -44,7 +47,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
         {
             var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController);
             _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
-            var combatBlackboard = new CombatBlackboard(animationController);
+            var combatBlackboard = new CombatBlackboard(animationController, playerWeaponSlots);
             _combatStateMachine = new CombatStateMachine(combatBlackboard);
         }
 

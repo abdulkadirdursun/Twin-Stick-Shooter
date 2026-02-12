@@ -233,8 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3d355b39794a129a74df383015e80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
-  movementController: {fileID: 180966527}
   animationController: {fileID: 180966523}
+  movementController: {fileID: 180966527}
+  playerWeaponSlots: {fileID: 180966525}
 --- !u!114 &180966527
 MonoBehaviour:
   m_ObjectHideFlags: 0
