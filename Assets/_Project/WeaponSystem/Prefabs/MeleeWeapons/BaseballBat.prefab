@@ -80,6 +80,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseballBat
       objectReference: {fileID: 0}
+    - target: {fileID: 7539232702723471035, guid: 704884940d705f24daab343fdcbdc68b, type: 3}
+      propertyPath: m_Height
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539232702723471035, guid: 704884940d705f24daab343fdcbdc68b, type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8376246775155071049, guid: 704884940d705f24daab343fdcbdc68b, type: 3}
       propertyPath: weaponTip
       value: 

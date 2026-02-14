@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TwinStickShooter.DamageableSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -8,33 +9,32 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private MeleeWeaponData weaponData;
         [SerializeField] private Collider hitCollider;
 
-        //private HashSet<IDamageable> _damagedTargets = new();
+        private HashSet<IDamageable> _damagedTargets = new();
         protected override float AttackRate => weaponData.AttackRate;
         protected override bool RapidAttack => false;
 
         public override void StartAttacking()
         {
             base.StartAttacking();
+            _damagedTargets.Clear();
             hitCollider.enabled = true;
-        }
-
-        public override void StopAttacking()
-        {
-            //_damagedTargets.Clear();
-            base.StopAttacking();
-            hitCollider.enabled = false;
         }
 
         protected override void Attack()
         {
         }
 
+        private void OnAttackComplete()
+        {
+            hitCollider.enabled = false;
+        }
+
         #region MonoBehaviour Methods
 
         private void OnTriggerEnter(Collider other)
         {
-            //if (!other.TryGetComponent(out IDamageable target) || !_damagedTargets.Add(target)) return;
-            //target.Damage(weaponData.Damage);
+            if (!other.TryGetComponent(out IDamageable target) || !_damagedTargets.Add(target)) return;
+            target.Damage(weaponData.Damage);
         }
 
         #endregion
