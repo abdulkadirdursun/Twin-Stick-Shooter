@@ -63,7 +63,7 @@ namespace TwinStickShooter.WeaponSlotSystem
             if (selectedSlot.IsActive) return;
             if (ActiveSlot != null)
             {
-                ActiveSlot.Weapon?.StopAttacking();
+                ActiveSlot.Weapon?.AttackReleased();
                 ActiveSlot.SetActive(false);
             }
             ActiveSlot = selectedSlot;

@@ -40,8 +40,8 @@ namespace TwinStickShooter.InputSystem
         public static event Action<Vector2> AimPositionInput;
         public static event Action Interact;
         public static event Action<int> OnWeaponSlotSelected;
-        public static event Action OnStartAttacking;
-        public static event Action OnStopAttacking;
+        public static event Action OnAttackPressed;
+        public static event Action OnAttackReleased;
 
         private void ReadMovementInput(InputAction.CallbackContext context)
         {
@@ -95,12 +95,12 @@ namespace TwinStickShooter.InputSystem
 
         private void AttackInputPerformed(InputAction.CallbackContext context)
         {
-            OnStartAttacking?.Invoke();
+            OnAttackPressed?.Invoke();
         }
 
         private void AttackInputCancelled(InputAction.CallbackContext context)
         {
-            OnStopAttacking?.Invoke();
+            OnAttackReleased?.Invoke();
         }
 
         #endregion

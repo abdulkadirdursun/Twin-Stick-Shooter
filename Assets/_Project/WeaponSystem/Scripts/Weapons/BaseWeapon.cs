@@ -13,15 +13,14 @@ namespace TwinStickShooter.WeaponSystem
         public Transform HoldTransform => holdTransform;
         public bool CanAttack => _timeSinceLastShot >= AttackRate;
 
-        public virtual void StartAttacking()
+        public virtual void AttackPressed()
         {
             if (IsAttacking) return;
             IsAttacking = true;
         }
 
-        public virtual void StopAttacking()
+        public virtual void AttackReleased()
         {
-            if (!IsAttacking) return;
             IsAttacking = false;
         }
 
@@ -42,7 +41,7 @@ namespace TwinStickShooter.WeaponSystem
             Attack();
             if (!RapidAttack)
             {
-                StopAttacking();
+                IsAttacking = false;
             }
 
             _timeSinceLastShot = 0f;

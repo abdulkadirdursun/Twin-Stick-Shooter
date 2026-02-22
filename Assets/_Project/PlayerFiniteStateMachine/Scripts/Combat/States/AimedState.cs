@@ -23,8 +23,8 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         {
             Blackboard.AnimationController.SetBool(AimId, true);
             PlayerInputs.OnStopAiming += ChangeToIdleState;
-            PlayerInputs.OnStartAttacking += OnAttackStarted;
-            PlayerInputs.OnStopAttacking += OnAttackStopped;
+            PlayerInputs.OnAttackPressed += OnAttackPressed;
+            PlayerInputs.OnAttackReleased += OnAttackReleased;
         }
 
         public override void StateUpdate()
@@ -47,8 +47,8 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         {
             Blackboard.AnimationController.SetBool(AimId, false);
             PlayerInputs.OnStopAiming -= ChangeToIdleState;
-            PlayerInputs.OnStartAttacking -= OnAttackStarted;
-            PlayerInputs.OnStopAttacking -= OnAttackStopped;
+            PlayerInputs.OnAttackPressed -= OnAttackPressed;
+            PlayerInputs.OnAttackReleased -= OnAttackReleased;
             _isAttacking = false;
         }
 
@@ -57,16 +57,16 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
             StateMachine.ChangeState<IdleState>();
         }
 
-        private void OnAttackStarted()
+        private void OnAttackPressed()
         {
             _isAttacking = true;
-            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.StartAttacking();
+            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.AttackPressed();
         }
 
-        private void OnAttackStopped()
+        private void OnAttackReleased()
         {
             _isAttacking = false;
-            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.StopAttacking();
+            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.AttackReleased();
         }
     }
 }
