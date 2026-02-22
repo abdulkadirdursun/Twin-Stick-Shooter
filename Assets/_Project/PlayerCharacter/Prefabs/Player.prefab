@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1054953579930831728}
+  - {fileID: 6671575773047505918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &679707326898502261
@@ -131,6 +132,106 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
   weaponParent: {fileID: 8779121019904214968}
+--- !u!1 &5575027983583388899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6671575773047505918}
+  - component: {fileID: 3585827762208519693}
+  - component: {fileID: 5532462632098137695}
+  m_Layer: 6
+  m_Name: AnimationEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6671575773047505918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575027983583388899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 875276069543613763}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3585827762208519693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575027983583388899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96cef9e508b8e46428fbb6f458d3d136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder
+  playerWeaponSlots: {fileID: 1373215447687763949}
+--- !u!114 &5532462632098137695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5575027983583388899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75833717aaac44f2a7f0ddf251f5d317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AKD.AnimationEvents::AKD.AnimationEvents.AnimationEventListener
+  dispatcher: {fileID: 3665056794518772985}
+  bindings:
+  - stateHash: 1080829965
+    stateName: Attack
+    eventType: 2
+    normalizedTime: 0.4
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3585827762208519693}
+          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder,
+            Assembly-CSharp
+          m_MethodName: OnWeaponAttackAnimationStartEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - stateHash: 1080829965
+    stateName: Attack
+    eventType: 2
+    normalizedTime: 0.55
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3585827762208519693}
+          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder,
+            Assembly-CSharp
+          m_MethodName: OnWeaponAttackAnimationEndEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7451927141499080702
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,13 +329,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4170833147357194, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8779121019904214968}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3665056794518772985}
   m_SourcePrefab: {fileID: 100100000, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
 --- !u!4 &1054953579930831728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
   m_PrefabInstance: {fileID: 1059388936165999664}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1060344096457557412 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+  m_PrefabInstance: {fileID: 1059388936165999664}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3665056794518772985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060344096457557412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf87c33039bafac44ae0e187ea99f398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AKD.AnimationEvents::AKD.AnimationEvents.AnimationEventDispatcher
 --- !u!4 &1062116988862409786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4170833147357194, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}

@@ -9,24 +9,29 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private MeleeWeaponData weaponData;
         [SerializeField] private Collider hitCollider;
 
-        private HashSet<IDamageable> _damagedTargets = new();
+        private readonly HashSet<IDamageable> _damagedTargets = new();
         protected override float AttackRate => weaponData.AttackRate;
         protected override bool RapidAttack => false;
 
-        public override void StartAttacking()
+        public override void OnAttackAnimationStartEventTriggered()
         {
-            base.StartAttacking();
             _damagedTargets.Clear();
             hitCollider.enabled = true;
         }
 
-        protected override void Attack()
-        {
-        }
-
-        private void OnAttackComplete()
+        public override void OnAttackAnimationEndEventTriggered()
         {
             hitCollider.enabled = false;
+        }
+
+        public override void OnUnequipped()
+        {
+            base.OnUnequipped();
+            hitCollider.enabled = false;
+        }
+
+        protected override void Attack()
+        {
         }
 
         #region MonoBehaviour Methods

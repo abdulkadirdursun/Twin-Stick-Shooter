@@ -24,6 +24,14 @@ namespace TwinStickShooter.WeaponSystem
             IsAttacking = false;
         }
 
+        public virtual void OnAttackAnimationStartEventTriggered()
+        {
+        }
+
+        public virtual void OnAttackAnimationEndEventTriggered()
+        {
+        }
+
         public virtual bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
             if (!CanAttack)
@@ -52,6 +60,11 @@ namespace TwinStickShooter.WeaponSystem
 
         public virtual void OnEquipped()
         {
+        }
+
+        public virtual void OnUnequipped()
+        {
+            IsAttacking = false;
         }
 
         protected abstract void Attack();
