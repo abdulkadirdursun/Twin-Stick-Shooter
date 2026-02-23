@@ -13,13 +13,19 @@ namespace TwinStickShooter.WeaponSystem
         private WaitForSeconds _waitForSecond;
         protected bool HasAmmo => _currentAmmo > 0;
 
+        public  void Shoot()
+        {
+            //Fire projectile
+            _currentAmmo--;
+            Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
+        }
+
         public override void OnEquipped()
         {
             _currentAmmo = gunData.AmmoCapacity;
-            _waitForSecond ??= new WaitForSeconds(gunData.ReloadTime);
         }
 
-        public override bool TryToAttack(out FailedAttackReason failedAttackReason)
+        public override bool CanAttack(out FailedAttackReason failedAttackReason)
         {
             if (!HasAmmo)
             {
@@ -27,27 +33,13 @@ namespace TwinStickShooter.WeaponSystem
                 return false;
             }
 
-            return base.TryToAttack(out failedAttackReason);
+            return base.CanAttack(out failedAttackReason);
         }
 
         public void Reload()
         {
             if (_reloading) return;
-            StartCoroutine(ReloadCoroutine());
-        }
-
-        protected override void Attack()
-        {
-            //Fire projectile
-            _currentAmmo--;
-            if (!HasAmmo)
-                Reload();
-        }
-
-        private IEnumerator ReloadCoroutine()
-        {
             _reloading = true;
-            yield return _waitForSecond;
             _currentAmmo = gunData.AmmoCapacity;
             _reloading = false;
         }

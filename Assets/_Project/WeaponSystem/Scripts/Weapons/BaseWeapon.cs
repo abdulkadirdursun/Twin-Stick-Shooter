@@ -11,7 +11,7 @@ namespace TwinStickShooter.WeaponSystem
         protected bool IsAttacking;
 
         public Transform HoldTransform => holdTransform;
-        public bool CanAttack => _timeSinceLastShot >= AttackRate;
+        public bool OnCooldown => _timeSinceLastShot < AttackRate;
 
         public virtual void AttackPressed()
         {
@@ -24,17 +24,9 @@ namespace TwinStickShooter.WeaponSystem
             IsAttacking = false;
         }
 
-        public virtual void OnAttackAnimationStartEventTriggered()
+        public virtual bool CanAttack(out FailedAttackReason failedAttackReason)
         {
-        }
-
-        public virtual void OnAttackAnimationEndEventTriggered()
-        {
-        }
-
-        public virtual bool TryToAttack(out FailedAttackReason failedAttackReason)
-        {
-            if (!CanAttack)
+            if (OnCooldown)
             {
                 failedAttackReason = FailedAttackReason.Cooldown;
                 return false;
@@ -45,8 +37,7 @@ namespace TwinStickShooter.WeaponSystem
                 failedAttackReason = FailedAttackReason.None;
                 return false;
             }
-
-            Attack();
+            
             if (!RapidAttack)
             {
                 IsAttacking = false;
@@ -66,8 +57,6 @@ namespace TwinStickShooter.WeaponSystem
         {
             IsAttacking = false;
         }
-
-        protected abstract void Attack();
 
         #region MonoBehaviour Methods
 

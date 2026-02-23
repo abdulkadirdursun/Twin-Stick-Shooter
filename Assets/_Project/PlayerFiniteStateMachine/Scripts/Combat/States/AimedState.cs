@@ -31,7 +31,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         {
             if (!_isAttacking || !Blackboard.WeaponSlots.ActiveSlot?.Weapon) return;
             var weapon = Blackboard.WeaponSlots.ActiveSlot.Weapon;
-            if (!weapon.TryToAttack(out var failedAttackReason))
+            if (!weapon.CanAttack(out var failedAttackReason))
             {
                 if (failedAttackReason == FailedAttackReason.NoAmmo)
                 {

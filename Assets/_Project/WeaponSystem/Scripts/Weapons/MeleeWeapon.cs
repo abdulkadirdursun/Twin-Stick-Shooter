@@ -13,13 +13,13 @@ namespace TwinStickShooter.WeaponSystem
         protected override float AttackRate => weaponData.AttackRate;
         protected override bool RapidAttack => false;
 
-        public override void OnAttackAnimationStartEventTriggered()
+        public void EnableHitDetection()
         {
             _damagedTargets.Clear();
             hitCollider.enabled = true;
         }
 
-        public override void OnAttackAnimationEndEventTriggered()
+        public void DisableHitDetection()
         {
             hitCollider.enabled = false;
         }
@@ -28,10 +28,6 @@ namespace TwinStickShooter.WeaponSystem
         {
             base.OnUnequipped();
             hitCollider.enabled = false;
-        }
-
-        protected override void Attack()
-        {
         }
 
         #region MonoBehaviour Methods
