@@ -7,16 +7,25 @@ namespace TwinStickShooter.WeaponSystem
     {
         [SerializeField] private PlayerWeaponSlots playerWeaponSlots;
 
-        public void OnWeaponAttackAnimationStartEvent()
+        public void OnShootAnimationStart()
         {
-            if (!playerWeaponSlots.ActiveSlot?.Weapon) return;
-            playerWeaponSlots.ActiveSlot.Weapon.OnAttackAnimationStartEventTriggered();
+            if (playerWeaponSlots.ActiveSlot?.Weapon is not Gun gun) return;
+
+            gun.Shoot();
         }
 
-        public void OnWeaponAttackAnimationEndEvent()
+        public void EnableHitDetection()
         {
-            if (!playerWeaponSlots.ActiveSlot?.Weapon) return;
-            playerWeaponSlots.ActiveSlot.Weapon.OnAttackAnimationEndEventTriggered();
+            if (playerWeaponSlots.ActiveSlot?.Weapon is not MeleeWeapon meleeWeapon) return;
+            
+            meleeWeapon.EnableHitDetection();
+        }
+
+        public void DisableHitDetection()
+        {
+            if (playerWeaponSlots.ActiveSlot?.Weapon is not MeleeWeapon meleeWeapon) return;
+            
+            meleeWeapon.DisableHitDetection();
         }
     }
 }
