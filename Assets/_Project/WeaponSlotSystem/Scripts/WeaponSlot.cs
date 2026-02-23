@@ -55,6 +55,7 @@ namespace TwinStickShooter.WeaponSlotSystem
             var rotationDifference = Quaternion.FromToRotation(Weapon.HoldTransform.forward, _weaponParent.forward);
             Weapon.transform.localRotation *= rotationDifference;
             Weapon.transform.localPosition = Weapon.HoldTransform.localPosition;
+            Weapon.OnEquipped();
             Weapon.gameObject.SetActive(IsActive);
         }
 
