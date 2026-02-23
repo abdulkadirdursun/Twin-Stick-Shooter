@@ -22,21 +22,23 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         public override void StateEnter()
         {
             Blackboard.AnimationController.SetBool(AimId, true);
+            SetWeaponAimState(true);
             PlayerInputs.OnStopAiming += ChangeToIdleState;
             PlayerInputs.OnAttackPressed += OnAttackPressed;
             PlayerInputs.OnAttackReleased += OnAttackReleased;
+            Blackboard.WeaponSlots.OnActiveSlotChanged += OnWeaponSlotChanged;
         }
 
         public override void StateUpdate()
         {
-            if (!_isAttacking || !Blackboard.WeaponSlots.ActiveSlot?.Weapon) return;
-            var weapon = Blackboard.WeaponSlots.ActiveSlot.Weapon;
+            if (!_isAttacking || !Blackboard.WeaponSlots.ActiveSlotHasWeapon(out var weapon)) return;
             if (!weapon.CanAttack(out var failedAttackReason))
             {
                 if (failedAttackReason == FailedAttackReason.NoAmmo)
                 {
                     StateMachine.ChangeState<ReloadState>();
                 }
+
                 return;
             }
 
@@ -46,6 +48,8 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         public override void StateExit()
         {
             Blackboard.AnimationController.SetBool(AimId, false);
+            SetWeaponAimState(false);
+            Blackboard.WeaponSlots.OnActiveSlotChanged -= OnWeaponSlotChanged;
             PlayerInputs.OnStopAiming -= ChangeToIdleState;
             PlayerInputs.OnAttackPressed -= OnAttackPressed;
             PlayerInputs.OnAttackReleased -= OnAttackReleased;
@@ -60,13 +64,34 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         private void OnAttackPressed()
         {
             _isAttacking = true;
-            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.AttackPressed();
+            if (!Blackboard.WeaponSlots.ActiveSlotHasWeapon(out var weapon)) return;
+            weapon.AttackPressed();
         }
 
         private void OnAttackReleased()
         {
             _isAttacking = false;
-            Blackboard.WeaponSlots.ActiveSlot?.Weapon?.AttackReleased();
+            if (!Blackboard.WeaponSlots.ActiveSlotHasWeapon(out var weapon)) return;
+            weapon.AttackReleased();
+        }
+
+        private void OnWeaponSlotChanged()
+        {
+            SetWeaponAimState(true);
+        }
+
+        private void SetWeaponAimState(bool value)
+        {
+            if (!Blackboard.WeaponSlots.ActiveSlotHasWeapon(out var weapon)) return;
+            switch (value)
+            {
+                case true:
+                    weapon.OnStartAim();
+                    break;
+                case false:
+                    weapon.OnStopAim();
+                    break;
+            }
         }
     }
 }

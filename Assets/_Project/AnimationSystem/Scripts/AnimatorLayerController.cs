@@ -24,7 +24,7 @@ namespace TwinStickShooter.AnimationSystem
             }
 
             PlayerWeaponSlots.Instance.OnActiveSlotChanged += OnWeaponSlotChanged;
-            OnWeaponSlotChanged(PlayerWeaponSlots.Instance.ActiveSlot);
+            OnWeaponSlotChanged();
         }
 
         #endregion
@@ -45,7 +45,7 @@ namespace TwinStickShooter.AnimationSystem
             PlayerWeaponSlots.Instance.OnActiveSlotChanged -= OnWeaponSlotChanged;
         }
 
-        private void OnWeaponSlotChanged(WeaponSlot weaponSlot)
+        private void OnWeaponSlotChanged()
         {
             if (_activeLayerId != -1)
             {
@@ -57,7 +57,7 @@ namespace TwinStickShooter.AnimationSystem
                 _weaponSlot.OnSlotChanged -= SetLayerWeight;
             }
 
-            _weaponSlot = weaponSlot;
+            _weaponSlot = PlayerWeaponSlots.Instance.ActiveSlot;
 
             if (_weaponSlot != null)
             {

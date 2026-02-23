@@ -23,6 +23,9 @@ namespace TwinStickShooter.WeaponSystem
         {
             IsAttacking = false;
         }
+        
+        public virtual void OnStartAim(){}
+        public virtual void OnStopAim(){}
 
         public virtual bool CanAttack(out FailedAttackReason failedAttackReason)
         {

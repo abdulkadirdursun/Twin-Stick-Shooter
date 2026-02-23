@@ -11,7 +11,7 @@ namespace TwinStickShooter.WeaponSlotSystem
         [SerializeField] private Transform weaponParent;
         private WeaponSlot[] _weaponSlots;
         public WeaponSlot ActiveSlot { get; private set; }
-        public event Action<WeaponSlot> OnActiveSlotChanged;
+        public event Action OnActiveSlotChanged;
 
         public bool TryToEquip(BaseWeaponData weaponData)
         {
@@ -25,6 +25,14 @@ namespace TwinStickShooter.WeaponSlotSystem
         public WeaponSlot GetWeaponSlot(int index)
         {
             return index >= _weaponSlots.Length ? null : _weaponSlots[index];
+        }
+
+        public bool ActiveSlotHasWeapon(out BaseWeapon weapon)
+        {
+            weapon = null;
+            if (ActiveSlot == null) return false;
+            weapon = ActiveSlot.Weapon;
+            return weapon != null;
         }
 
         private bool TryToGetEmptySlot(out WeaponSlot emptySlot)
@@ -69,7 +77,7 @@ namespace TwinStickShooter.WeaponSlotSystem
 
             ActiveSlot = selectedSlot;
             ActiveSlot?.SetActive(true);
-            OnActiveSlotChanged?.Invoke(ActiveSlot);
+            OnActiveSlotChanged?.Invoke();
         }
 
         #region MonoBehaviour Methods

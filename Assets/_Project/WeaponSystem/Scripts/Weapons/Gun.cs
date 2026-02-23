@@ -1,19 +1,29 @@
-﻿using System.Collections;
-using TwinStickShooter.WeaponSystem.Projectiles;
+﻿using TwinStickShooter.WeaponSystem.Projectiles;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
     public class Gun : BaseWeapon
     {
-        [SerializeField] private GunData gunData;
         [SerializeField] private Transform firePoint;
+        [SerializeField] private WeaponAimLineDrawer weaponAimLineDrawer;
+        [SerializeField] private GunData gunData;
         protected override float AttackRate => gunData.AttackRate;
         protected override bool RapidAttack => gunData.IsAutomatic;
         private int _currentAmmo;
         private bool _reloading;
         private WaitForSeconds _waitForSecond;
         protected bool HasAmmo => _currentAmmo > 0;
+
+        public override void OnStartAim()
+        {
+            weaponAimLineDrawer.SetActive(true);
+        }
+
+        public override void OnStopAim()
+        {
+            weaponAimLineDrawer.SetActive(false);
+        }
 
         public void Shoot()
         {
@@ -28,6 +38,13 @@ namespace TwinStickShooter.WeaponSystem
         public override void OnEquipped()
         {
             _currentAmmo = gunData.AmmoCapacity;
+            weaponAimLineDrawer.Configure(gunData.EffectiveDistance);
+        }
+
+        public override void OnUnequipped()
+        {
+            base.OnUnequipped();
+            weaponAimLineDrawer.SetActive(false);
         }
 
         public override bool CanAttack(out FailedAttackReason failedAttackReason)
