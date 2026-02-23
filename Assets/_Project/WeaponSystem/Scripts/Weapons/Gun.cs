@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TwinStickShooter.WeaponSystem.Projectiles;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -6,6 +7,7 @@ namespace TwinStickShooter.WeaponSystem
     public class Gun : BaseWeapon
     {
         [SerializeField] private GunData gunData;
+        [SerializeField] private Transform firePoint;
         protected override float AttackRate => gunData.AttackRate;
         protected override bool RapidAttack => gunData.IsAutomatic;
         private int _currentAmmo;
@@ -13,9 +15,12 @@ namespace TwinStickShooter.WeaponSystem
         private WaitForSeconds _waitForSecond;
         protected bool HasAmmo => _currentAmmo > 0;
 
-        public  void Shoot()
+        public void Shoot()
         {
-            //Fire projectile
+            var projectile = ProjectilePool.Instance.GetProjectile();
+            projectile.transform.position = firePoint.position;
+            projectile.transform.forward = firePoint.forward;
+            projectile.Fire(gunData.Damage, gunData.EffectiveDistance);
             _currentAmmo--;
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }

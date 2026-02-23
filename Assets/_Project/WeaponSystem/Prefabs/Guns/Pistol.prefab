@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4835980176215210323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4340997793655469631}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4340997793655469631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4835980176215210323}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.062163312, z: 0.231}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3173485696721086034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5133904637167534289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,6 +106,10 @@ PrefabInstance:
       propertyPath: gunData
       value: 
       objectReference: {fileID: 11400000, guid: 233925f071efd104e868b2024df693b6, type: 2}
+    - target: {fileID: 268077960707905636, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 4340997793655469631}
     - target: {fileID: 1199352295357701012, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -130,6 +165,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5823952448549545447, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4340997793655469631}
     - targetCorrespondingSourceObject: {fileID: 7604587743685644590, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5129161638378507907}
@@ -138,5 +176,10 @@ PrefabInstance:
 --- !u!4 &1535804212287640219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7604587743685644590, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+  m_PrefabInstance: {fileID: 8996126658601157557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3173485696721086034 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5823952448549545447, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
   m_PrefabInstance: {fileID: 8996126658601157557}
   m_PrefabAsset: {fileID: 0}
