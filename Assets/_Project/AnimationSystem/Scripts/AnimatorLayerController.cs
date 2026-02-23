@@ -37,6 +37,8 @@ namespace TwinStickShooter.AnimationSystem
         private WeaponSlot _weaponSlot;
         private int _activeLayerId = -1;
 
+        public int ActiveLayerId => _activeLayerId;
+
         public void Dispose()
         {
             if (!PlayerWeaponSlots.IsInstanceExist) return;

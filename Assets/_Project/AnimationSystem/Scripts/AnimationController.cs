@@ -8,6 +8,11 @@ namespace TwinStickShooter.AnimationSystem
 
         private AnimatorLayerController _animatorLayerController;
 
+        public int GetActiveLayerId()
+        {
+            return _animatorLayerController.ActiveLayerId;
+        }
+
         public void SetBool(int id, bool value)
         {
             animator.SetBool(id, value);
