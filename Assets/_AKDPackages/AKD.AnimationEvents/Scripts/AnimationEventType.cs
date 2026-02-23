@@ -2,8 +2,8 @@ namespace AKD.AnimationEvents
 {
     public enum AnimationEventType
     {
-        OnStart,
-        OnEnd,
+        OnEnter,
+        OnExit,
         OnTime
     }
 }

@@ -7,25 +7,21 @@ namespace AKD.AnimationEvents
     [RequireComponent(typeof(Animator))]
     public class AnimationEventDispatcher : MonoBehaviour
     {
-        private readonly struct EventKey : IEquatable<EventKey> {
-            public readonly int StateHash;
-            public readonly AnimationEventType EventType;
-            public readonly float NormalizedTime;
+        private readonly struct EventKey : IEquatable<EventKey>
+        {
+            public readonly int LayerIndex;
+            public readonly string EventName;
 
-            public EventKey(int stateHash, AnimationEventType eventType, float normalizedTime = 0f)
+            public EventKey(int layerIndex, string eventName)
             {
-                StateHash = stateHash;
-                EventType = eventType;
-                NormalizedTime = eventType == AnimationEventType.OnTime
-                    ? Mathf.Round(normalizedTime * 1000f) / 1000f
-                    : 0f;
+                LayerIndex = layerIndex;
+                EventName = eventName;
             }
 
             public bool Equals(EventKey other)
             {
-                return StateHash == other.StateHash
-                       && EventType == other.EventType
-                       && NormalizedTime == other.NormalizedTime;
+                return LayerIndex == other.LayerIndex
+                       && string.Equals(EventName, other.EventName, StringComparison.Ordinal);
             }
 
             public override bool Equals(object obj) => obj is EventKey other && Equals(other);
@@ -34,70 +30,16 @@ namespace AKD.AnimationEvents
             {
                 unchecked
                 {
-                    int hash = StateHash;
-                    hash = (hash * 397) ^ (int)EventType;
-                    hash = (hash * 397) ^ NormalizedTime.GetHashCode();
-                    return hash;
+                    return (LayerIndex * 397) ^ (EventName != null ? StringComparer.Ordinal.GetHashCode(EventName) : 0);
                 }
             }
         }
-        
 
         private readonly Dictionary<EventKey, List<Action>> _callbacks = new();
 
-        public void Register(int stateHash, AnimationEventType eventType, Action callback)
+        public void Register(int layerIndex, string eventName, Action callback)
         {
-            var key = new EventKey(stateHash, eventType);
-            AddCallback(key, callback);
-        }
-
-        public void Unregister(int stateHash, AnimationEventType eventType, Action callback)
-        {
-            var key = new EventKey(stateHash, eventType);
-            RemoveCallback(key, callback);
-        }
-
-        public void Register(int stateHash, float normalizedTime, Action callback)
-        {
-            var key = new EventKey(stateHash, AnimationEventType.OnTime, normalizedTime);
-            AddCallback(key, callback);
-        }
-
-        public void Unregister(int stateHash, float normalizedTime, Action callback)
-        {
-            var key = new EventKey(stateHash, AnimationEventType.OnTime, normalizedTime);
-            RemoveCallback(key, callback);
-        }
-
-        internal void Invoke(int stateHash, AnimationEventType eventType, float normalizedTime = 0f)
-        {
-            var key = new EventKey(stateHash, eventType, normalizedTime);
-            if (!_callbacks.TryGetValue(key, out var list)) return;
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i]?.Invoke();
-            }
-        }
-
-        internal List<float> GetRegisteredTimes(int stateHash)
-        {
-            List<float> times = null;
-
-            foreach (var key in _callbacks.Keys)
-            {
-                if (key.StateHash == stateHash && key.EventType == AnimationEventType.OnTime)
-                {
-                    times ??= new List<float>();
-                    times.Add(key.NormalizedTime);
-                }
-            }
-
-            return times;
-        }
-
-        private void AddCallback(EventKey key, Action callback)
-        {
+            var key = new EventKey(layerIndex, eventName);
             if (!_callbacks.TryGetValue(key, out var list))
             {
                 list = new List<Action>();
@@ -108,13 +50,25 @@ namespace AKD.AnimationEvents
                 list.Add(callback);
         }
 
-        private void RemoveCallback(EventKey key, Action callback)
+        public void Unregister(int layerIndex, string eventName, Action callback)
         {
+            var key = new EventKey(layerIndex, eventName);
             if (_callbacks.TryGetValue(key, out var list))
             {
                 list.Remove(callback);
                 if (list.Count == 0)
                     _callbacks.Remove(key);
+            }
+        }
+
+        internal void Fire(int layerIndex, string eventName)
+        {
+            var key = new EventKey(layerIndex, eventName);
+            if (!_callbacks.TryGetValue(key, out var list)) return;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i]?.Invoke();
             }
         }
     }

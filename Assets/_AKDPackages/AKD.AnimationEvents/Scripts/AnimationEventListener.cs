@@ -6,8 +6,8 @@ namespace AKD.AnimationEvents
 {
     public class AnimationEventListener : MonoBehaviour
     {
-        [SerializeField] private AnimationEventDispatcher dispatcher;
-        [SerializeField] private List<AnimationEventBinding> bindings = new();
+        [SerializeField] private AnimationEventDispatcher _dispatcher;
+        [SerializeField] private List<AnimationEventBinding> _bindings = new();
 
         private Action[] _cachedCallbacks;
 
@@ -15,41 +15,35 @@ namespace AKD.AnimationEvents
 
         private void OnEnable()
         {
-            if (dispatcher == null)
+            if (_dispatcher == null)
             {
-                Debug.LogWarning($"<color=#FF5F5D>[AnimationEvents]</color> AnimationEventListener on '{gameObject.name}' has no dispatcher assigned.");
+                Debug.LogWarning(
+                    $"<color=#FF5F5D>[AnimationEvents]</color> AnimationEventListener on '{gameObject.name}' has no dispatcher assigned.");
                 return;
             }
 
-            _cachedCallbacks = new Action[bindings.Count];
+            _cachedCallbacks = new Action[_bindings.Count];
 
-            for (int i = 0; i < bindings.Count; i++)
+            for (int i = 0; i < _bindings.Count; i++)
             {
-                var binding = bindings[i];
+                var binding = _bindings[i];
                 int index = i;
                 _cachedCallbacks[index] = () => binding.response?.Invoke();
 
-                if (binding.eventType == AnimationEventType.OnTime)
-                    dispatcher.Register(binding.stateHash, binding.normalizedTime, _cachedCallbacks[index]);
-                else
-                    dispatcher.Register(binding.stateHash, binding.eventType, _cachedCallbacks[index]);
+                _dispatcher.Register(binding.layerIndex, binding.eventName, _cachedCallbacks[index]);
             }
         }
 
         private void OnDisable()
         {
-            if (dispatcher == null || _cachedCallbacks == null) return;
+            if (_dispatcher == null || _cachedCallbacks == null) return;
 
-            for (int i = 0; i < bindings.Count; i++)
+            for (int i = 0; i < _bindings.Count; i++)
             {
                 if (i >= _cachedCallbacks.Length || _cachedCallbacks[i] == null) continue;
 
-                var binding = bindings[i];
-
-                if (binding.eventType == AnimationEventType.OnTime)
-                    dispatcher.Unregister(binding.stateHash, binding.normalizedTime, _cachedCallbacks[i]);
-                else
-                    dispatcher.Unregister(binding.stateHash, binding.eventType, _cachedCallbacks[i]);
+                var binding = _bindings[i];
+                _dispatcher.Unregister(binding.layerIndex, binding.eventName, _cachedCallbacks[i]);
             }
 
             _cachedCallbacks = null;

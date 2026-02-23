@@ -5,35 +5,38 @@ namespace AKD.AnimationEvents
 {
     public class AnimationEventBehaviour : StateMachineBehaviour
     {
-        private class PerAnimatorState
+        [SerializeField] private List<AnimationEventEntry> _events = new();
+
+        public IReadOnlyList<AnimationEventEntry> Events => _events;
+
+        private class StateTracker
         {
             public AnimationEventDispatcher Dispatcher;
-            public List<float> RegisteredTimes;
-            public readonly HashSet<int> InvokedThisCycle = new();
             public float LastNormalizedTime;
+            public readonly HashSet<int> InvokedThisCycle = new();
         }
 
-        private readonly Dictionary<int, PerAnimatorState> _stateByAnimator = new();
+        private readonly Dictionary<int, StateTracker> _trackers = new();
 
-        private PerAnimatorState GetOrCreateState(Animator animator)
+        private StateTracker GetOrCreateTracker(Animator animator)
         {
             int id = animator.GetInstanceID();
-            if (!_stateByAnimator.TryGetValue(id, out var state))
+            if (!_trackers.TryGetValue(id, out var tracker))
             {
-                state = new PerAnimatorState();
-                _stateByAnimator[id] = state;
+                tracker = new StateTracker();
+                _trackers[id] = tracker;
             }
 
-            return state;
+            return tracker;
         }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var state = GetOrCreateState(animator);
+            var tracker = GetOrCreateTracker(animator);
 
-            if (state.Dispatcher == null)
+            if (tracker.Dispatcher == null)
             {
-                if (!animator.TryGetComponent(out state.Dispatcher))
+                if (!animator.TryGetComponent(out tracker.Dispatcher))
                 {
                     Debug.LogWarning(
                         $"<color=#FF5F5D>[AnimationEvents]</color> No AnimationEventDispatcher found on '{animator.gameObject.name}'.");
@@ -41,50 +44,54 @@ namespace AKD.AnimationEvents
                 }
             }
 
-            state.LastNormalizedTime = 0f;
-            state.InvokedThisCycle.Clear();
-            state.RegisteredTimes = state.Dispatcher.GetRegisteredTimes(stateInfo.shortNameHash);
+            tracker.LastNormalizedTime = 0f;
+            tracker.InvokedThisCycle.Clear();
 
-            state.Dispatcher.Invoke(stateInfo.shortNameHash, AnimationEventType.OnStart);
+            for (int i = 0; i < _events.Count; i++)
+            {
+                if (_events[i].eventType == AnimationEventType.OnEnter)
+                    tracker.Dispatcher.Fire(layerIndex, _events[i].eventName);
+            }
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var state = GetOrCreateState(animator);
-            if (state.Dispatcher == null || state.RegisteredTimes == null) return;
+            var tracker = GetOrCreateTracker(animator);
+            if (tracker.Dispatcher == null) return;
 
             float currentTime = stateInfo.normalizedTime % 1f;
 
-            if (currentTime < state.LastNormalizedTime)
+            if (currentTime < tracker.LastNormalizedTime)
+                tracker.InvokedThisCycle.Clear();
+
+            for (int i = 0; i < _events.Count; i++)
             {
-                state.InvokedThisCycle.Clear();
-            }
+                if (_events[i].eventType != AnimationEventType.OnTime) continue;
+                if (tracker.InvokedThisCycle.Contains(i)) continue;
 
-            int stateHash = stateInfo.shortNameHash;
-
-            for (int i = 0; i < state.RegisteredTimes.Count; i++)
-            {
-                if (state.InvokedThisCycle.Contains(i)) continue;
-
-                float threshold = state.RegisteredTimes[i];
-                if (state.LastNormalizedTime < threshold && currentTime >= threshold)
+                float threshold = _events[i].normalizedTime;
+                if (tracker.LastNormalizedTime < threshold && currentTime >= threshold)
                 {
-                    state.InvokedThisCycle.Add(i);
-                    state.Dispatcher.Invoke(stateHash, AnimationEventType.OnTime, threshold);
+                    tracker.InvokedThisCycle.Add(i);
+                    tracker.Dispatcher.Fire(layerIndex, _events[i].eventName);
                 }
             }
 
-            state.LastNormalizedTime = currentTime;
+            tracker.LastNormalizedTime = currentTime;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            var state = GetOrCreateState(animator);
-            if (state.Dispatcher == null) return;
+            var tracker = GetOrCreateTracker(animator);
+            if (tracker.Dispatcher == null) return;
 
-            state.Dispatcher.Invoke(stateInfo.shortNameHash, AnimationEventType.OnEnd);
-            state.InvokedThisCycle.Clear();
-            state.RegisteredTimes = null;
+            for (int i = 0; i < _events.Count; i++)
+            {
+                if (_events[i].eventType == AnimationEventType.OnExit)
+                    tracker.Dispatcher.Fire(layerIndex, _events[i].eventName);
+            }
+
+            tracker.InvokedThisCycle.Clear();
         }
     }
 }
