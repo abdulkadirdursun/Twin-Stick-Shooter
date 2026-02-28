@@ -14,6 +14,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
         [SerializeField] private AnimationController animationController;
         [Header("Locomotion Components")]
         [SerializeField] private MovementController movementController;
+        [SerializeField] private IKAimTargetPlacer ikAimTargetPlacer;
         [Header("Combat Components")]
         [SerializeField] private PlayerWeaponSlots playerWeaponSlots;
         [SerializeField] private AnimationEventDispatcher animationEventDispatcher;
@@ -47,7 +48,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
 
         private void Awake()
         {
-            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController);
+            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController, ikAimTargetPlacer);
             _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
             var combatBlackboard = new CombatBlackboard(animationController, playerWeaponSlots, animationEventDispatcher);
             _combatStateMachine = new CombatStateMachine(combatBlackboard);

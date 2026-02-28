@@ -22,11 +22,13 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             base.StateEnter();
             PlayerInputs.AimPositionInput += ReadAimRotationInput;
             PlayerInputs.OnStopAiming += ChangeToFreeMovementState;
+            Blackboard.IKAimTargetPlacer.SetActive(true);
         }
 
         public override void StateExit()
         {
             base.StateExit();
+            Blackboard.IKAimTargetPlacer.SetActive(false);
             PlayerInputs.AimPositionInput -= ReadAimRotationInput;
             PlayerInputs.OnStopAiming -= ChangeToFreeMovementState;
         }
@@ -43,6 +45,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
             var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
             Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
+            Blackboard.IKAimTargetPlacer.SetDirection(Blackboard.LookDirection);
         }
 
         private void ChangeToFreeMovementState()
