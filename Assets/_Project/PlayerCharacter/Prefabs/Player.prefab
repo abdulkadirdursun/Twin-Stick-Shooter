@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5979996137793629002}
   - component: {fileID: 7171520829203255420}
   m_Layer: 0
-  m_Name: Rig 1
+  m_Name: AimRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.Rig
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors: []
 --- !u!1 &2872628100262053529
 GameObject:
@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272cd9629fceaf242ace8f7da46a5716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.AnimationSystem.IKAimTargetPlacer
+  aimRig: {fileID: 7171520829203255420}
   aimTarget: {fileID: 6575141049875477893}
   distanceFromBody: 10
 --- !u!1 &2932317481539014182
