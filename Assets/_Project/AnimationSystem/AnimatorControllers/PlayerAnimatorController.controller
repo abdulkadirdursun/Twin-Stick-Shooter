@@ -425,7 +425,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: UpperBody_BaseballBat
     m_StateMachine: {fileID: -813493912103501641}
-    m_Mask: {fileID: 31900000, guid: d4b10dae20ff6184794dae386c49547a, type: 2}
+    m_Mask: {fileID: 31900000, guid: 6f890c75d1dd22e458e094b7839ce2bb, type: 2}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 0
