@@ -14,6 +14,9 @@ namespace TwinStickShooter.WeaponSystem
         [Header("Prefabs")]
         [SerializeField] private GameObject weaponPreviewPrefab;
         [SerializeField] private BaseWeapon weaponPrefab;
+        [Header("Placement Info")]
+        [SerializeField] private Vector3 holdPosition;
+        [SerializeField] private Vector3 holdRotation;
 
         public string WeaponName => weaponName;
         public Sprite WeaponIcon => weaponIcon;
@@ -24,5 +27,7 @@ namespace TwinStickShooter.WeaponSystem
 
         public GameObject WeaponPreviewPrefab => weaponPreviewPrefab;
         public BaseWeapon WeaponPrefab => weaponPrefab;
+        public Vector3 HoldPosition => holdPosition;
+        public Vector3 HoldRotation => holdRotation;
     }
 }

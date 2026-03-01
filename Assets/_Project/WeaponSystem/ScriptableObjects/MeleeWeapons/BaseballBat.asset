@@ -16,5 +16,8 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: 11bac76e893e6e14b884f1ffd688c686, type: 3}
   attackRate: 1
   damage: 1
+  animatorLayer: 1
   weaponPreviewPrefab: {fileID: 1720152226819544, guid: 133f932775f5bff43a09e7bcb2f346dc, type: 3}
   weaponPrefab: {fileID: 1280892515059965649, guid: 2b2552c5e814c5244b3bad53b28fd073, type: 3}
+  holdPosition: {x: 0, y: 0, z: 0}
+  holdRotation: {x: 0, y: 0, z: 270}

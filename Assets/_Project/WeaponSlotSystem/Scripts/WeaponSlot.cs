@@ -42,19 +42,17 @@ namespace TwinStickShooter.WeaponSlotSystem
 
         public void SetActive(bool isActive)
         {
-            if(IsActive==isActive)return;
+            if (IsActive == isActive) return;
             IsActive = isActive;
             Weapon?.gameObject.SetActive(IsActive);
-
         }
 
         private void SpawnWeapon()
         {
             //TODO: Use Pool
             Weapon = Object.Instantiate(WeaponData.WeaponPrefab, _weaponParent, true);
-            var rotationDifference = Quaternion.FromToRotation(Weapon.HoldTransform.forward, _weaponParent.forward);
-            Weapon.transform.localRotation *= rotationDifference;
-            Weapon.transform.localPosition = Weapon.HoldTransform.localPosition;
+            Weapon.transform.localRotation = Quaternion.Euler(WeaponData.HoldRotation);
+            Weapon.transform.localPosition = WeaponData.HoldPosition;
             Weapon.OnEquipped();
             Weapon.gameObject.SetActive(IsActive);
         }
