@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &525259497159639158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217699243822395987}
+  - component: {fileID: 6359070430390949340}
+  m_Layer: 0
+  m_Name: BaseballBatAimRig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &217699243822395987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525259497159639158}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7246908983370695272}
+  m_Father: {fileID: 1054953579930831728}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6359070430390949340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525259497159639158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.Rig
+  m_Weight: 0
+  m_Effectors: []
 --- !u!1 &2019311610103166785
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +58,7 @@ GameObject:
   - component: {fileID: 5979996137793629002}
   - component: {fileID: 7171520829203255420}
   m_Layer: 0
-  m_Name: AimRig
+  m_Name: PistolAimRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +77,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2404666320388309143}
-  - {fileID: 3917169131222487662}
+  - {fileID: 6649742301443413815}
+  - {fileID: 937046170617248237}
   m_Father: {fileID: 1054953579930831728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7171520829203255420
@@ -58,7 +105,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6575141049875477893}
   - component: {fileID: 7194595821441837027}
-  - component: {fileID: 2101455164178574686}
   m_Layer: 6
   m_Name: AimTarget
   m_TagString: Untagged
@@ -75,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 2872628100262053529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 2}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -96,22 +142,7 @@ MonoBehaviour:
   radius: 0.1
   gizmosColor: {r: 0.735849, g: 0.6174898, b: 0, a: 1}
   isWireView: 0
---- !u!114 &2101455164178574686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2872628100262053529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 272cd9629fceaf242ace8f7da46a5716, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.AnimationSystem.IKAimTargetPlacer
-  aimRig: {fileID: 7171520829203255420}
-  aimTarget: {fileID: 6575141049875477893}
-  distanceFromBody: 10
---- !u!1 &2932317481539014182
+--- !u!1 &3092221573050321447
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,22 +150,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2404666320388309143}
-  - component: {fileID: 3968469968723317843}
+  - component: {fileID: 937046170617248237}
+  - component: {fileID: 7922947926942170946}
   m_Layer: 0
-  m_Name: SpineAim
+  m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2404666320388309143
+--- !u!4 &937046170617248237
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2932317481539014182}
+  m_GameObject: {fileID: 3092221573050321447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -143,21 +174,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5979996137793629002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3968469968723317843
+--- !u!114 &7922947926942170946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2932317481539014182}
+  m_GameObject: {fileID: 3092221573050321447}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.MultiAimConstraint
-  m_Weight: 0.7
+  m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 1054469013998270338}
+    m_ConstrainedObject: {fileID: 1062116988862409786}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -185,10 +216,10 @@ MonoBehaviour:
         transform: {fileID: 0}
         weight: 0
     m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -45
-    m_MaxLimit: 45
-    m_AimAxis: 3
-    m_UpAxis: 1
+    m_MinLimit: -180
+    m_MaxLimit: 180
+    m_AimAxis: 0
+    m_UpAxis: 5
     m_WorldUpType: 0
     m_WorldUpObject: {fileID: 0}
     m_WorldUpAxis: 2
@@ -211,6 +242,7 @@ GameObject:
   - component: {fileID: 8165691704867209562}
   - component: {fileID: 5087827803757914369}
   - component: {fileID: 4216494704605009283}
+  - component: {fileID: 8266025216133319228}
   - component: {fileID: 1373215447687763949}
   m_Layer: 6
   m_Name: Player
@@ -289,7 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
   animationController: {fileID: 4216494704605009283}
   movementController: {fileID: 5087827803757914369}
-  ikAimTargetPlacer: {fileID: 2101455164178574686}
+  ikAimTargetPlacer: {fileID: 8266025216133319228}
   playerWeaponSlots: {fileID: 1373215447687763949}
   animationEventDispatcher: {fileID: 3665056794518772985}
 --- !u!114 &5087827803757914369
@@ -319,6 +351,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerAnimationController
   animator: {fileID: 1146158694434482792}
+--- !u!114 &8266025216133319228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278666455597025988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272cd9629fceaf242ace8f7da46a5716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.AnimationSystem.IKAimTargetPlacer
+  animationController: {fileID: 4216494704605009283}
+  aimTarget: {fileID: 6575141049875477893}
+  distanceFromBody: 10
+  baseballBatAimRig: {fileID: 6359070430390949340}
+  pistolAimRig: {fileID: 7171520829203255420}
 --- !u!114 &1373215447687763949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28aa648e410248ec972523fea380429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
-  weaponParent: {fileID: 8779121019904214968}
+  weaponParent: {fileID: 1689212339532960289}
 --- !u!1 &5575027983583388899
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +495,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!1 &6384027004515927250
+--- !u!1 &6567142489339232087
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,22 +503,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3917169131222487662}
-  - component: {fileID: 276199901932362788}
+  - component: {fileID: 6649742301443413815}
+  - component: {fileID: 5706523542454683478}
   m_Layer: 0
-  m_Name: RHand
+  m_Name: SpineAim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3917169131222487662
+--- !u!4 &6649742301443413815
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384027004515927250}
+  m_GameObject: {fileID: 6567142489339232087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -478,13 +527,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5979996137793629002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &276199901932362788
+--- !u!114 &5706523542454683478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384027004515927250}
+  m_GameObject: {fileID: 6567142489339232087}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
@@ -492,7 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.MultiAimConstraint
   m_Weight: 1
   m_Data:
-    m_ConstrainedObject: {fileID: 1062116988862409786}
+    m_ConstrainedObject: {fileID: 1054966484077387628}
     m_SourceObjects:
       m_Length: 1
       m_Item0:
@@ -522,8 +571,8 @@ MonoBehaviour:
     m_Offset: {x: 0, y: 0, z: 0}
     m_MinLimit: -45
     m_MaxLimit: 45
-    m_AimAxis: 0
-    m_UpAxis: 5
+    m_AimAxis: 3
+    m_UpAxis: 1
     m_WorldUpType: 0
     m_WorldUpObject: {fileID: 0}
     m_WorldUpAxis: 2
@@ -531,8 +580,8 @@ MonoBehaviour:
     m_ConstrainedAxes:
       x: 1
       y: 1
-      z: 1
---- !u!1 &7451927141499080702
+      z: 0
+--- !u!1 &8208916033431186663
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -540,7 +589,93 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8779121019904214968}
+  - component: {fileID: 7246908983370695272}
+  - component: {fileID: 3985037035959286664}
+  m_Layer: 0
+  m_Name: SpineAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7246908983370695272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208916033431186663}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 217699243822395987}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3985037035959286664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208916033431186663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.MultiAimConstraint
+  m_Weight: 1
+  m_Data:
+    m_ConstrainedObject: {fileID: 1054966484077387628}
+    m_SourceObjects:
+      m_Length: 1
+      m_Item0:
+        transform: {fileID: 6575141049875477893}
+        weight: 1
+      m_Item1:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item2:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item3:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item4:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item5:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item6:
+        transform: {fileID: 0}
+        weight: 0
+      m_Item7:
+        transform: {fileID: 0}
+        weight: 0
+    m_Offset: {x: 0, y: 0, z: 0}
+    m_MinLimit: -45
+    m_MaxLimit: 45
+    m_AimAxis: 3
+    m_UpAxis: 1
+    m_WorldUpType: 0
+    m_WorldUpObject: {fileID: 0}
+    m_WorldUpAxis: 2
+    m_MaintainOffset: 0
+    m_ConstrainedAxes:
+      x: 1
+      y: 1
+      z: 0
+--- !u!1 &8914845220069575660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1689212339532960289}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -548,13 +683,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8779121019904214968
+--- !u!4 &1689212339532960289
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451927141499080702}
+  m_GameObject: {fileID: 8914845220069575660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 9, y: 2.5, z: 0}
@@ -1070,6 +1205,18 @@ PrefabInstance:
     - target: {fileID: 4435398991064960, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.44930154
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463030476091104, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463030476091104, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463030476091104, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 4505688899824798, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1709,9 +1856,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5979996137793629002}
+    - targetCorrespondingSourceObject: {fileID: 4580766925885248, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 217699243822395987}
     - targetCorrespondingSourceObject: {fileID: 4170833147357194, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8779121019904214968}
+      addedObject: {fileID: 1689212339532960289}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
@@ -1893,6 +2043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.RigBuilder
   m_RigLayers:
+  - m_Rig: {fileID: 6359070430390949340}
+    m_Active: 1
   - m_Rig: {fileID: 7171520829203255420}
     m_Active: 1
   m_Effectors: []
@@ -1946,7 +2098,7 @@ MonoBehaviour:
   - {fileID: 1054814158255415524}
   - {fileID: 1062043654510900674}
   - {fileID: 1054963466372224476}
-  - {fileID: 8779121019904214968}
+  - {fileID: 0}
   - {fileID: 1054842794925127444}
   - {fileID: 1062252687629652474}
   - {fileID: 1054953845050402472}

@@ -1,3 +1,4 @@
+using TwinStickShooter.AnimationSystem.Enums;
 using UnityEngine;
 
 namespace TwinStickShooter.AnimationSystem
@@ -11,6 +12,11 @@ namespace TwinStickShooter.AnimationSystem
         public int GetActiveLayerId()
         {
             return _animatorLayerController.ActiveLayerId;
+        }
+
+        public AnimatorLayer GetActiveLayer()
+        {
+            return _animatorLayerController.ActiveAnimatorLayer;
         }
 
         public void SetBool(int id, bool value)
