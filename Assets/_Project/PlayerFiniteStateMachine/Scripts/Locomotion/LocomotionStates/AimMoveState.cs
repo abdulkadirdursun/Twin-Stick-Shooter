@@ -38,13 +38,15 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
             {
                 Blackboard.LookDirection = new Vector3(input.x, 0f, input.y);
-                return;
+            }
+            else
+            {
+                var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
+                var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
+                var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
+                Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
             }
 
-            var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
-            var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
-            var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
-            Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
             Blackboard.IKAimTargetPlacer.SetDirection(Blackboard.LookDirection);
         }
 
