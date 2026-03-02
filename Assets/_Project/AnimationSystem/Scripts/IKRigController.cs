@@ -4,7 +4,7 @@ using UnityEngine.Animations.Rigging;
 
 namespace TwinStickShooter.AnimationSystem
 {
-    public class IKAimTargetPlacer : MonoBehaviour
+    public class IKRigController : MonoBehaviour
     {
         [SerializeField] private AnimationController animationController;
         [Header("Rigs")]
