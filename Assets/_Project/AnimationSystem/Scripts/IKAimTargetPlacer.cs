@@ -7,8 +7,6 @@ namespace TwinStickShooter.AnimationSystem
     public class IKAimTargetPlacer : MonoBehaviour
     {
         [SerializeField] private AnimationController animationController;
-        [SerializeField] private Transform aimTarget;
-        [SerializeField] private float distanceFromBody = 10f;
         [Header("Rigs")]
         [SerializeField] private Rig baseballBatAimRig;
         [SerializeField] private Rig pistolAimRig;
@@ -23,13 +21,6 @@ namespace TwinStickShooter.AnimationSystem
 
             _activeRig = rig;
             _activeRig.weight = 1f;
-        }
-
-        public void SetDirection(Vector3 lookDirection)
-        {
-            var position = lookDirection * distanceFromBody;
-            position.y = aimTarget.position.y;
-            aimTarget.position = position;
         }
 
         private bool TryGetRig(out Rig rig)

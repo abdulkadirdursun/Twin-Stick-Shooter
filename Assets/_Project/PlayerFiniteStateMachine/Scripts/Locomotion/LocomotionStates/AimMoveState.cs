@@ -20,7 +20,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public override void StateEnter()
         {
             base.StateEnter();
-            PlayerInputs.AimPositionInput += ReadAimRotationInput;
+            PlayerInputs.CursorPositionInput += ReadCursorRotationInput;
             PlayerInputs.OnStopAiming += ChangeToFreeMovementState;
             Blackboard.IKAimTargetPlacer.SetActive(true);
         }
@@ -29,25 +29,22 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         {
             base.StateExit();
             Blackboard.IKAimTargetPlacer.SetActive(false);
-            PlayerInputs.AimPositionInput -= ReadAimRotationInput;
+            PlayerInputs.CursorPositionInput -= ReadCursorRotationInput;
             PlayerInputs.OnStopAiming -= ChangeToFreeMovementState;
         }
 
-        private void ReadAimRotationInput(Vector2 input)
-        {
+        private void ReadCursorRotationInput(Vector2 input)
+        { 
             if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
             {
                 Blackboard.LookDirection = new Vector3(input.x, 0f, input.y);
-            }
-            else
-            {
-                var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
-                var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
-                var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
-                Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
+                return;
             }
 
-            Blackboard.IKAimTargetPlacer.SetDirection(Blackboard.LookDirection);
+            var distanceToGround = Mathf.Abs(_mainCamera.transform.position.y - GroundHeight);
+            var screenPositionWithDepth = new Vector3(input.x, input.y, distanceToGround);
+            var mouseWorldPosition = _mainCamera.ScreenToWorldPoint(screenPositionWithDepth);
+            Blackboard.LookDirection = (mouseWorldPosition - Blackboard.MovementController.Position).normalized;
         }
 
         private void ChangeToFreeMovementState()
