@@ -19,8 +19,8 @@ namespace TwinStickShooter.InputSystem
             _inputControlScheme = new InputControlScheme(_playerInputActions);
             //Gameplay
             _playerInputActions.Gameplay.Movement.performed += ReadMovementInput;
-            _playerInputActions.Gameplay.MouseAimTrigger.performed += OnMouseRightClickPerformed;
-            _playerInputActions.Gameplay.MouseAimTrigger.canceled += OnMouseRightClickCancelled;
+            _playerInputActions.Gameplay.AimTrigger.performed += OnMouseRightClickPerformed;
+            _playerInputActions.Gameplay.AimTrigger.canceled += OnMouseRightClickCancelled;
             _playerInputActions.Gameplay.LookTargetMovement.performed += ReadLookTargetMovement;
             _playerInputActions.Gameplay.Aim.performed += ReadAim;
             _playerInputActions.Gameplay.Interact.performed += OnInteractButtonClicked;
@@ -70,14 +70,6 @@ namespace TwinStickShooter.InputSystem
         private void ReadAim(InputAction.CallbackContext context)
         {
             var aimPosition = context.ReadValue<Vector2>();
-            if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
-            {
-                if (aimPosition == Vector2.zero)
-                    OnStopAiming?.Invoke();
-                else
-                    OnStartAiming?.Invoke();
-            }
-
             CursorPositionInput?.Invoke(aimPosition);
         }
 

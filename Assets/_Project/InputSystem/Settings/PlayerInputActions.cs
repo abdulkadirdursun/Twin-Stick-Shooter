@@ -111,7 +111,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MouseAimTrigger"",
+                    ""name"": ""AimTrigger"",
                     ""type"": ""Button"",
                     ""id"": ""6ff544fc-9da8-48c1-a36e-21bd04ec176a"",
                     ""expectedControlType"": """",
@@ -314,7 +314,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MouseAimTrigger"",
+                    ""action"": ""AimTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34c1092e-52a5-46fe-8d76-98bbca71b3dc"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""AimTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -487,7 +498,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
-        m_Gameplay_MouseAimTrigger = m_Gameplay.FindAction("MouseAimTrigger", throwIfNotFound: true);
+        m_Gameplay_AimTrigger = m_Gameplay.FindAction("AimTrigger", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_WeaponSlot1 = m_Gameplay.FindAction("WeaponSlot1", throwIfNotFound: true);
@@ -576,7 +587,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Aim;
-    private readonly InputAction m_Gameplay_MouseAimTrigger;
+    private readonly InputAction m_Gameplay_AimTrigger;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_WeaponSlot1;
@@ -603,9 +614,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/MouseAimTrigger".
+        /// Provides access to the underlying input action "Gameplay/AimTrigger".
         /// </summary>
-        public InputAction @MouseAimTrigger => m_Wrapper.m_Gameplay_MouseAimTrigger;
+        public InputAction @AimTrigger => m_Wrapper.m_Gameplay_AimTrigger;
         /// <summary>
         /// Provides access to the underlying input action "Gameplay/Attack".
         /// </summary>
@@ -662,9 +673,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @MouseAimTrigger.started += instance.OnMouseAimTrigger;
-            @MouseAimTrigger.performed += instance.OnMouseAimTrigger;
-            @MouseAimTrigger.canceled += instance.OnMouseAimTrigger;
+            @AimTrigger.started += instance.OnAimTrigger;
+            @AimTrigger.performed += instance.OnAimTrigger;
+            @AimTrigger.canceled += instance.OnAimTrigger;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -700,9 +711,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @MouseAimTrigger.started -= instance.OnMouseAimTrigger;
-            @MouseAimTrigger.performed -= instance.OnMouseAimTrigger;
-            @MouseAimTrigger.canceled -= instance.OnMouseAimTrigger;
+            @AimTrigger.started -= instance.OnAimTrigger;
+            @AimTrigger.performed -= instance.OnAimTrigger;
+            @AimTrigger.canceled -= instance.OnAimTrigger;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -802,12 +813,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "MouseAimTrigger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "AimTrigger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMouseAimTrigger(InputAction.CallbackContext context);
+        void OnAimTrigger(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
