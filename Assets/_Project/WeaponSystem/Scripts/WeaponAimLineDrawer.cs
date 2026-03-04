@@ -30,7 +30,7 @@ namespace TwinStickShooter.WeaponSystem
             if (!_isActive) return;
             var hitCount = Physics.RaycastNonAlloc(firePoint.position, firePoint.forward, _rayHitBuffer, _maxDistance);
             _linePositionsBuffer[0] = firePoint.position;
-            _linePositionsBuffer[1] = hitCount > 0 ? _rayHitBuffer[0].point : firePoint.forward * _maxDistance;
+            _linePositionsBuffer[1] = hitCount > 0 ? _rayHitBuffer[0].point : firePoint.position + firePoint.forward * _maxDistance;
             lineRenderer.SetPositions(_linePositionsBuffer);
         }
 

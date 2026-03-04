@@ -111,7 +111,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MouseAimTrigger"",
+                    ""name"": ""AimTrigger"",
                     ""type"": ""Button"",
                     ""id"": ""6ff544fc-9da8-48c1-a36e-21bd04ec176a"",
                     ""expectedControlType"": """",
@@ -160,6 +160,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""9f1efb6c-b70a-44c1-80c1-57f711219bc5"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookTargetMovement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""06dfa78c-d1b5-44c3-98bc-4fb2d1cdc1cc"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -305,7 +314,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""MouseAimTrigger"",
+                    ""action"": ""AimTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34c1092e-52a5-46fe-8d76-98bbca71b3dc"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""AimTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -418,6 +438,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""WeaponSlot3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d070580c-94b7-47fd-8e02-768b64f3baa2"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""LookTargetMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90c93236-3599-4f65-87f2-e6ad16f5abb2"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""LookTargetMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -456,12 +498,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
-        m_Gameplay_MouseAimTrigger = m_Gameplay.FindAction("MouseAimTrigger", throwIfNotFound: true);
+        m_Gameplay_AimTrigger = m_Gameplay.FindAction("AimTrigger", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_WeaponSlot1 = m_Gameplay.FindAction("WeaponSlot1", throwIfNotFound: true);
         m_Gameplay_WeaponSlot2 = m_Gameplay.FindAction("WeaponSlot2", throwIfNotFound: true);
         m_Gameplay_WeaponSlot3 = m_Gameplay.FindAction("WeaponSlot3", throwIfNotFound: true);
+        m_Gameplay_LookTargetMovement = m_Gameplay.FindAction("LookTargetMovement", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -544,12 +587,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Aim;
-    private readonly InputAction m_Gameplay_MouseAimTrigger;
+    private readonly InputAction m_Gameplay_AimTrigger;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_WeaponSlot1;
     private readonly InputAction m_Gameplay_WeaponSlot2;
     private readonly InputAction m_Gameplay_WeaponSlot3;
+    private readonly InputAction m_Gameplay_LookTargetMovement;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -570,9 +614,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/MouseAimTrigger".
+        /// Provides access to the underlying input action "Gameplay/AimTrigger".
         /// </summary>
-        public InputAction @MouseAimTrigger => m_Wrapper.m_Gameplay_MouseAimTrigger;
+        public InputAction @AimTrigger => m_Wrapper.m_Gameplay_AimTrigger;
         /// <summary>
         /// Provides access to the underlying input action "Gameplay/Attack".
         /// </summary>
@@ -593,6 +637,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/WeaponSlot3".
         /// </summary>
         public InputAction @WeaponSlot3 => m_Wrapper.m_Gameplay_WeaponSlot3;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/LookTargetMovement".
+        /// </summary>
+        public InputAction @LookTargetMovement => m_Wrapper.m_Gameplay_LookTargetMovement;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -625,9 +673,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
-            @MouseAimTrigger.started += instance.OnMouseAimTrigger;
-            @MouseAimTrigger.performed += instance.OnMouseAimTrigger;
-            @MouseAimTrigger.canceled += instance.OnMouseAimTrigger;
+            @AimTrigger.started += instance.OnAimTrigger;
+            @AimTrigger.performed += instance.OnAimTrigger;
+            @AimTrigger.canceled += instance.OnAimTrigger;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -643,6 +691,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @WeaponSlot3.started += instance.OnWeaponSlot3;
             @WeaponSlot3.performed += instance.OnWeaponSlot3;
             @WeaponSlot3.canceled += instance.OnWeaponSlot3;
+            @LookTargetMovement.started += instance.OnLookTargetMovement;
+            @LookTargetMovement.performed += instance.OnLookTargetMovement;
+            @LookTargetMovement.canceled += instance.OnLookTargetMovement;
         }
 
         /// <summary>
@@ -660,9 +711,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
-            @MouseAimTrigger.started -= instance.OnMouseAimTrigger;
-            @MouseAimTrigger.performed -= instance.OnMouseAimTrigger;
-            @MouseAimTrigger.canceled -= instance.OnMouseAimTrigger;
+            @AimTrigger.started -= instance.OnAimTrigger;
+            @AimTrigger.performed -= instance.OnAimTrigger;
+            @AimTrigger.canceled -= instance.OnAimTrigger;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -678,6 +729,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @WeaponSlot3.started -= instance.OnWeaponSlot3;
             @WeaponSlot3.performed -= instance.OnWeaponSlot3;
             @WeaponSlot3.canceled -= instance.OnWeaponSlot3;
+            @LookTargetMovement.started -= instance.OnLookTargetMovement;
+            @LookTargetMovement.performed -= instance.OnLookTargetMovement;
+            @LookTargetMovement.canceled -= instance.OnLookTargetMovement;
         }
 
         /// <summary>
@@ -759,12 +813,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "MouseAimTrigger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "AimTrigger" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMouseAimTrigger(InputAction.CallbackContext context);
+        void OnAimTrigger(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -800,5 +854,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWeaponSlot3(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LookTargetMovement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLookTargetMovement(InputAction.CallbackContext context);
     }
 }

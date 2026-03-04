@@ -8,19 +8,24 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
     {
         #region Constructor
 
-        public LocomotionBlackboard(MovementController movementController, AnimationController animationController, IKAimTargetPlacer ikAimTargetPlacer)
+        public LocomotionBlackboard(
+            MovementController movementController, 
+            AnimationController animationController, 
+            IKRigController ikRigController,
+            Transform aimTarget)
         {
             MovementController = movementController;
             AnimationController = animationController;
-            IKAimTargetPlacer = ikAimTargetPlacer;
+            IKRigController = ikRigController;
+            AimTarget = aimTarget;
         }
 
         #endregion
 
         public MovementController MovementController { get; }
         public AnimationController AnimationController { get; }
-        
-        public IKAimTargetPlacer IKAimTargetPlacer { get; }
+        public IKRigController IKRigController { get; }
+        public Transform AimTarget { get; }
 
         public Vector3 MoveDirection { get; set; }
         public Vector3 LookDirection { get; set; }

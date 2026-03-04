@@ -19,8 +19,9 @@ namespace TwinStickShooter.InputSystem
             _inputControlScheme = new InputControlScheme(_playerInputActions);
             //Gameplay
             _playerInputActions.Gameplay.Movement.performed += ReadMovementInput;
-            _playerInputActions.Gameplay.MouseAimTrigger.performed += OnMouseRightClickPerformed;
-            _playerInputActions.Gameplay.MouseAimTrigger.canceled += OnMouseRightClickCancelled;
+            _playerInputActions.Gameplay.AimTrigger.performed += OnMouseRightClickPerformed;
+            _playerInputActions.Gameplay.AimTrigger.canceled += OnMouseRightClickCancelled;
+            _playerInputActions.Gameplay.LookTargetMovement.performed += ReadLookTargetMovement;
             _playerInputActions.Gameplay.Aim.performed += ReadAim;
             _playerInputActions.Gameplay.Interact.performed += OnInteractButtonClicked;
             _playerInputActions.Gameplay.WeaponSlot1.performed += OnWeaponSlot1Selected;
@@ -37,7 +38,8 @@ namespace TwinStickShooter.InputSystem
         public static event Action<Vector2> MoveInput;
         public static event Action OnStartAiming;
         public static event Action OnStopAiming;
-        public static event Action<Vector2> AimPositionInput;
+        public static event Action<Vector2> LookTargetMovement;
+        public static event Action<Vector2> CursorPositionInput;
         public static event Action Interact;
         public static event Action<int> OnWeaponSlotSelected;
         public static event Action OnAttackPressed;
@@ -59,18 +61,16 @@ namespace TwinStickShooter.InputSystem
             OnStopAiming?.Invoke();
         }
 
+        private void ReadLookTargetMovement(InputAction.CallbackContext context)
+        {
+            var value = context.ReadValue<Vector2>();
+            LookTargetMovement?.Invoke(value);
+        }
+
         private void ReadAim(InputAction.CallbackContext context)
         {
             var aimPosition = context.ReadValue<Vector2>();
-            if (InputControlScheme.CurrentControlType == ControlSchemeType.Gamepad)
-            {
-                if (aimPosition == Vector2.zero)
-                    OnStopAiming?.Invoke();
-                else
-                    OnStartAiming?.Invoke();
-            }
-
-            AimPositionInput?.Invoke(aimPosition);
+            CursorPositionInput?.Invoke(aimPosition);
         }
 
         private void OnInteractButtonClicked(InputAction.CallbackContext context)
