@@ -320,7 +320,7 @@ MonoBehaviour:
   rotationTarget: {fileID: 1054953579930831728}
   moveSpeed: 25
   smoothTime: 0.08
-  rotationSpeed: 360
+  rotationSpeed: 720
 --- !u!114 &4216494704605009283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.MovementSystem.LookTargetController
   cursorObject: {fileID: 484585922460630646}
   minDistanceClamp: 1.5
-  sensitivity: 17
+  sensitivity: 20
 --- !u!1 &8914845220069575660
 GameObject:
   m_ObjectHideFlags: 0
