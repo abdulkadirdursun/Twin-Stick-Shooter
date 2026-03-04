@@ -24,9 +24,14 @@ namespace TwinStickShooter.WeaponSystem
         {
             IsAttacking = false;
         }
-        
-        public virtual void OnStartAim(){}
-        public virtual void OnStopAim(){}
+
+        public virtual void OnStartAim()
+        {
+        }
+
+        public virtual void OnStopAim()
+        {
+        }
 
         public virtual bool CanAttack(out FailedAttackReason failedAttackReason)
         {
@@ -41,7 +46,7 @@ namespace TwinStickShooter.WeaponSystem
                 failedAttackReason = FailedAttackReason.None;
                 return false;
             }
-            
+
             if (!RapidAttack)
             {
                 IsAttacking = false;
@@ -51,7 +56,6 @@ namespace TwinStickShooter.WeaponSystem
             failedAttackReason = FailedAttackReason.None;
             return true;
         }
-
 
         public virtual void OnEquipped(LayerMask targetLayers)
         {
@@ -63,6 +67,10 @@ namespace TwinStickShooter.WeaponSystem
             IsAttacking = false;
         }
 
+        protected virtual void OnUpdate()
+        {
+        }
+
         #region MonoBehaviour Methods
 
         private void Update()
@@ -71,6 +79,8 @@ namespace TwinStickShooter.WeaponSystem
             {
                 _timeSinceLastShot += Time.deltaTime;
             }
+
+            OnUpdate();
         }
 
         #endregion
