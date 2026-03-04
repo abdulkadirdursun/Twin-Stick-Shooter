@@ -30,13 +30,14 @@ namespace TwinStickShooter.WeaponSystem
             var projectile = ProjectilePool.Instance.GetProjectile();
             projectile.transform.position = firePoint.position;
             projectile.transform.forward = firePoint.forward;
-            projectile.Fire(gunData.Damage, gunData.EffectiveDistance);
+            projectile.Fire(gunData.Damage, gunData.EffectiveDistance, TargetLayers);
             _currentAmmo--;
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }
 
-        public override void OnEquipped()
+        public override void OnEquipped(LayerMask targetLayers)
         {
+            base.OnEquipped(targetLayers);
             _currentAmmo = gunData.AmmoCapacity;
             weaponAimLineDrawer.Configure(gunData.EffectiveDistance);
         }

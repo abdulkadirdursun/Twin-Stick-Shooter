@@ -9,6 +9,7 @@ namespace TwinStickShooter.WeaponSystem
         protected abstract bool RapidAttack { get; }
         private float _timeSinceLastShot;
         protected bool IsAttacking;
+        protected LayerMask TargetLayers;
 
         public Transform HoldTransform => holdTransform;
         public bool OnCooldown => _timeSinceLastShot < AttackRate;
@@ -52,8 +53,9 @@ namespace TwinStickShooter.WeaponSystem
         }
 
 
-        public virtual void OnEquipped()
+        public virtual void OnEquipped(LayerMask targetLayers)
         {
+            TargetLayers = targetLayers;
         }
 
         public virtual void OnUnequipped()

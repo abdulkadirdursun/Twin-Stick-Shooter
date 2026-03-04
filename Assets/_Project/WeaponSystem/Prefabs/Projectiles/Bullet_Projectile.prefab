@@ -151,8 +151,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6447697741137888484}
-  - component: {fileID: 7925611165329379899}
   - component: {fileID: 4351963612161590686}
+  - component: {fileID: 2257994910070142374}
   m_Layer: 8
   m_Name: Bullet_Projectile
   m_TagString: Untagged
@@ -177,27 +177,6 @@ Transform:
   - {fileID: 3375962341083510735}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7925611165329379899
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2186915870345462191}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.015, y: 0.015, z: 0.02}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4351963612161590686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +189,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6fda3db88e485691188be10e92715e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.Projectiles.Projectile
+  hitDetector: {fileID: 2257994910070142374}
   speed: 35
+--- !u!114 &2257994910070142374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186915870345462191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21446cdb4627b940961273da5b32d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.HitDetector
+  detectionShape: 0
+  originOffset: {x: 0, y: 0, z: -0.002}
+  size: {x: 0.015, y: 0.015, z: 0.02}
+  radius: 0.01
+  height: 1
+  gizmosColor: {r: 1, g: 0.2705882, b: 0, a: 1}
 --- !u!1001 &313560144676475655
 PrefabInstance:
   m_ObjectHideFlags: 0

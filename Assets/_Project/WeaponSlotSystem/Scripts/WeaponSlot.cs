@@ -10,9 +10,10 @@ namespace TwinStickShooter.WeaponSlotSystem
     {
         #region Constructor
 
-        public WeaponSlot(Transform weaponParent)
+        public WeaponSlot(Transform weaponParent, LayerMask targetLayers)
         {
             _weaponParent = weaponParent;
+            _targetLayers = targetLayers;
         }
 
         #endregion
@@ -21,6 +22,7 @@ namespace TwinStickShooter.WeaponSlotSystem
         public BaseWeapon Weapon { get; private set; }
 
         private Transform _weaponParent;
+        private LayerMask _targetLayers;
         public bool IsActive { get; private set; }
 
         public event Action OnSlotChanged;
@@ -53,7 +55,7 @@ namespace TwinStickShooter.WeaponSlotSystem
             Weapon = Object.Instantiate(WeaponData.WeaponPrefab, _weaponParent, true);
             Weapon.transform.localRotation = Quaternion.Euler(WeaponData.HoldRotation);
             Weapon.transform.localPosition = WeaponData.HoldPosition;
-            Weapon.OnEquipped();
+            Weapon.OnEquipped(_targetLayers);
             Weapon.gameObject.SetActive(IsActive);
         }
 

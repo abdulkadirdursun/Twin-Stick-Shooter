@@ -9,6 +9,7 @@ namespace TwinStickShooter.WeaponSlotSystem
     public class PlayerWeaponSlots : Singleton<PlayerWeaponSlots>
     {
         [SerializeField] private Transform weaponParent;
+        [SerializeField] private LayerMask targetLayers;
         private WeaponSlot[] _weaponSlots;
         public WeaponSlot ActiveSlot { get; private set; }
         public event Action OnActiveSlotChanged;
@@ -86,9 +87,9 @@ namespace TwinStickShooter.WeaponSlotSystem
         {
             _weaponSlots = new WeaponSlot[]
             {
-                new WeaponSlot(weaponParent),
-                new WeaponSlot(weaponParent),
-                new WeaponSlot(weaponParent)
+                new WeaponSlot(weaponParent, targetLayers),
+                new WeaponSlot(weaponParent, targetLayers),
+                new WeaponSlot(weaponParent, targetLayers)
             };
 
             SelectActiveSlot(0);

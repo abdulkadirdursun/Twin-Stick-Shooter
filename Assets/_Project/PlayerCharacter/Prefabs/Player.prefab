@@ -319,6 +319,7 @@ MonoBehaviour:
   movementRb: {fileID: 881746430398986149}
   rotationTarget: {fileID: 1054953579930831728}
   moveSpeed: 25
+  smoothTime: 0.08
   rotationSpeed: 360
 --- !u!114 &4216494704605009283
 MonoBehaviour:
@@ -361,6 +362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
   weaponParent: {fileID: 1689212339532960289}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 1152
 --- !u!1 &3444596179587277572
 GameObject:
   m_ObjectHideFlags: 0
