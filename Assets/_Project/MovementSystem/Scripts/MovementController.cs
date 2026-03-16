@@ -4,7 +4,7 @@ namespace TwinStickShooter.MovementSystem
 {
     public class MovementController : MonoBehaviour
     {
-        [SerializeField] private Rigidbody movementRb;
+        [SerializeField] private CharacterController characterController;
         [SerializeField] private Transform rotationTarget;
         [SerializeField] private float moveSpeed = 5f;
         [SerializeField] private float smoothTime = 0.08f;
@@ -19,8 +19,8 @@ namespace TwinStickShooter.MovementSystem
         {
             var targetVelocity = moveDirection * moveSpeed;
             _smoothedVelocity = Vector3.SmoothDamp(_smoothedVelocity, targetVelocity, ref _currentVelocity, smoothTime);
-            var targetPosition = movementRb.position + _smoothedVelocity * Time.deltaTime;
-            movementRb.MovePosition(targetPosition);
+            var targetPosition = _smoothedVelocity * Time.deltaTime;
+            characterController.Move(targetPosition);
         }
 
         public void Rotate(Vector3 lookDirection)

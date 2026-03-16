@@ -190,14 +190,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 875276069543613763}
-  - component: {fileID: 881746430398986149}
-  - component: {fileID: 6500990292471205320}
   - component: {fileID: 5427136536786386377}
   - component: {fileID: 8165691704867209562}
   - component: {fileID: 5087827803757914369}
   - component: {fileID: 4216494704605009283}
   - component: {fileID: 8266025216133319228}
   - component: {fileID: 1373215447687763949}
+  - component: {fileID: 5059844950931654990}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -223,56 +222,6 @@ Transform:
   - {fileID: 4461793822676347137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &881746430398986149
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3278666455597025988}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &6500990292471205320
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3278666455597025988}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &5427136536786386377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,9 +265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a0bc95895e4565adb18bdaabbf023e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.MovementSystem.MovementController
-  movementRb: {fileID: 881746430398986149}
+  characterController: {fileID: 5059844950931654990}
   rotationTarget: {fileID: 1054953579930831728}
-  moveSpeed: 25
+  moveSpeed: 7
   smoothTime: 0.08
   rotationSpeed: 720
 --- !u!114 &4216494704605009283
@@ -365,6 +314,31 @@ MonoBehaviour:
   targetLayers:
     serializedVersion: 2
     m_Bits: 1152
+--- !u!143 &5059844950931654990
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278666455597025988}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.8
+  m_Radius: 0.2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &3444596179587277572
 GameObject:
   m_ObjectHideFlags: 0
