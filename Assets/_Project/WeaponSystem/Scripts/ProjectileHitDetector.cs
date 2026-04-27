@@ -1,4 +1,4 @@
-using TwinStickShooter.DamageableSystem;
+using TwinStickShooter.Core;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem

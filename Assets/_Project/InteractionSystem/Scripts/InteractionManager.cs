@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TwinStickShooter.Core;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 

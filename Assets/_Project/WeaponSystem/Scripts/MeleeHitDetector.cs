@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TwinStickShooter.DamageableSystem;
+using TwinStickShooter.Core;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem

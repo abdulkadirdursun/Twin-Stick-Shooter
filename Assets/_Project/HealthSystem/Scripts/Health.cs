@@ -1,5 +1,5 @@
 using System;
-using TwinStickShooter.DamageableSystem;
+using TwinStickShooter.Core;
 using UnityEngine;
 
 namespace AKD.HealthSystem

@@ -1,4 +1,4 @@
-﻿namespace TwinStickShooter.DamageableSystem
+﻿namespace TwinStickShooter.Core
 {
     public interface IDamageable
     {

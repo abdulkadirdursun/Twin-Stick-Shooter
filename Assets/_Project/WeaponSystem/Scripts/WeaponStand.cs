@@ -1,4 +1,5 @@
 using PrimeTween;
+using TwinStickShooter.Core;
 using TwinStickShooter.InputSystem.View;
 using TwinStickShooter.InteractionSystem;
 using TwinStickShooter.WeaponSlotSystem;
