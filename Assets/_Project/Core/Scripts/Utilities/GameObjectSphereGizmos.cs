@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TwinStickShooter
+namespace TwinStickShooter.Core.Utilities
 {
     public class GameObjectSphereGizmos : MonoBehaviour
     {

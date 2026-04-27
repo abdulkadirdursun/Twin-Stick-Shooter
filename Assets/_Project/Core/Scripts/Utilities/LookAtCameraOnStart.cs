@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TwinStickShooter.Utilities
+namespace TwinStickShooter.Core.Utilities
 {
     public class LookAtCameraOnStart : MonoBehaviour
     {
