@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24e140057f640feb4fe3fd154703552, type: 3}
+  m_Name: BaseballBat
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.MeleeWeaponData
+  weaponName: Baseball Bat
+  weaponIcon: {fileID: 21300000, guid: 11bac76e893e6e14b884f1ffd688c686, type: 3}
+  attackRate: 0.4
+  damage: 1
+  animatorLayer: 1
+  weaponPreviewPrefab: {fileID: 1720152226819544, guid: 133f932775f5bff43a09e7bcb2f346dc, type: 3}
+  weaponPrefab: {fileID: 1280892515059965649, guid: 2b2552c5e814c5244b3bad53b28fd073, type: 3}
+  holdPosition: {x: 0, y: 0, z: 0}
+  holdRotation: {x: 0, y: 0, z: 270}
