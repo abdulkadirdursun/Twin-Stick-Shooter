@@ -11,15 +11,13 @@ namespace TwinStickShooter.Core.Utilities
         private void OnDrawGizmos()
         {
             Gizmos.color = gizmosColor;
-            switch (isWireView)
+            if (isWireView)
             {
-                case true:
-                    Gizmos.DrawWireSphere(transform.position, radius);
-                    break;
-                case false:
-                    Gizmos.DrawSphere(transform.position, radius);
-                    break;
+                Gizmos.DrawWireSphere(transform.position, radius);
+                return;
             }
+
+            Gizmos.DrawSphere(transform.position, radius);
         }
     }
 }
