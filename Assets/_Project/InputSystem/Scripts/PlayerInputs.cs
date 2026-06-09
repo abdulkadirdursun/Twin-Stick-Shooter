@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 namespace TwinStickShooter.InputSystem
 {
@@ -10,15 +8,14 @@ namespace TwinStickShooter.InputSystem
      */
     public class PlayerInputs : MonoBehaviour
     {
+        [SerializeField] private InputControlSchemeData inputControlSchemeData;
         [SerializeField] private GameplayInputs gameplayInputs;
         private PlayerInputActions _playerInputActions;
-        private InputControlScheme _inputControlScheme;
 
         private void Initialize()
         {
             _playerInputActions = new PlayerInputActions();
-            _inputControlScheme = new InputControlScheme(_playerInputActions);
-            //Gameplay
+            inputControlSchemeData.Initialize(_playerInputActions);
             gameplayInputs.Initialize(_playerInputActions.Gameplay);
         }
 
@@ -32,7 +29,7 @@ namespace TwinStickShooter.InputSystem
 
         private void OnDestroy()
         {
-            _inputControlScheme.Dispose();
+            inputControlSchemeData.Dispose();
             _playerInputActions.Dispose();
         }
 

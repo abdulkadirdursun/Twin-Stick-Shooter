@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96da9fbff7fb59443a4ec48bce567a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.UI.SlotView
-  slotData: {fileID: 11400000, guid: 904445c67560021419550c651d0c4820, type: 2}
   slotIndex: 0
   iconCanvasGroup: {fileID: 6953802060350927153}
   iconImage: {fileID: 261700913913816338}
@@ -460,6 +459,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7838296733699128736, guid: bc34657dcb4a5bc4382b658753ccd656, type: 3}
+      propertyPath: inputControlSchemeData
+      value: 
+      objectReference: {fileID: 11400000, guid: 049dd89543a706b43b03b74e62ee64ac, type: 2}
     - target: {fileID: 8548068650983754102, guid: bc34657dcb4a5bc4382b658753ccd656, type: 3}
       propertyPath: m_Alpha
       value: 1

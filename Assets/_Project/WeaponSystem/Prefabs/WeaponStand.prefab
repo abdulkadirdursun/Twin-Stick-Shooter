@@ -122,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9802f55a7d410f44e950e76046f586da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponStand
-  playerWeaponSlotsData: {fileID: 11400000, guid: 904445c67560021419550c651d0c4820, type: 2}
   weaponData: {fileID: 0}
   previewParent: {fileID: 200230379479268273}
   animationEase: 1
@@ -242,6 +241,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4115310016619295717, guid: 549e1cacd1f7d5f4b988494c1ac2dbef, type: 3}
+      propertyPath: inputControlScheme
+      value: 
+      objectReference: {fileID: 11400000, guid: 049dd89543a706b43b03b74e62ee64ac, type: 2}
     - target: {fileID: 4637366418221826305, guid: 549e1cacd1f7d5f4b988494c1ac2dbef, type: 3}
       propertyPath: m_FlipX
       value: 1

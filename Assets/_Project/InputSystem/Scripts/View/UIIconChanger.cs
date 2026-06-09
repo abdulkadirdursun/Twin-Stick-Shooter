@@ -18,6 +18,7 @@ namespace TwinStickShooter.InputSystem.View
 
         #endregion
 
+        [SerializeField] private InputControlSchemeData inputControlSchemeData;
         [SerializeField] private IconInfo[] iconInfos;
 
         private readonly Dictionary<ControlSchemeType, CanvasGroup> _iconLookup = new();
@@ -42,17 +43,17 @@ namespace TwinStickShooter.InputSystem.View
 
         private void OnEnable()
         {
-            InputControlScheme.OnControlSchemeTypeChanged += SetControlSchemeIcon;
+            inputControlSchemeData.ControlSchemeTypeChanged += SetControlSchemeIcon;
         }
 
         private void Start()
         {
-            SetControlSchemeIcon(InputControlScheme.CurrentControlType);
+            SetControlSchemeIcon(inputControlSchemeData.CurrentControlType);
         }
 
         private void OnDisable()
         {
-            InputControlScheme.OnControlSchemeTypeChanged -= SetControlSchemeIcon;
+            inputControlSchemeData.ControlSchemeTypeChanged -= SetControlSchemeIcon;
         }
 
         #endregion

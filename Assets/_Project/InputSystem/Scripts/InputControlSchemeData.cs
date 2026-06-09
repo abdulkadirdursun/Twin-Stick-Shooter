@@ -1,33 +1,27 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
 
 namespace TwinStickShooter.InputSystem
 {
-    public class InputControlScheme : IDisposable
+    [CreateAssetMenu(fileName = "InputControlScheme", menuName = "Twin Stick Shooter/Input System/Input Control Scheme")]
+    public class InputControlSchemeData : ScriptableObject, IDisposable
     {
-        #region Contructor
+        private InputUser _inputUser;
+        private bool _inputUserCreated;
 
-        public InputControlScheme(PlayerInputActions playerInputActions)
+        public event Action<ControlSchemeType> ControlSchemeTypeChanged;
+        public ControlSchemeType CurrentControlType { get; private set; } = ControlSchemeType.Undefined;
+
+        public void Initialize(PlayerInputActions playerInputActions)
         {
             CreateUserWithAvailableDevices();
             _inputUser.AssociateActionsWithUser(playerInputActions);
             ++InputUser.listenForUnpairedDeviceActivity;
             InputUser.onUnpairedDeviceUsed += HandleUnpairedDeviceUsed;
         }
-
-        #endregion
-
-        #region Static Fields
-
-        public static ControlSchemeType CurrentControlType { get; private set; } = ControlSchemeType.Undefined;
-        public static event Action<ControlSchemeType> OnControlSchemeTypeChanged;
-
-        #endregion
-
-        private InputUser _inputUser;
-        private bool _inputUserCreated;
 
         private void CreateUserWithAvailableDevices()
         {
@@ -91,7 +85,7 @@ namespace TwinStickShooter.InputSystem
             _inputUser.UnpairDevices();
             InputUser.PerformPairingWithDevice(device, user: _inputUser);
             CurrentControlType = newControlType;
-            OnControlSchemeTypeChanged?.Invoke(CurrentControlType);
+            ControlSchemeTypeChanged?.Invoke(CurrentControlType);
         }
 
         private ControlSchemeType GetControlTypeFromDevice(InputDevice device)
