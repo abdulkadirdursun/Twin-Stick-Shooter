@@ -11,6 +11,7 @@ namespace TwinStickShooter.InteractionSystem
         [SerializeField] private GameplayInputs gameplayInputs;
         [SerializeField] private float checkNearestInteractableInterval = 0.1f;
         private readonly List<IInteractable> _possibleInteractables = new();
+        private Transform _transform;
 
         private IInteractable _nearestInteractable;
 
@@ -38,19 +39,6 @@ namespace TwinStickShooter.InteractionSystem
             _nearestInteractable.Interact();
         }
 
-        private void SortThePossibleInteractables()
-        {
-            var originPos = transform.position;
-            _possibleInteractables.Sort(CompareDistance);
-
-            int CompareDistance(IInteractable a, IInteractable b)
-            {
-                var distA = (a.Position - originPos).sqrMagnitude;
-                var distB = (b.Position - originPos).sqrMagnitude;
-                return distA.CompareTo(distB);
-            }
-        }
-
         private bool CheckForNearestInteractable()
         {
             if (_possibleInteractables.Count == 0)
@@ -61,13 +49,29 @@ namespace TwinStickShooter.InteractionSystem
                 return false;
             }
 
-            SortThePossibleInteractables();
-            var tempNearestInteractable = _possibleInteractables[0];
+            var tempNearestInteractable = FindNearest();
             if (tempNearestInteractable == _nearestInteractable) return _nearestInteractable != null;
             _nearestInteractable?.HideInteractableIndicator();
             _nearestInteractable = tempNearestInteractable;
             _nearestInteractable.ShowInteractableIndicator();
             return true;
+        }
+
+        private IInteractable FindNearest()
+        {
+            var originPos = _transform.position;
+            IInteractable nearest = null;
+            var nearestSqr = float.MaxValue;
+
+            foreach (var interactable in _possibleInteractables)
+            {
+                var distanceSqr = (interactable.Position - originPos).sqrMagnitude;
+                if (distanceSqr > nearestSqr) continue;
+                nearestSqr = distanceSqr;
+                nearest = interactable;
+            }
+
+            return nearest;
         }
 
         private IEnumerator CheckInteractables()
@@ -83,6 +87,11 @@ namespace TwinStickShooter.InteractionSystem
         }
 
         #region MonoBehaviour Methods
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
 
         private void OnEnable()
         {
