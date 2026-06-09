@@ -19,10 +19,10 @@ namespace TwinStickShooter.Core.Utilities
             if (!cameraTransformToLookAt) return;
             //Calculate X axis
             var lookDirection = cameraTransformToLookAt.position - transform.position;
-            var targetXAsis = Quaternion.LookRotation(lookDirection).eulerAngles.x;
+            var targetXAxis = Quaternion.LookRotation(lookDirection).eulerAngles.x;
             
             var targetYaw = 180f;//Always look -Z direction, towards the camera
-            transform.rotation = Quaternion.Euler(targetXAsis, targetYaw, 0f);
+            transform.rotation = Quaternion.Euler(targetXAxis, targetYaw, 0f);
         }
 
         #endregion
