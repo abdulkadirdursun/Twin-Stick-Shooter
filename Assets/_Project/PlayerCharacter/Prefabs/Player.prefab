@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3461dc203b84072b938be006e49bfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.InteractionSystem.InteractionManager
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   checkNearestInteractableInterval: 0.1
 --- !u!114 &8165691704867209562
 MonoBehaviour:
@@ -247,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3d355b39794a129a74df383015e80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   animationController: {fileID: 4216494704605009283}
   movementController: {fileID: 5087827803757914369}
   ikRigController: {fileID: 8266025216133319228}
@@ -310,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28aa648e410248ec972523fea380429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   weaponParent: {fileID: 1689212339532960289}
   targetLayers:
     serializedVersion: 2
@@ -1059,6 +1062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23cf322e87c70f540b55b6bc596f95b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.MovementSystem.LookTargetController
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   cursorObject: {fileID: 484585922460630646}
   minDistanceClamp: 1.5
   sensitivity: 20

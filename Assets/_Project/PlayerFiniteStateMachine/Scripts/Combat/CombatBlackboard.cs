@@ -1,5 +1,6 @@
 ﻿using AKD.AnimationEvents;
 using TwinStickShooter.AnimationSystem;
+using TwinStickShooter.InputSystem;
 using TwinStickShooter.WeaponSlotSystem;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
@@ -8,17 +9,19 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
     {
         #region Constructor
 
-        public CombatBlackboard(AnimationController animationController,PlayerWeaponSlots playerWeaponSlots, AnimationEventDispatcher animationEventDispatcher)
+        public CombatBlackboard(AnimationController animationController,PlayerWeaponSlots playerWeaponSlots, AnimationEventDispatcher animationEventDispatcher, GameplayInputs gameplayInputs)
         {
             AnimationController = animationController;
             WeaponSlots = playerWeaponSlots;
             AnimationEventDispatcher = animationEventDispatcher;
+            GameplayInputs = gameplayInputs;
         }
 
         #endregion
 
         public AnimationController AnimationController { get; }
         public PlayerWeaponSlots WeaponSlots { get; }
+        public GameplayInputs GameplayInputs { get; }
         
         public AnimationEventDispatcher AnimationEventDispatcher { get; }
     }

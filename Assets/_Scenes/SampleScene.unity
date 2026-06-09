@@ -996,6 +996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac798fd733a4d5c8e2b40ba1546512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.InputSystem.PlayerInputs
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
 --- !u!4 &1592268504
 Transform:
   m_ObjectHideFlags: 0

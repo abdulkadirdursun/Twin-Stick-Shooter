@@ -26,7 +26,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public virtual void StateEnter()
         {
             Debug.Log($"<color=green>[{GetType().Name}] </color>State Enter");
-            PlayerInputs.MoveInput += ReadMoveInputInput;
+            Blackboard.GameplayInputs.MoveInput += ReadMoveInputInput;
         }
 
         public virtual void StateUpdate()
@@ -48,7 +48,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public virtual void StateExit()
         {
             Debug.Log($"<color=magenta>[{GetType().Name}]</color> State Exit");
-            PlayerInputs.MoveInput -= ReadMoveInputInput;
+            Blackboard.GameplayInputs.MoveInput -= ReadMoveInputInput;
         }
 
         private void ReadMoveInputInput(Vector2 moveInput)

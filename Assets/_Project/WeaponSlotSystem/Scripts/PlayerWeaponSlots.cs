@@ -8,6 +8,7 @@ namespace TwinStickShooter.WeaponSlotSystem
 {
     public class PlayerWeaponSlots : Singleton<PlayerWeaponSlots>
     {
+        [SerializeField] private GameplayInputs gameplayInputs;
         [SerializeField] private Transform weaponParent;
         [SerializeField] private LayerMask targetLayers;
         private WeaponSlot[] _weaponSlots;
@@ -97,12 +98,12 @@ namespace TwinStickShooter.WeaponSlotSystem
 
         private void OnEnable()
         {
-            PlayerInputs.OnWeaponSlotSelected += OnSlotSelected;
+            gameplayInputs.WeaponSlotSelected += OnSlotSelected;
         }
 
         private void OnDisable()
         {
-            PlayerInputs.OnWeaponSlotSelected -= OnSlotSelected;
+            gameplayInputs.WeaponSlotSelected -= OnSlotSelected;
         }
 
         #endregion

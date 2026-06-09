@@ -8,6 +8,7 @@ namespace TwinStickShooter.InteractionSystem
 {
     public class InteractionManager : MonoBehaviour
     {
+        [SerializeField] private GameplayInputs gameplayInputs;
         [SerializeField] private float checkNearestInteractableInterval = 0.1f;
         private readonly List<IInteractable> _possibleInteractables = new();
 
@@ -85,7 +86,7 @@ namespace TwinStickShooter.InteractionSystem
 
         private void OnEnable()
         {
-            PlayerInputs.Interact += Interact;
+            gameplayInputs.Interact += Interact;
         }
 
         private void Start()
@@ -95,7 +96,7 @@ namespace TwinStickShooter.InteractionSystem
 
         private void OnDisable()
         {
-            PlayerInputs.Interact -= Interact;
+            gameplayInputs.Interact -= Interact;
         }
 
         #endregion

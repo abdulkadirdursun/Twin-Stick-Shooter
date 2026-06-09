@@ -1,5 +1,4 @@
-﻿using TwinStickShooter.InputSystem;
-using TwinStickShooter.WeaponSystem;
+﻿using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
@@ -23,9 +22,9 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
         {
             Blackboard.AnimationController.SetBool(AimId, true);
             SetWeaponAimState(true);
-            PlayerInputs.OnStopAiming += ChangeToIdleState;
-            PlayerInputs.OnAttackPressed += OnAttackPressed;
-            PlayerInputs.OnAttackReleased += OnAttackReleased;
+            Blackboard.GameplayInputs.StopAiming += ChangeToIdleState;
+            Blackboard.GameplayInputs.AttackPressed += OnAttackPressed;
+            Blackboard.GameplayInputs.AttackReleased += OnAttackReleased;
             Blackboard.WeaponSlots.OnActiveSlotChanged += OnWeaponSlotChanged;
         }
 
@@ -50,9 +49,9 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
             Blackboard.AnimationController.SetBool(AimId, false);
             SetWeaponAimState(false);
             Blackboard.WeaponSlots.OnActiveSlotChanged -= OnWeaponSlotChanged;
-            PlayerInputs.OnStopAiming -= ChangeToIdleState;
-            PlayerInputs.OnAttackPressed -= OnAttackPressed;
-            PlayerInputs.OnAttackReleased -= OnAttackReleased;
+            Blackboard.GameplayInputs.StopAiming -= ChangeToIdleState;
+            Blackboard.GameplayInputs.AttackPressed -= OnAttackPressed;
+            Blackboard.GameplayInputs.AttackReleased -= OnAttackReleased;
             _isAttacking = false;
         }
 
