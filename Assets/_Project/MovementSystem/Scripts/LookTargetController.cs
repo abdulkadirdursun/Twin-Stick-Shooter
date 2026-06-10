@@ -13,7 +13,7 @@ namespace TwinStickShooter.MovementSystem
         private bool _onMove;
         private Vector3 _movementInput;
 
-        private void OnCursorPositionChanged(Vector2 input)
+        private void OnLookTargetMoved(Vector2 input)
         {
             _onMove = input != Vector2.zero;
             _movementInput = new Vector3(input.x, 0f, input.y).normalized;
@@ -23,7 +23,7 @@ namespace TwinStickShooter.MovementSystem
 
         private void OnEnable()
         {
-            gameplayInputs.LookTargetMovement += OnCursorPositionChanged;
+            gameplayInputs.LookTargetMovement += OnLookTargetMoved;
         }
 
         private void Update()
@@ -40,7 +40,7 @@ namespace TwinStickShooter.MovementSystem
 
         private void OnDisable()
         {
-            gameplayInputs.LookTargetMovement -= OnCursorPositionChanged;
+            gameplayInputs.LookTargetMovement -= OnLookTargetMoved;
         }
 
         #endregion
