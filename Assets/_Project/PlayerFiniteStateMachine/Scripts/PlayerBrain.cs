@@ -4,7 +4,7 @@ using TwinStickShooter.InputSystem;
 using TwinStickShooter.MovementSystem;
 using TwinStickShooter.PlayerFiniteStateMachine.Combat;
 using TwinStickShooter.PlayerFiniteStateMachine.Locomotion;
-using TwinStickShooter.WeaponSlotSystem;
+using TwinStickShooter.WeaponSystem.SlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine

@@ -3,7 +3,7 @@ using AKD.Toolkit.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TwinStickShooter.WeaponSlotSystem.UI
+namespace TwinStickShooter.WeaponSystem.SlotSystem
 {
     public class SlotView : MonoBehaviour
     {

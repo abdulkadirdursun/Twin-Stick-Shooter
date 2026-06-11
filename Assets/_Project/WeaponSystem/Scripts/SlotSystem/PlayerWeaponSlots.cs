@@ -1,10 +1,9 @@
 ﻿using System;
 using AKD.Toolkit.Singleton;
 using TwinStickShooter.InputSystem;
-using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
-namespace TwinStickShooter.WeaponSlotSystem
+namespace TwinStickShooter.WeaponSystem.SlotSystem
 {
     public class PlayerWeaponSlots : Singleton<PlayerWeaponSlots>
     {

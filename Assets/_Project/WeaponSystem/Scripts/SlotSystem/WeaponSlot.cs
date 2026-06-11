@@ -1,9 +1,8 @@
 ﻿using System;
-using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace TwinStickShooter.WeaponSlotSystem
+namespace TwinStickShooter.WeaponSystem.SlotSystem
 {
     [Serializable]
     public class WeaponSlot

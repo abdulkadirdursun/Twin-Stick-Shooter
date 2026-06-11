@@ -1,4 +1,4 @@
-using TwinStickShooter.WeaponSlotSystem;
+using TwinStickShooter.WeaponSystem.SlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem

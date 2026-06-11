@@ -1,7 +1,7 @@
 ﻿using AKD.AnimationEvents;
 using TwinStickShooter.AnimationSystem;
 using TwinStickShooter.InputSystem;
-using TwinStickShooter.WeaponSlotSystem;
+using TwinStickShooter.WeaponSystem.SlotSystem;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 {

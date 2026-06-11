@@ -2,7 +2,7 @@ using PrimeTween;
 using TwinStickShooter.Core;
 using TwinStickShooter.InputSystem.View;
 using TwinStickShooter.InteractionSystem;
-using TwinStickShooter.WeaponSlotSystem;
+using TwinStickShooter.WeaponSystem.SlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem

@@ -1,6 +1,6 @@
 ﻿using System;
 using TwinStickShooter.AnimationSystem.Enums;
-using TwinStickShooter.WeaponSlotSystem;
+using TwinStickShooter.WeaponSystem.SlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.AnimationSystem
