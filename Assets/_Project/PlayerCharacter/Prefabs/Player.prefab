@@ -249,11 +249,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
   gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
+  selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   animationController: {fileID: 4216494704605009283}
   movementController: {fileID: 5087827803757914369}
   ikRigController: {fileID: 8266025216133319228}
   aimTarget: {fileID: 8234424024695960873}
-  playerWeaponSlots: {fileID: 1373215447687763949}
+  weaponSlotManager: {fileID: 1373215447687763949}
   animationEventDispatcher: {fileID: 3665056794518772985}
 --- !u!114 &5087827803757914369
 MonoBehaviour:
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937dcb59404f2d4a90f1c9c723ae9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerAnimationController
+  selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   animator: {fileID: 1146158694434482792}
 --- !u!114 &8266025216133319228
 MonoBehaviour:
@@ -312,11 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28aa648e410248ec972523fea380429c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.PlayerWeaponSlots
+  playerWeaponSlotsData: {fileID: 11400000, guid: 887c13f238424e54483014f43cb6ebce, type: 2}
+  selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
-  weaponParent: {fileID: 1689212339532960289}
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 1152
 --- !u!143 &5059844950931654990
 CharacterController:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cef9e508b8e46428fbb6f458d3d136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder
-  playerWeaponSlots: {fileID: 1373215447687763949}
+  weaponSlotManager: {fileID: 0}
 --- !u!114 &5532462632098137695
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96da9fbff7fb59443a4ec48bce567a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSlotSystem.UI.SlotView
+  playerWeaponSlotsData: {fileID: 11400000, guid: 887c13f238424e54483014f43cb6ebce, type: 2}
   slotIndex: 0
   iconCanvasGroup: {fileID: 6953802060350927153}
   iconImage: {fileID: 261700913913816338}

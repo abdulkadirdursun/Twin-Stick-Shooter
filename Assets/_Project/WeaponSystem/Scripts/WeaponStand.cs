@@ -9,6 +9,7 @@ namespace TwinStickShooter.WeaponSystem
 {
     public class WeaponStand : MonoBehaviour, IInteractable
     {
+        [SerializeField] private PlayerWeaponSlotsData playerWeaponSlotsData;
         [Header("Showcased Weapon")]
         [SerializeField] private BaseWeaponData weaponData;
         [SerializeField] private Transform previewParent;
@@ -24,7 +25,7 @@ namespace TwinStickShooter.WeaponSystem
 
         public void Interact()
         {
-            PlayerWeaponSlots.Instance.TryToEquip(weaponData);
+            playerWeaponSlotsData.AddWeaponToEmptySlot(weaponData);
         }
 
         public void ShowInteractableIndicator()

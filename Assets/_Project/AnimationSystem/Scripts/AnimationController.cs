@@ -1,10 +1,12 @@
 using TwinStickShooter.AnimationSystem.Enums;
+using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.AnimationSystem
 {
     public class AnimationController : MonoBehaviour
     {
+        [SerializeField] private SelectedPlayerWeaponData selectedPlayerWeaponData;
         [SerializeField] private Animator animator;
 
         private AnimatorLayerController _animatorLayerController;
@@ -38,7 +40,7 @@ namespace TwinStickShooter.AnimationSystem
 
         private void Start()
         {
-            _animatorLayerController = new AnimatorLayerController(animator);
+            _animatorLayerController = new AnimatorLayerController(animator, selectedPlayerWeaponData);
         }
 
         private void OnDestroy()

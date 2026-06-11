@@ -1,4 +1,3 @@
-using System.Collections;
 using AKD.Toolkit.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +6,7 @@ namespace TwinStickShooter.WeaponSystem.SlotSystem
 {
     public class SlotView : MonoBehaviour
     {
+        [SerializeField] private PlayerWeaponSlotsData playerWeaponSlotsData;
         [SerializeField] private int slotIndex;
         [Header("UI Elements")]
         [SerializeField] private CanvasGroup iconCanvasGroup;
@@ -14,11 +14,11 @@ namespace TwinStickShooter.WeaponSystem.SlotSystem
 
         private WeaponSlot _slot;
 
-        private void SetView()
+        private void UpdateView()
         {
             if (!_slot.WeaponData)
             {
-                ResetView();
+                iconCanvasGroup.SetActive(false, false);
                 return;
             }
 
@@ -26,32 +26,24 @@ namespace TwinStickShooter.WeaponSystem.SlotSystem
             iconCanvasGroup.SetActive(true, false);
         }
 
-        private void ResetView()
-        {
-            iconCanvasGroup.SetActive(false, false);
-        }
-
         #region MonoBehaviour Methods
 
-        private IEnumerator Start()
+        private void Start()
         {
-            yield return new WaitUntil(() => PlayerWeaponSlots.IsInstanceExist);
-            _slot = PlayerWeaponSlots.Instance.GetWeaponSlot(slotIndex);
-            if (_slot == null)
+            if (!playerWeaponSlotsData.TryGetWeaponSlotData(slotIndex, out _slot))
             {
-                gameObject.SetActive(false);
-                Debug.LogError($"Player Slot Index {slotIndex} is not available!!");
-                yield break;
+                Destroy(gameObject);
+                return;
             }
-            _slot.OnSlotChanged += SetView;
 
-            SetView();
+            _slot.OnSlotChanged += UpdateView;
+            UpdateView();
         }
 
         private void OnDestroy()
         {
             if (_slot == null) return;
-            _slot.OnSlotChanged -= SetView;
+            _slot.OnSlotChanged -= UpdateView;
         }
 
         #endregion
