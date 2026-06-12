@@ -57,9 +57,13 @@ namespace TwinStickShooter.WeaponSystem
             return true;
         }
 
-        public virtual void OnEquipped(LayerMask targetLayers)
+        public void SetTargetLayers(LayerMask targetLayers)
         {
             TargetLayers = targetLayers;
+        }
+
+        public virtual void OnEquipped()
+        {
         }
 
         public virtual void OnUnequipped()

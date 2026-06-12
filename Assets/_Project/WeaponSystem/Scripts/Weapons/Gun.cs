@@ -35,9 +35,8 @@ namespace TwinStickShooter.WeaponSystem
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }
 
-        public override void OnEquipped(LayerMask targetLayers)
+        public override void OnEquipped()
         {
-            base.OnEquipped(targetLayers);
             _currentAmmo = gunData.AmmoCapacity;
             weaponAimLineDrawer.Configure(gunData.EffectiveDistance);
         }

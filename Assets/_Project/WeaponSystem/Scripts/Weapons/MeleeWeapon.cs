@@ -29,10 +29,9 @@ namespace TwinStickShooter.WeaponSystem
             _hitDetectionActive = false;
         }
 
-        public override void OnEquipped(LayerMask targetLayers)
+        public override void OnEquipped()
         {
-            base.OnEquipped(targetLayers);
-            hitDetector.SetTargetLayers(targetLayers);
+            hitDetector.SetTargetLayers(TargetLayers);
         }
 
         public override void OnUnequipped()
