@@ -33,6 +33,11 @@ namespace TwinStickShooter.WeaponSystem.SlotSystem
             gameplayInputs.WeaponSlotSelected -= OnSlotSelected;
         }
 
+        private void OnDestroy()
+        {
+            selectedPlayerWeaponData.Dispose();
+        }
+
         #endregion
     }
 }
