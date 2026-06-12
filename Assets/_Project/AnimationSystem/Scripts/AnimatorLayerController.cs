@@ -1,30 +1,25 @@
 ﻿using System;
 using TwinStickShooter.AnimationSystem.Enums;
+using TwinStickShooter.WeaponSystem;
 using TwinStickShooter.WeaponSystem.SlotSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.AnimationSystem
 {
-    //TODO: Refactor
     public class AnimatorLayerController : IDisposable
     {
         #region Constructor
 
-        public AnimatorLayerController(Animator animator)
+        public AnimatorLayerController(Animator animator, SelectedPlayerWeaponData selectedPlayerWeaponData)
         {
             _animator = animator;
+            _selectedPlayerWeaponData = selectedPlayerWeaponData;
             _baseballBatLayerId = _animator.GetLayerIndex(AnimatorLayer.UpperBody_BaseballBat.ToString());
             _pistolLayerId = _animator.GetLayerIndex(AnimatorLayer.UpperBody_Pistol.ToString());
             _rifleLayerId = _animator.GetLayerIndex(AnimatorLayer.UpperBody_Rifle.ToString());
 
-            if (!PlayerWeaponSlots.IsInstanceExist)
-            {
-                Debug.LogError($"{nameof(PlayerWeaponSlots)} instance is not available");
-                return;
-            }
-
-            PlayerWeaponSlots.Instance.OnActiveSlotChanged += OnWeaponSlotChanged;
-            OnWeaponSlotChanged();
+            _selectedPlayerWeaponData.SelectedWeaponChanged += SetAnimationLayerWeight;
+            SetAnimationLayerWeight();
         }
 
         #endregion
@@ -34,62 +29,34 @@ namespace TwinStickShooter.AnimationSystem
         private readonly int _rifleLayerId;
 
         private readonly Animator _animator;
-        private WeaponSlot _weaponSlot;
+        private readonly SelectedPlayerWeaponData _selectedPlayerWeaponData;
         private int _activeLayerId = -1;
 
         public int ActiveLayerId => _activeLayerId;
 
-        public AnimatorLayer ActiveAnimatorLayer => _weaponSlot == null || !_weaponSlot.WeaponData ? AnimatorLayer.None : _weaponSlot.WeaponData.AnimatorLayer;
+        public AnimatorLayer ActiveAnimatorLayer => _selectedPlayerWeaponData.HasWeapon ? _selectedPlayerWeaponData.SelectedWeaponData.AnimatorLayer : AnimatorLayer.None;
 
         public void Dispose()
         {
-            if (!PlayerWeaponSlots.IsInstanceExist) return;
-            PlayerWeaponSlots.Instance.OnActiveSlotChanged -= OnWeaponSlotChanged;
+            _selectedPlayerWeaponData.SelectedWeaponChanged -= SetAnimationLayerWeight;
         }
 
-        private void OnWeaponSlotChanged()
+        private void SetAnimationLayerWeight()
         {
-            if (_activeLayerId != -1)
-            {
-                _animator.SetLayerWeight(_activeLayerId, 0f);
-            }
+            ResetAnimationLayerWeight();
+            if (!_selectedPlayerWeaponData.HasWeapon) return;
 
-            if (_weaponSlot != null)
-            {
-                _weaponSlot.OnSlotChanged -= SetLayerWeight;
-            }
-
-            _weaponSlot = PlayerWeaponSlots.Instance.ActiveSlot;
-
-            if (_weaponSlot != null)
-            {
-                _weaponSlot.OnSlotChanged += SetLayerWeight;
-            }
-
-            if (_weaponSlot == null)
-            {
-                _activeLayerId = -1;
-                return;
-            }
-
-            SetLayerWeight();
-        }
-
-        private void SetLayerWeight()
-        {
-            if (_activeLayerId != -1)
-            {
-                _animator.SetLayerWeight(_activeLayerId, 0f);
-            }
-
-            if (!_weaponSlot.Weapon)
-            {
-                _activeLayerId = -1;
-                return;
-            }
-
-            _activeLayerId = GetLayerId(_weaponSlot.WeaponData.AnimatorLayer);
+            _activeLayerId = GetLayerId(_selectedPlayerWeaponData.SelectedWeaponData.AnimatorLayer);
+            if (_activeLayerId == -1) return;
             _animator.SetLayerWeight(_activeLayerId, 1f);
+        }
+
+        private void ResetAnimationLayerWeight()
+        {
+            if (_activeLayerId == -1) return;
+
+            _animator.SetLayerWeight(_activeLayerId, 0f);
+            _activeLayerId = -1;
         }
 
         private int GetLayerId(AnimatorLayer animatorLayer)
