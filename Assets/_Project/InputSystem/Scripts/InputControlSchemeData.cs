@@ -10,7 +10,7 @@ namespace TwinStickShooter.InputSystem
     public class InputControlSchemeData : ScriptableObject, IDisposable
     {
         private InputUser _inputUser;
-        private bool _inputUserCreated;
+        private bool _inputUserCreated = false;
 
         public event Action<ControlSchemeType> ControlSchemeTypeChanged;
         public ControlSchemeType CurrentControlType { get; private set; } = ControlSchemeType.Undefined;
@@ -100,6 +100,7 @@ namespace TwinStickShooter.InputSystem
 
         public void Dispose()
         {
+            _inputUserCreated = false;
             --InputUser.listenForUnpairedDeviceActivity;
             if (_inputUser.valid)
                 _inputUser.UnpairDevicesAndRemoveUser();
