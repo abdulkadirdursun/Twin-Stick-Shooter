@@ -1,4 +1,3 @@
-using System;
 using TwinStickShooter.AnimationSystem.Enums;
 using TwinStickShooter.WeaponSystem;
 using UnityEngine;

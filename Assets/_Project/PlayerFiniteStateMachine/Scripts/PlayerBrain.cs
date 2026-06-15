@@ -4,7 +4,7 @@ using TwinStickShooter.InputSystem;
 using TwinStickShooter.MovementSystem;
 using TwinStickShooter.PlayerFiniteStateMachine.Combat;
 using TwinStickShooter.PlayerFiniteStateMachine.Locomotion;
-using TwinStickShooter.WeaponSystem.SlotSystem;
+using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine
@@ -19,7 +19,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
         [SerializeField] private IKRigController ikRigController;
         [SerializeField] private Transform aimTarget;
         [Header("Combat Components")]
-        [SerializeField] private PlayerWeaponSlots playerWeaponSlots;
+        [SerializeField] private WeaponController weaponController;
         [SerializeField] private AnimationEventDispatcher animationEventDispatcher;
 
         private LocomotionStateMachine _locomotionStateMachine;
@@ -51,9 +51,18 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
 
         private void Awake()
         {
-            var locomotionBlackboard = new LocomotionBlackboard(movementController, animationController, ikRigController, aimTarget, gameplayInputs);
+            var locomotionBlackboard = new LocomotionBlackboard(
+                movementController,
+                animationController,
+                ikRigController,
+                aimTarget,
+                gameplayInputs);
             _locomotionStateMachine = new LocomotionStateMachine(locomotionBlackboard);
-            var combatBlackboard = new CombatBlackboard(animationController, playerWeaponSlots, animationEventDispatcher, gameplayInputs);
+            var combatBlackboard = new CombatBlackboard(
+                animationController,
+                weaponController,
+                gameplayInputs,
+                animationEventDispatcher);
             _combatStateMachine = new CombatStateMachine(combatBlackboard);
         }
 

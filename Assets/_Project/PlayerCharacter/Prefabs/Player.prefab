@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1373215447687763949}
   - component: {fileID: 5059844950931654990}
   - component: {fileID: 4630003570815392432}
+  - component: {fileID: 5820492693430225411}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -219,7 +220,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1054953579930831728}
-  - {fileID: 6671575773047505918}
   - {fileID: 4461793822676347137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,13 +250,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerFiniteStateMachine.PlayerBrain
   gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
-  selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   animationController: {fileID: 4216494704605009283}
   movementController: {fileID: 5087827803757914369}
   ikRigController: {fileID: 8266025216133319228}
   aimTarget: {fileID: 8234424024695960873}
-  weaponSlotManager: {fileID: 1373215447687763949}
-  animationEventDispatcher: {fileID: 3665056794518772985}
+  weaponController: {fileID: 4630003570815392432}
+  animationEventDispatcher: {fileID: 7531646916125113062}
 --- !u!114 &5087827803757914369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerAnimationController
   selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
+  weaponController: {fileID: 4630003570815392432}
   animator: {fileID: 1146158694434482792}
 --- !u!114 &8266025216133319228
 MonoBehaviour:
@@ -356,10 +356,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.WeaponController
   selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   weaponHandler: {fileID: 1689212339532960289}
   weaponTargetLayers:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &5820492693430225411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278666455597025988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75833717aaac44f2a7f0ddf251f5d317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AKD.AnimationEvents.AnimationEventListener
+  dispatcher: {fileID: 7531646916125113062}
+  bindings:
+  - scopeKind: 0
+    stateName: Reload
+    stateHash: -1525363869
+    tagName: 
+    layerIndex: -1
+    eventType: 2
+    normalizedTime: 0
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4630003570815392432}
+          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.WeaponController,
+            Assembly-CSharp
+          m_MethodName: Reload
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - scopeKind: 0
+    stateName: Attack
+    stateHash: 1080829965
+    tagName: 
+    layerIndex: 1
+    eventType: 3
+    normalizedTime: 0
+    response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4630003570815392432}
+          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.WeaponController,
+            Assembly-CSharp
+          m_MethodName: DisableMeleeWeaponHitDetection
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3444596179587277572
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,120 +546,6 @@ Transform:
   - {fileID: 5987626177708102721}
   m_Father: {fileID: 4461793822676347137}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5575027983583388899
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6671575773047505918}
-  - component: {fileID: 3585827762208519693}
-  - component: {fileID: 5532462632098137695}
-  m_Layer: 6
-  m_Name: AnimationEvents
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6671575773047505918
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575027983583388899}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 875276069543613763}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3585827762208519693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575027983583388899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96cef9e508b8e46428fbb6f458d3d136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder
-  weaponSlotManager: {fileID: 0}
---- !u!114 &5532462632098137695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5575027983583388899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75833717aaac44f2a7f0ddf251f5d317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AKD.AnimationEvents::AKD.AnimationEvents.AnimationEventListener
-  _dispatcher: {fileID: 3665056794518772985}
-  _bindings:
-  - layerIndex: 1
-    eventName: EnableHitbox
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3585827762208519693}
-          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder,
-            Assembly-CSharp
-          m_MethodName: EnableHitDetection
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - layerIndex: 1
-    eventName: DisableHitbox
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3585827762208519693}
-          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder,
-            Assembly-CSharp
-          m_MethodName: DisableHitDetection
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - layerIndex: 2
-    eventName: Shoot
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3585827762208519693}
-          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.PlayerWeaponEventResponder,
-            Assembly-CSharp
-          m_MethodName: OnShootAnimationStart
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &6567142489339232087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,13 +2229,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3665056794518772985}
-    - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5615590648286003786}
     - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3098528844377944544}
+    - targetCorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7531646916125113062}
   m_SourcePrefab: {fileID: 100100000, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
 --- !u!4 &1054406569180431928 stripped
 Transform:
@@ -2435,18 +2382,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1316981293597076, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
   m_PrefabInstance: {fileID: 1059388936165999664}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3665056794518772985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1060344096457557412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf87c33039bafac44ae0e187ea99f398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: AKD.AnimationEvents::AKD.AnimationEvents.AnimationEventDispatcher
 --- !u!114 &5615590648286003786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2534,6 +2469,19 @@ MonoBehaviour:
   - {fileID: 1061941057023420166}
   - {fileID: 1062097336208260788}
   - {fileID: 1054618909072402210}
+--- !u!114 &7531646916125113062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060344096457557412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf87c33039bafac44ae0e187ea99f398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AKD.AnimationEvents.AnimationEventDispatcher
+  ignoreZeroWeightLayers: 1
 --- !u!4 &1061728808205678120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4415802707194392, guid: 2f3e27eecb190e44a9af50723c394274, type: 3}
