@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TwinStickShooter.StateMachineSystem
 {
-    public abstract class StateMachine<T> where T : IState
+    public abstract class StateMachine<T> : IDisposable where T : IState
     {
         private T _currentState;
         private T _previousState;
@@ -49,6 +49,12 @@ namespace TwinStickShooter.StateMachineSystem
             _previousState = _currentState;
             _currentState = newState;
             _currentState.StateEnter();
+        }
+
+        public void Dispose()
+        {
+            if (_currentState == null) return;
+            _currentState.StateExit();
         }
     }
 }

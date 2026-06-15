@@ -1,4 +1,5 @@
-﻿using AKD.AnimationEvents;
+﻿using System;
+using AKD.AnimationEvents;
 using TwinStickShooter.AnimationSystem;
 using TwinStickShooter.InputSystem;
 using TwinStickShooter.MovementSystem;
@@ -70,6 +71,12 @@ namespace TwinStickShooter.PlayerFiniteStateMachine
         {
             UpdateLocomotionState();
             UpdateCombatState();
+        }
+
+        private void OnDestroy()
+        {
+            _locomotionStateMachine.Dispose();
+            _combatStateMachine.Dispose();
         }
 
         #endregion
