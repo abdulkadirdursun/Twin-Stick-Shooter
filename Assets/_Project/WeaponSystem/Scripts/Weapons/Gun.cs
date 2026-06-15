@@ -9,23 +9,11 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private WeaponAimLineDrawer weaponAimLineDrawer;
         [SerializeField] private GunData gunData;
         protected override float AttackRate => gunData.AttackRate;
-        protected override bool RapidAttack => gunData.IsAutomatic;
+        protected override bool RapidAttack => gunData.IsAutomatic; //TODO: Implement rapid fire
         private int _currentAmmo;
-        private bool _reloading;
         private WaitForSeconds _waitForSecond;
-        protected bool HasAmmo => _currentAmmo > 0;
 
-        public override void OnStartAim()
-        {
-            weaponAimLineDrawer.SetActive(true);
-        }
-
-        public override void OnStopAim()
-        {
-            weaponAimLineDrawer.SetActive(false);
-        }
-
-        public void Shoot()
+        protected override void PerformAttack()
         {
             var projectile = ProjectilePool.Instance.GetProjectile();
             projectile.transform.position = firePoint.position;
@@ -33,6 +21,26 @@ namespace TwinStickShooter.WeaponSystem
             projectile.Fire(gunData.Damage, gunData.EffectiveDistance, TargetLayers);
             _currentAmmo--;
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
+        }
+        
+        protected override bool CanAttack(out FailedAttackReason failedAttackReason)
+        {
+            var canAttack = base.CanAttack(out failedAttackReason);
+            if (!canAttack && failedAttackReason == FailedAttackReason.Cooldown)
+                return false;
+
+            if (_currentAmmo == 0)
+            {
+                failedAttackReason = FailedAttackReason.NoAmmo;
+                return false;
+            }
+
+            return canAttack;
+        }
+        
+        public override void ShowDamageAreaPreview(bool isVisible)
+        {
+            weaponAimLineDrawer.SetActive(isVisible);
         }
 
         public override void OnEquipped()
@@ -43,27 +51,17 @@ namespace TwinStickShooter.WeaponSystem
 
         public override void OnUnequipped()
         {
-            base.OnUnequipped();
             weaponAimLineDrawer.SetActive(false);
         }
 
-        public override bool CanAttack(out FailedAttackReason failedAttackReason)
+        public override void OnDropped()
         {
-            if (!HasAmmo)
-            {
-                failedAttackReason = FailedAttackReason.NoAmmo;
-                return false;
-            }
-
-            return base.CanAttack(out failedAttackReason);
+            weaponAimLineDrawer.SetActive(false);
         }
 
         public void Reload()
         {
-            if (_reloading) return;
-            _reloading = true;
             _currentAmmo = gunData.AmmoCapacity;
-            _reloading = false;
         }
     }
 }

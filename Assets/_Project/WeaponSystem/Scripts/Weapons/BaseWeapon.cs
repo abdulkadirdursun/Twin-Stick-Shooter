@@ -8,68 +8,43 @@ namespace TwinStickShooter.WeaponSystem
         protected abstract float AttackRate { get; }
         protected abstract bool RapidAttack { get; }
         private float _timeSinceLastShot;
-        protected bool IsAttacking;
         protected LayerMask TargetLayers;
-
-        public Transform HoldTransform => holdTransform;
         public bool OnCooldown => _timeSinceLastShot < AttackRate;
 
-        public virtual void AttackPressed()
+        public bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
-            if (IsAttacking) return;
-            IsAttacking = true;
+            if (!CanAttack(out failedAttackReason)) return false;
+            _timeSinceLastShot = 0f;
+            PerformAttack();
+            return true;
         }
-
-        public virtual void AttackReleased()
+        
+        protected virtual bool CanAttack(out FailedAttackReason failedAttackReason)
         {
-            IsAttacking = false;
-        }
-
-        public virtual void OnStartAim()
-        {
-        }
-
-        public virtual void OnStopAim()
-        {
-        }
-
-        public virtual bool CanAttack(out FailedAttackReason failedAttackReason)
-        {
+            failedAttackReason = FailedAttackReason.None;
             if (OnCooldown)
             {
                 failedAttackReason = FailedAttackReason.Cooldown;
                 return false;
             }
 
-            if (!IsAttacking)
-            {
-                failedAttackReason = FailedAttackReason.None;
-                return false;
-            }
-
-            if (!RapidAttack)
-            {
-                IsAttacking = false;
-            }
-
-            _timeSinceLastShot = 0f;
-            failedAttackReason = FailedAttackReason.None;
             return true;
         }
-
+        
         public void SetTargetLayers(LayerMask targetLayers)
         {
             TargetLayers = targetLayers;
         }
 
-        public virtual void OnEquipped()
-        {
-        }
+        public abstract void ShowDamageAreaPreview(bool isVisible);
 
-        public virtual void OnUnequipped()
-        {
-            IsAttacking = false;
-        }
+        protected abstract void PerformAttack();
+        
+        public abstract void OnEquipped();
+
+        public abstract void OnUnequipped();
+
+        public abstract void OnDropped();
 
         protected virtual void OnUpdate()
         {

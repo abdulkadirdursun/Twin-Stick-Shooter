@@ -17,16 +17,15 @@ namespace TwinStickShooter.WeaponSystem
         private bool _hitDetectionActive;
         private float _timeSinceLastCheck = 0f;
 
-        public void EnableHitDetection()
+        protected override void PerformAttack()
         {
             _damagedTargets.Clear();
             _timeSinceLastCheck = 0f;
             _hitDetectionActive = true;
         }
 
-        public void DisableHitDetection()
+        public override void ShowDamageAreaPreview(bool isVisible)
         {
-            _hitDetectionActive = false;
         }
 
         public override void OnEquipped()
@@ -36,11 +35,20 @@ namespace TwinStickShooter.WeaponSystem
 
         public override void OnUnequipped()
         {
-            base.OnUnequipped();
             _hitDetectionActive = false;
         }
 
-        protected override void OnUpdate()
+        public override void OnDropped()
+        {
+            _hitDetectionActive = false;
+        }
+        
+        public void DisableHitDetection()
+        {
+            _hitDetectionActive = false;
+        }
+
+        protected override void OnUpdate() //TODO: Separate system and pass the activity
         {
             if (!_hitDetectionActive) return;
 

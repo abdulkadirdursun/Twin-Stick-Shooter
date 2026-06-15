@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1253961e2f544017b392447779a36c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.Gun
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
   holdTransform: {fileID: 5839448279943375158}
   firePoint: {fileID: 4676702297954104714}
   weaponAimLineDrawer: {fileID: 2469884854060946252}
