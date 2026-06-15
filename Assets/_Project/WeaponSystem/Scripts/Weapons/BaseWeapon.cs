@@ -9,16 +9,16 @@ namespace TwinStickShooter.WeaponSystem
         protected abstract bool RapidAttack { get; }
         private float _timeSinceLastShot;
         protected LayerMask TargetLayers;
-        public bool OnCooldown => _timeSinceLastShot < AttackRate;
+        public bool OnCooldown => _timeSinceLastShot > 0f;
 
         public bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
             if (!CanAttack(out failedAttackReason)) return false;
-            _timeSinceLastShot = 0f;
+            _timeSinceLastShot = AttackRate;
             PerformAttack();
             return true;
         }
-        
+
         protected virtual bool CanAttack(out FailedAttackReason failedAttackReason)
         {
             failedAttackReason = FailedAttackReason.None;
@@ -30,7 +30,7 @@ namespace TwinStickShooter.WeaponSystem
 
             return true;
         }
-        
+
         public void SetTargetLayers(LayerMask targetLayers)
         {
             TargetLayers = targetLayers;
@@ -39,7 +39,7 @@ namespace TwinStickShooter.WeaponSystem
         public abstract void ShowDamageAreaPreview(bool isVisible);
 
         protected abstract void PerformAttack();
-        
+
         public abstract void OnEquipped();
 
         public abstract void OnUnequipped();
@@ -54,9 +54,9 @@ namespace TwinStickShooter.WeaponSystem
 
         private void Update()
         {
-            if (_timeSinceLastShot < AttackRate)
+            if (OnCooldown)
             {
-                _timeSinceLastShot += Time.deltaTime;
+                _timeSinceLastShot -= Time.deltaTime;
             }
 
             OnUpdate();
