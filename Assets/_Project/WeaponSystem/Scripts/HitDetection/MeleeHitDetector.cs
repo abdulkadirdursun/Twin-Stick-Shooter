@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TwinStickShooter.Core;
 using UnityEngine;
@@ -10,11 +9,13 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private int bufferSize;
 
         private Collider[] _hitColliderBuffer;
+        private readonly List<IDamageable> _collidedDamageTargets = new();
 
         public bool CheckCollision(out List<IDamageable> damageTargets)
         {
             int hitCount = 0;
-            damageTargets = new List<IDamageable>();
+            damageTargets = _collidedDamageTargets;
+            damageTargets.Clear();
             var origin = transform.position + originOffset;
             switch (detectionShape)
             {
@@ -46,7 +47,6 @@ namespace TwinStickShooter.WeaponSystem
             return damageTargets.Count > 0;
         }
 
-        
 
         #region MonoBehaviour Methods
 
@@ -56,7 +56,5 @@ namespace TwinStickShooter.WeaponSystem
         }
 
         #endregion
-
-        
     }
 }
