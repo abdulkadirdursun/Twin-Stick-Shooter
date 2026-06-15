@@ -6,7 +6,7 @@ namespace TwinStickShooter.WeaponSystem
 {
     public class MeleeHitDetector : BaseHitDetector
     {
-        [SerializeField] private int bufferSize;
+        [SerializeField] private int bufferSize = 5;
 
         private Collider[] _hitColliderBuffer;
         private readonly List<IDamageable> _collidedDamageTargets = new();
