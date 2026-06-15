@@ -19,6 +19,8 @@ namespace TwinStickShooter.InputSystem
         public event Action AttackPressed;
         public event Action AttackReleased;
 
+        public event Action Reload;
+
         public void Initialize(PlayerInputActions.GameplayActions gameplayActions)
         {
             _gameplayActions = gameplayActions;
@@ -34,6 +36,7 @@ namespace TwinStickShooter.InputSystem
             _gameplayActions.WeaponSlot3.performed += OnWeaponSlot3Selected;
             _gameplayActions.Attack.performed += AttackInputPerformed;
             _gameplayActions.Attack.canceled += AttackInputCancelled;
+            _gameplayActions.Reload.performed += ReloadButtonClick;
             _gameplayActions.Enable();
         }
 
@@ -93,6 +96,11 @@ namespace TwinStickShooter.InputSystem
         private void AttackInputCancelled(InputAction.CallbackContext context)
         {
             AttackReleased?.Invoke();
+        }
+
+        private void ReloadButtonClick(InputAction.CallbackContext context)
+        {
+            Reload?.Invoke();
         }
     }
 }
