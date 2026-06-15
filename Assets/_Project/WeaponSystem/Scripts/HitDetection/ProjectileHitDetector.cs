@@ -17,7 +17,7 @@ namespace TwinStickShooter.WeaponSystem
                     hitCount = Physics.SphereCastNonAlloc(origin, radius, direction, _rayHitBuffer, distance, TargetLayers);
                     break;
                 case HitDetectionShape.Capsule:
-                    var upVector = transform.up;
+                    var upVector = GetVector(localUpAxis);
                     var pointOffset = (height * 0.5f) - radius;
                     var point1 = origin + (upVector * pointOffset);
                     var point2 = origin - (upVector * pointOffset);
