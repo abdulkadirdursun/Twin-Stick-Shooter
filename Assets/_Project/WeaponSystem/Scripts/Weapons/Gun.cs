@@ -11,7 +11,6 @@ namespace TwinStickShooter.WeaponSystem
         protected override float AttackRate => gunData.AttackRate;
         protected override bool RapidAttack => gunData.IsAutomatic; //TODO: Implement rapid fire
         private int _currentAmmo;
-        private WaitForSeconds _waitForSecond;
 
         protected override void PerformAttack()
         {
