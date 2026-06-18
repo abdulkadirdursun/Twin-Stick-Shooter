@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AKD.AnimationEvents;
 using TwinStickShooter.Core;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace TwinStickShooter.WeaponSystem
         private bool _hitDetectionActive;
         private float _timeSinceLastCheck = 0f;
 
+        private readonly int _attackAnimationId = Animator.StringToHash("Attack");
+
         protected override void PerformAttack()
         {
             _damagedTargets.Clear();
@@ -28,24 +31,28 @@ namespace TwinStickShooter.WeaponSystem
         {
         }
 
-        public override void OnEquipped()
+        protected override void OnEquipped()
         {
             hitDetector.SetTargetLayers(TargetLayers);
         }
 
-        public override void OnUnequipped()
+        protected override void OnUnequipped()
         {
             _hitDetectionActive = false;
         }
 
-        public override void OnDropped()
+        protected override void OnDropped()
         {
             _hitDetectionActive = false;
         }
-        
-        public void DisableHitDetection()
+
+        protected override void SubscribeAnimationEvents()
         {
-            _hitDetectionActive = false;
+            AnimationEventDispatcher.Register(AnimationEventScope.State(_attackAnimationId), weaponData.HitWindowCloseTime, DisableHitDetection);
+        }
+
+        protected override void UnsubscribeAnimationEvents()
+        {
         }
 
         protected override void OnUpdate() //TODO: Separate system and pass the activity
@@ -64,6 +71,11 @@ namespace TwinStickShooter.WeaponSystem
                 if (!_damagedTargets.Add(target)) continue;
                 target.Damage(weaponData.Damage);
             }
+        }
+
+        private void DisableHitDetection(AnimationEventContext context)
+        {
+            _hitDetectionActive = false;
         }
     }
 }

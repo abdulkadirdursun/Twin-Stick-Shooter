@@ -1,4 +1,5 @@
-﻿using TwinStickShooter.WeaponSystem.Projectiles;
+﻿using AKD.AnimationEvents;
+using TwinStickShooter.WeaponSystem.Projectiles;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -12,6 +13,8 @@ namespace TwinStickShooter.WeaponSystem
         protected override bool RapidAttack => gunData.IsAutomatic; //TODO: Implement rapid fire
         private int _currentAmmo;
 
+        private readonly int _reloadAnimationId = Animator.StringToHash("Reload");
+
         protected override void PerformAttack()
         {
             var projectile = ProjectilePool.Instance.GetProjectile();
@@ -21,7 +24,7 @@ namespace TwinStickShooter.WeaponSystem
             _currentAmmo--;
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }
-        
+
         protected override bool CanAttack(out FailedAttackReason failedAttackReason)
         {
             var canAttack = base.CanAttack(out failedAttackReason);
@@ -36,29 +39,39 @@ namespace TwinStickShooter.WeaponSystem
 
             return canAttack;
         }
-        
+
         public override void ShowDamageAreaPreview(bool isVisible)
         {
             weaponAimLineDrawer.SetActive(isVisible);
         }
 
-        public override void OnEquipped()
+        protected override void OnEquipped()
         {
             _currentAmmo = gunData.AmmoCapacity;
             weaponAimLineDrawer.Configure(gunData.EffectiveDistance);
         }
 
-        public override void OnUnequipped()
+        protected override void OnUnequipped()
         {
             weaponAimLineDrawer.SetActive(false);
         }
 
-        public override void OnDropped()
+        protected override void OnDropped()
         {
             weaponAimLineDrawer.SetActive(false);
         }
 
-        public void Reload()
+        protected override void SubscribeAnimationEvents()
+        {
+            AnimationEventDispatcher.Register(AnimationEventScope.State(_reloadAnimationId), AnimationEventType.OnComplete, OnReloadAnimationComplete);
+        }
+
+        protected override void UnsubscribeAnimationEvents()
+        {
+            AnimationEventDispatcher.Unregister(AnimationEventScope.State(_reloadAnimationId), AnimationEventType.OnComplete, OnReloadAnimationComplete);
+        }
+
+        private void OnReloadAnimationComplete(AnimationEventContext context)
         {
             _currentAmmo = gunData.AmmoCapacity;
         }

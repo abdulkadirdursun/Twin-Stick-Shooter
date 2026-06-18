@@ -1,4 +1,5 @@
 ﻿using System;
+using AKD.AnimationEvents;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace TwinStickShooter.WeaponSystem
     {
         [SerializeField] private SelectedPlayerWeaponData selectedPlayerWeaponData;
         [SerializeField] private GameplayInputs gameplayInputs;
+        [SerializeField] private AnimationEventDispatcher animationEventDispatcher;
         [SerializeField] private Transform weaponHandler;
         [SerializeField] private LayerMask weaponTargetLayers;
 
@@ -34,19 +36,6 @@ namespace TwinStickShooter.WeaponSystem
             _weapon.ShowDamageAreaPreview(_canAttack);
         }
 
-        public void Reload()
-        {
-            Debug.LogWarning("[WeaponController] Reload");
-            if (_weapon == null || _weapon is not Gun gun) return;
-            gun.Reload();
-        }
-
-        public void DisableMeleeWeaponHitDetection() //Temp
-        {
-            if (!_weapon || _weapon is not MeleeWeapon meleeWeapon) return;
-            meleeWeapon.DisableHitDetection();
-        }
-
         private void Attack()
         {
             if (!_weapon || !_canAttack) return;
@@ -64,13 +53,13 @@ namespace TwinStickShooter.WeaponSystem
             weaponTransform.localRotation = Quaternion.Euler(weaponData.HoldRotation);
             weaponTransform.localPosition = weaponData.HoldPosition;
             _weapon.SetTargetLayers(weaponTargetLayers);
-            _weapon.OnEquipped();
+            _weapon.Equip(animationEventDispatcher);
         }
 
         private void HideCurrentWeapon()
         {
             if (_weapon == null) return;
-            _weapon.OnUnequipped();
+            _weapon.Unequip();
             //TODO: Use Pool
             Destroy(_weapon.gameObject);
         }

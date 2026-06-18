@@ -21,3 +21,4 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1280892515059965649, guid: 2b2552c5e814c5244b3bad53b28fd073, type: 3}
   holdPosition: {x: 0, y: 0, z: 0}
   holdRotation: {x: 0, y: 0, z: 270}
+  hitWindowCloseTime: 0.6

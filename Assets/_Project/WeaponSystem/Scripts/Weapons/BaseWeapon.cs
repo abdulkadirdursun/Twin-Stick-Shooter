@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AKD.AnimationEvents;
+using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
@@ -7,9 +8,23 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private Transform holdTransform;
         protected abstract float AttackRate { get; }
         protected abstract bool RapidAttack { get; }
+        protected AnimationEventDispatcher AnimationEventDispatcher { get; private set; }
         private float _timeSinceLastShot;
         protected LayerMask TargetLayers;
         public bool OnCooldown => _timeSinceLastShot > 0f;
+
+        public void Equip(AnimationEventDispatcher animationEventDispatcher)
+        {
+            AnimationEventDispatcher = animationEventDispatcher;
+            OnEquipped();
+            SubscribeAnimationEvents();
+        }
+
+        public void Unequip()
+        {
+            UnsubscribeAnimationEvents();
+            OnUnequipped();
+        }
 
         public bool TryToAttack(out FailedAttackReason failedAttackReason)
         {
@@ -39,12 +54,11 @@ namespace TwinStickShooter.WeaponSystem
         public abstract void ShowDamageAreaPreview(bool isVisible);
 
         protected abstract void PerformAttack();
-
-        public abstract void OnEquipped();
-
-        public abstract void OnUnequipped();
-
-        public abstract void OnDropped();
+        protected abstract void OnEquipped();
+        protected abstract void OnUnequipped();
+        protected abstract void OnDropped();
+        protected abstract void SubscribeAnimationEvents();
+        protected abstract void UnsubscribeAnimationEvents();
 
         protected virtual void OnUpdate()
         {

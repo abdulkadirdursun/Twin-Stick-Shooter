@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 1373215447687763949}
   - component: {fileID: 5059844950931654990}
   - component: {fileID: 4630003570815392432}
-  - component: {fileID: 5820492693430225411}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -357,70 +356,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.WeaponController
   selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
+  animationEventDispatcher: {fileID: 7531646916125113062}
   weaponHandler: {fileID: 1689212339532960289}
   weaponTargetLayers:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &5820492693430225411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3278666455597025988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75833717aaac44f2a7f0ddf251f5d317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AKD.AnimationEvents.AnimationEventListener
-  dispatcher: {fileID: 7531646916125113062}
-  bindings:
-  - scopeKind: 0
-    stateName: Reload
-    stateHash: -1525363869
-    tagName: 
-    layerIndex: -1
-    eventType: 2
-    normalizedTime: 0
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4630003570815392432}
-          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.WeaponController,
-            Assembly-CSharp
-          m_MethodName: Reload
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - scopeKind: 0
-    stateName: Attack
-    stateHash: 1080829965
-    tagName: 
-    layerIndex: 1
-    eventType: 3
-    normalizedTime: 0
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4630003570815392432}
-          m_TargetAssemblyTypeName: TwinStickShooter.WeaponSystem.WeaponController,
-            Assembly-CSharp
-          m_MethodName: DisableMeleeWeaponHitDetection
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &3444596179587277572
 GameObject:
   m_ObjectHideFlags: 0

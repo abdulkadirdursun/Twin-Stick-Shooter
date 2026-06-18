@@ -13,14 +13,14 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         #endregion
 
-        private static readonly int ReloadId = Animator.StringToHash("Reload");
+        private readonly int _reloadId = Animator.StringToHash("Reload");
 
         private int _reloadLayerId;
 
         public override void StateEnter()
         {
-            Blackboard.AnimationController.SetTrigger(ReloadId);
-            Blackboard.AnimationEventDispatcher.Register(AnimationEventScope.State(ReloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
+            Blackboard.AnimationController.SetTrigger(_reloadId);
+            Blackboard.AnimationEventDispatcher.Register(AnimationEventScope.State(_reloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
         }
 
         public override void StateUpdate()
@@ -29,7 +29,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         public override void StateExit()
         {
-            Blackboard.AnimationEventDispatcher.Unregister(AnimationEventScope.State(ReloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
+            Blackboard.AnimationEventDispatcher.Unregister(AnimationEventScope.State(_reloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
         }
 
         private void OnReloadAnimationEnd(AnimationEventContext context)
