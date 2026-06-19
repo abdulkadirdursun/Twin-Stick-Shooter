@@ -32,7 +32,6 @@ namespace TwinStickShooter.WeaponSystem
 
         public void StartAttack()
         {
-            Debug.LogWarning("Start Attack");
             _canAttack = true;
         }
 
@@ -56,10 +55,8 @@ namespace TwinStickShooter.WeaponSystem
             _timeSinceLastShot = AttackRate;
             PerformAttack();
             AttackPerformed?.Invoke();
-            Debug.Log("Attack Performed");
             if (!RapidAttack)
             {
-                Debug.Log("Not rapid fire");
                 _canAttack = false;
             }
         }
