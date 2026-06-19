@@ -9,6 +9,7 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private Transform firePoint;
         [SerializeField] private WeaponAimLineDrawer weaponAimLineDrawer;
         [SerializeField] private GunData gunData;
+        [SerializeField] private ProjectilePoolService projectilePoolService;
         protected override float AttackRate => gunData.AttackRate;
         protected override bool RapidAttack => gunData.IsAutomatic; //TODO: Implement rapid fire
         private int _currentAmmo;
@@ -17,7 +18,7 @@ namespace TwinStickShooter.WeaponSystem
 
         protected override void PerformAttack()
         {
-            var projectile = ProjectilePool.Instance.GetProjectile();
+            var projectile = projectilePoolService.Get();
             projectile.transform.position = firePoint.position;
             projectile.transform.forward = firePoint.forward;
             projectile.Fire(gunData.Damage, gunData.EffectiveDistance, TargetLayers);

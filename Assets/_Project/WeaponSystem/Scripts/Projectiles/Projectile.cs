@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem.Projectiles
 {
@@ -11,6 +12,7 @@ namespace TwinStickShooter.WeaponSystem.Projectiles
         private float _damage;
         private float _maxDistance;
         private float _distanceTravelled;
+        public event Action<Projectile> Destroyed;
 
         public void Fire(float damage, float maxDistance, LayerMask targetLayers)
         {
@@ -25,7 +27,7 @@ namespace TwinStickShooter.WeaponSystem.Projectiles
         {
             if (!_isActive) return;
             _isActive = false;
-            ProjectilePool.Instance.ReleaseProjectile(this);
+            Destroyed?.Invoke(this);
         }
 
         #region MonoBehaviour Methods
@@ -46,6 +48,11 @@ namespace TwinStickShooter.WeaponSystem.Projectiles
             _distanceTravelled += moveDistance;
             if (_distanceTravelled < _maxDistance) return;
             Disable();
+        }
+
+        private void OnDestroy()
+        {
+            Destroyed = null;
         }
 
         #endregion
