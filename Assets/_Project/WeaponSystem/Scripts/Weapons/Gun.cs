@@ -25,19 +25,11 @@ namespace TwinStickShooter.WeaponSystem
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }
 
-        protected override bool CanAttack(out FailedAttackReason failedAttackReason)
+        protected override bool CanAttack()
         {
-            var canAttack = base.CanAttack(out failedAttackReason);
-            if (!canAttack && failedAttackReason == FailedAttackReason.Cooldown)
-                return false;
+            if (!base.CanAttack() || _currentAmmo == 0) return false;
 
-            if (_currentAmmo == 0)
-            {
-                failedAttackReason = FailedAttackReason.NoAmmo;
-                return false;
-            }
-
-            return canAttack;
+            return true;
         }
 
         public override void ShowDamageAreaPreview(bool isVisible)

@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.PlayerControllers.PlayerAnimationController
   selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
-  weaponController: {fileID: 4630003570815392432}
   animator: {fileID: 1146158694434482792}
 --- !u!114 &8266025216133319228
 MonoBehaviour:
@@ -356,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.WeaponController
   selectedPlayerWeaponData: {fileID: 11400000, guid: a0e60ea9a38564d4b90c5190523e6018, type: 2}
   gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
+  animationController: {fileID: 4216494704605009283}
   animationEventDispatcher: {fileID: 7531646916125113062}
   weaponHandler: {fileID: 1689212339532960289}
   weaponTargetLayers:

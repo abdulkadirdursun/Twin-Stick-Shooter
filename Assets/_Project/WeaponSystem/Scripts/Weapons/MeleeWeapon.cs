@@ -55,11 +55,11 @@ namespace TwinStickShooter.WeaponSystem
         {
         }
 
-        protected override void OnUpdate() //TODO: Separate system and pass the activity
+        protected override void OnTicked(float time)
         {
             if (!_hitDetectionActive) return;
 
-            _timeSinceLastCheck += Time.deltaTime;
+            _timeSinceLastCheck += time;
             if (_timeSinceLastCheck < hitCheckInterval)
                 return;
             _timeSinceLastCheck = 0f;

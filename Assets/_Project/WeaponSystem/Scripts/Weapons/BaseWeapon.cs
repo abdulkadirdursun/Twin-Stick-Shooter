@@ -1,4 +1,5 @@
-﻿using AKD.AnimationEvents;
+﻿using System;
+using AKD.AnimationEvents;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -10,8 +11,10 @@ namespace TwinStickShooter.WeaponSystem
         protected abstract bool RapidAttack { get; }
         protected AnimationEventDispatcher AnimationEventDispatcher { get; private set; }
         private float _timeSinceLastShot;
+        private bool _canAttack;
         protected LayerMask TargetLayers;
         public bool OnCooldown => _timeSinceLastShot > 0f;
+        public event Action AttackPerformed;
 
         public void Equip(AnimationEventDispatcher animationEventDispatcher)
         {
@@ -22,26 +25,49 @@ namespace TwinStickShooter.WeaponSystem
 
         public void Unequip()
         {
+            AttackPerformed = null;
             UnsubscribeAnimationEvents();
             OnUnequipped();
         }
 
-        public bool TryToAttack(out FailedAttackReason failedAttackReason)
+        public void StartAttack()
         {
-            if (!CanAttack(out failedAttackReason)) return false;
-            _timeSinceLastShot = AttackRate;
-            PerformAttack();
-            return true;
+            Debug.LogWarning("Start Attack");
+            _canAttack = true;
         }
 
-        protected virtual bool CanAttack(out FailedAttackReason failedAttackReason)
+        public void StopAttack()
         {
-            failedAttackReason = FailedAttackReason.None;
-            if (OnCooldown)
+            _canAttack = false;
+        }
+
+        public void Tick(float time)
+        {
+            _timeSinceLastShot -= time;
+            if (!OnCooldown)
+                TryToAttack();
+
+            OnTicked(time);
+        }
+
+        private void TryToAttack()
+        {
+            if (!CanAttack()) return;
+            _timeSinceLastShot = AttackRate;
+            PerformAttack();
+            AttackPerformed?.Invoke();
+            Debug.Log("Attack Performed");
+            if (!RapidAttack)
             {
-                failedAttackReason = FailedAttackReason.Cooldown;
-                return false;
+                Debug.Log("Not rapid fire");
+                _canAttack = false;
             }
+        }
+
+        protected virtual bool CanAttack()
+        {
+            if (!_canAttack || OnCooldown)
+                return false;
 
             return true;
         }
@@ -51,31 +77,16 @@ namespace TwinStickShooter.WeaponSystem
             TargetLayers = targetLayers;
         }
 
-        public abstract void ShowDamageAreaPreview(bool isVisible);
+        protected virtual void OnTicked(float time)
+        {
+        }
 
+        public abstract void ShowDamageAreaPreview(bool isVisible);
         protected abstract void PerformAttack();
         protected abstract void OnEquipped();
         protected abstract void OnUnequipped();
         protected abstract void OnDropped();
         protected abstract void SubscribeAnimationEvents();
         protected abstract void UnsubscribeAnimationEvents();
-
-        protected virtual void OnUpdate()
-        {
-        }
-
-        #region MonoBehaviour Methods
-
-        private void Update()
-        {
-            if (OnCooldown)
-            {
-                _timeSinceLastShot -= Time.deltaTime;
-            }
-
-            OnUpdate();
-        }
-
-        #endregion
     }
 }
