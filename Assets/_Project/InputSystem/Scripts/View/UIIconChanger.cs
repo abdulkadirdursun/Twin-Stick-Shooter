@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using AKD.Toolkit.Extensions;
+using TwinStickShooter.Core.Utilities;
 using UnityEngine;
 
 namespace TwinStickShooter.InputSystem.View

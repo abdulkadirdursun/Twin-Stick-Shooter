@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AKD.Toolkit.Extensions
+namespace TwinStickShooter.Core.Utilities
 {
     public static class CanvasGroupExtensions
     {
