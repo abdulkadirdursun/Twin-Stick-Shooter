@@ -83,6 +83,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0173
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.028
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0047
+      objectReference: {fileID: 0}
     - target: {fileID: 5823952448549545447, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -130,6 +142,18 @@ PrefabInstance:
     - target: {fileID: 5839448279943375158, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0119
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0433
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

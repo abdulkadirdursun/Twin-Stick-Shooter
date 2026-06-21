@@ -17,17 +17,18 @@ namespace TwinStickShooter.WeaponSystem
         [Header("Placement Info")]
         [SerializeField] private Vector3 holdPosition;
         [SerializeField] private Vector3 holdRotation;
-
+        [Header("IK Settings")]
+        [SerializeField] private WeaponIKProfile ikProfile;
+        
         public string WeaponName => weaponName;
         public Sprite WeaponIcon => weaponIcon;
         public float AttackRate => attackRate;
         public float Damage => damage;
-
         public AnimatorLayer AnimatorLayer => animatorLayer;
-
         public GameObject WeaponPreviewPrefab => weaponPreviewPrefab;
         public BaseWeapon WeaponPrefab => weaponPrefab;
         public Vector3 HoldPosition => holdPosition;
         public Vector3 HoldRotation => holdRotation;
+        public WeaponIKProfile IKProfile => ikProfile;
     }
 }

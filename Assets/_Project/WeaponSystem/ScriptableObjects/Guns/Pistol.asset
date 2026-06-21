@@ -21,6 +21,16 @@ MonoBehaviour:
   weaponPrefab: {fileID: 9178563589898968017, guid: 6b519bc748d740a4f844de725d371d02, type: 3}
   holdPosition: {x: 3.44, y: 0.57, z: -1.14}
   holdRotation: {x: 0, y: 0, z: 270}
+  ikProfile:
+    useSupportHand: 0
+    aimOffset: {x: -15, y: -2, z: 0}
+    aimLimits: {x: -30, y: 30}
+    aimAxis: 0
+    upAxis: 2
+    aimWeight: 1
+    supportHandWeight: 1
+    hintWeight: 1
+    blendInTime: 0.15
   isAutomatic: 0
   ammoCapacity: 7
   effectiveDistance: 25

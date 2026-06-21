@@ -1,11 +1,13 @@
 ﻿using System;
 using AKD.AnimationEvents;
+using TwinStickShooter.AnimationSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
     public abstract class BaseWeapon : MonoBehaviour
     {
+        [SerializeField] private WeaponRigPoints rigPoints;
         [SerializeField] private Transform holdTransform;
         protected abstract float AttackRate { get; }
         protected abstract bool RapidAttack { get; }
@@ -13,6 +15,7 @@ namespace TwinStickShooter.WeaponSystem
         private float _timeSinceLastShot;
         private bool _canAttack;
         protected LayerMask TargetLayers;
+        public WeaponRigPoints RigPoints => rigPoints;
         public bool OnCooldown => _timeSinceLastShot > 0f;
         public event Action AttackPerformed;
 

@@ -1,4 +1,5 @@
-﻿using AKD.AnimationEvents;
+﻿using System;
+using AKD.AnimationEvents;
 using TwinStickShooter.AnimationSystem;
 using TwinStickShooter.InputSystem;
 using UnityEngine;
@@ -17,6 +18,9 @@ namespace TwinStickShooter.WeaponSystem
         private readonly int _attackParameterId = Animator.StringToHash("Attack");
         private BaseWeapon _weapon;
         private bool _canAttack;
+
+        public event Action<BaseWeapon, BaseWeaponData> WeaponEquipped;
+        public event Action WeaponUnequipped;
 
         public void ChangeAttackPermit(bool value)
         {
@@ -66,12 +70,14 @@ namespace TwinStickShooter.WeaponSystem
             weaponTransform.localPosition = weaponData.HoldPosition;
             _weapon.SetTargetLayers(weaponTargetLayers);
             _weapon.Equip(animationEventDispatcher);
+            WeaponEquipped?.Invoke(_weapon, weaponData);
         }
 
         private void HideCurrentWeapon()
         {
             if (_weapon == null) return;
             _weapon.Unequip();
+            WeaponUnequipped?.Invoke();
             //TODO: Use Pool
             Destroy(_weapon.gameObject);
         }
