@@ -5,6 +5,7 @@ namespace TwinStickShooter.MovementSystem
 {
     public class LookTargetController : MonoBehaviour
     {
+        [SerializeField] private GameplayInputs gameplayInputs;
         [SerializeField] private Transform cursorObject;
         [SerializeField] private float minDistanceClamp = 1.5f;
         [SerializeField, Range(1f, 100f)] private float sensitivity = 10;
@@ -12,7 +13,7 @@ namespace TwinStickShooter.MovementSystem
         private bool _onMove;
         private Vector3 _movementInput;
 
-        private void OnCursorPositionChanged(Vector2 input)
+        private void OnLookTargetMoved(Vector2 input)
         {
             _onMove = input != Vector2.zero;
             _movementInput = new Vector3(input.x, 0f, input.y).normalized;
@@ -22,7 +23,7 @@ namespace TwinStickShooter.MovementSystem
 
         private void OnEnable()
         {
-            PlayerInputs.LookTargetMovement += OnCursorPositionChanged;
+            gameplayInputs.LookTargetMovement += OnLookTargetMoved;
         }
 
         private void Update()
@@ -39,7 +40,7 @@ namespace TwinStickShooter.MovementSystem
 
         private void OnDisable()
         {
-            PlayerInputs.LookTargetMovement -= OnCursorPositionChanged;
+            gameplayInputs.LookTargetMovement -= OnLookTargetMoved;
         }
 
         #endregion

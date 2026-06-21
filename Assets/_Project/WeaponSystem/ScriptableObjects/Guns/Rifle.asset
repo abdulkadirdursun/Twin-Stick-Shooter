@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8e1bcfac1e4982ada7369b5f67f74c, type: 3}
+  m_Name: Rifle
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.GunData
+  weaponName: Rifle
+  weaponIcon: {fileID: 21300000, guid: 72de55ec04c255e4792c2882214aae79, type: 3}
+  attackRate: 0.35
+  damage: 1
+  animatorLayer: 3
+  weaponPreviewPrefab: {fileID: 1341255972871256, guid: c25ac4fdc903e7d49a7520930673ecd6, type: 3}
+  weaponPrefab: {fileID: 4274397210836259375, guid: 48628cb7c3a77344088883745122beab, type: 3}
+  holdPosition: {x: 2.2, y: 0.4, z: 2.2}
+  holdRotation: {x: 1.560466, y: 320.8182, z: 241.3636}
+  ikProfile:
+    useSupportHand: 1
+    aimOffset: {x: -1, y: 20, z: -8.5}
+    aimAxis: 0
+    upAxis: 2
+    blendInTime: 0.15
+    spineOffset: {x: -25, y: 0, z: 0}
+  isAutomatic: 1
+  ammoCapacity: 30
+  effectiveDistance: 75

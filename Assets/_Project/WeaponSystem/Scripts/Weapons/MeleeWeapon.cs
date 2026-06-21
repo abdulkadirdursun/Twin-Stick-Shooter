@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using TwinStickShooter.DamageableSystem;
+using AKD.AnimationEvents;
+using TwinStickShooter.Core;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -17,35 +18,48 @@ namespace TwinStickShooter.WeaponSystem
         private bool _hitDetectionActive;
         private float _timeSinceLastCheck = 0f;
 
-        public void EnableHitDetection()
+        private readonly int _attackAnimationId = Animator.StringToHash("Attack");
+
+        protected override void PerformAttack()
         {
             _damagedTargets.Clear();
             _timeSinceLastCheck = 0f;
             _hitDetectionActive = true;
         }
 
-        public void DisableHitDetection()
+        public override void ShowDamageAreaPreview(bool isVisible)
+        {
+        }
+
+        protected override void OnEquipped()
+        {
+            hitDetector.SetTargetLayers(TargetLayers);
+        }
+
+        protected override void OnUnequipped()
         {
             _hitDetectionActive = false;
         }
 
-        public override void OnEquipped(LayerMask targetLayers)
+        protected override void OnDropped()
         {
-            base.OnEquipped(targetLayers);
-            hitDetector.SetTargetLayers(targetLayers);
-        }
-
-        public override void OnUnequipped()
-        {
-            base.OnUnequipped();
             _hitDetectionActive = false;
         }
 
-        protected override void OnUpdate()
+        protected override void SubscribeAnimationEvents()
+        {
+            AnimationEventDispatcher.Register(AnimationEventScope.State(_attackAnimationId), weaponData.HitWindowCloseTime, DisableHitDetection);
+        }
+
+        protected override void UnsubscribeAnimationEvents()
+        {
+        }
+
+        protected override void OnTicked(float time)
         {
             if (!_hitDetectionActive) return;
 
-            _timeSinceLastCheck += Time.deltaTime;
+            _timeSinceLastCheck += time;
             if (_timeSinceLastCheck < hitCheckInterval)
                 return;
             _timeSinceLastCheck = 0f;
@@ -57,6 +71,11 @@ namespace TwinStickShooter.WeaponSystem
                 if (!_damagedTargets.Add(target)) continue;
                 target.Damage(weaponData.Damage);
             }
+        }
+
+        private void DisableHitDetection(AnimationEventContext context)
+        {
+            _hitDetectionActive = false;
         }
     }
 }

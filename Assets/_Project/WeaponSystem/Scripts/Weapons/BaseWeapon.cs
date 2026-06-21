@@ -1,88 +1,92 @@
-﻿using UnityEngine;
+﻿using System;
+using AKD.AnimationEvents;
+using TwinStickShooter.AnimationSystem;
+using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
 {
     public abstract class BaseWeapon : MonoBehaviour
     {
+        [SerializeField] private WeaponRigPoints rigPoints;
         [SerializeField] private Transform holdTransform;
         protected abstract float AttackRate { get; }
         protected abstract bool RapidAttack { get; }
+        protected AnimationEventDispatcher AnimationEventDispatcher { get; private set; }
         private float _timeSinceLastShot;
-        protected bool IsAttacking;
+        private bool _canAttack;
         protected LayerMask TargetLayers;
+        public WeaponRigPoints RigPoints => rigPoints;
+        public bool OnCooldown => _timeSinceLastShot > 0f;
+        public event Action AttackPerformed;
 
-        public Transform HoldTransform => holdTransform;
-        public bool OnCooldown => _timeSinceLastShot < AttackRate;
-
-        public virtual void AttackPressed()
+        public void Equip(AnimationEventDispatcher animationEventDispatcher)
         {
-            if (IsAttacking) return;
-            IsAttacking = true;
+            AnimationEventDispatcher = animationEventDispatcher;
+            OnEquipped();
+            SubscribeAnimationEvents();
         }
 
-        public virtual void AttackReleased()
+        public void Unequip()
         {
-            IsAttacking = false;
+            AttackPerformed = null;
+            UnsubscribeAnimationEvents();
+            OnUnequipped();
         }
 
-        public virtual void OnStartAim()
+        public void StartAttack()
         {
+            _canAttack = true;
         }
 
-        public virtual void OnStopAim()
+        public void StopAttack()
         {
+            _canAttack = false;
         }
 
-        public virtual bool CanAttack(out FailedAttackReason failedAttackReason)
+        public void Tick(float time)
         {
-            if (OnCooldown)
-            {
-                failedAttackReason = FailedAttackReason.Cooldown;
-                return false;
-            }
+            _timeSinceLastShot -= time;
+            if (!OnCooldown)
+                TryToAttack();
 
-            if (!IsAttacking)
-            {
-                failedAttackReason = FailedAttackReason.None;
-                return false;
-            }
+            OnTicked(time);
+        }
 
+        private void TryToAttack()
+        {
+            if (!CanAttack()) return;
+            _timeSinceLastShot = AttackRate;
+            PerformAttack();
+            AttackPerformed?.Invoke();
             if (!RapidAttack)
             {
-                IsAttacking = false;
+                _canAttack = false;
             }
+        }
 
-            _timeSinceLastShot = 0f;
-            failedAttackReason = FailedAttackReason.None;
+        protected virtual bool CanAttack()
+        {
+            if (!_canAttack || OnCooldown)
+                return false;
+
             return true;
         }
 
-        public virtual void OnEquipped(LayerMask targetLayers)
+        public void SetTargetLayers(LayerMask targetLayers)
         {
             TargetLayers = targetLayers;
         }
 
-        public virtual void OnUnequipped()
-        {
-            IsAttacking = false;
-        }
-
-        protected virtual void OnUpdate()
+        protected virtual void OnTicked(float time)
         {
         }
 
-        #region MonoBehaviour Methods
-
-        private void Update()
-        {
-            if (_timeSinceLastShot < AttackRate)
-            {
-                _timeSinceLastShot += Time.deltaTime;
-            }
-
-            OnUpdate();
-        }
-
-        #endregion
+        public abstract void ShowDamageAreaPreview(bool isVisible);
+        protected abstract void PerformAttack();
+        protected abstract void OnEquipped();
+        protected abstract void OnUnequipped();
+        protected abstract void OnDropped();
+        protected abstract void SubscribeAnimationEvents();
+        protected abstract void UnsubscribeAnimationEvents();
     }
 }

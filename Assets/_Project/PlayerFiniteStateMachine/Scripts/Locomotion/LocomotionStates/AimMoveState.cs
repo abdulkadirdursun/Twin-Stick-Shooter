@@ -16,7 +16,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public override void StateEnter()
         {
             base.StateEnter();
-            PlayerInputs.OnStopAiming += ChangeToFreeMovementState;
+            Blackboard.GameplayInputs.StopAiming += ChangeToFreeMovementState;
             Blackboard.IKRigController.SetActive(true);
         }
 
@@ -32,7 +32,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         {
             base.StateExit();
             Blackboard.IKRigController.SetActive(false);
-            PlayerInputs.OnStopAiming -= ChangeToFreeMovementState;
+            Blackboard.GameplayInputs.StopAiming -= ChangeToFreeMovementState;
         }
 
         private void ChangeToFreeMovementState()

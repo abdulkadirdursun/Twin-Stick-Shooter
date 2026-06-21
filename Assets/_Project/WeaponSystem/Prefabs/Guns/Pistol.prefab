@@ -75,9 +75,25 @@ PrefabInstance:
       propertyPath: gunData
       value: 
       objectReference: {fileID: 11400000, guid: 233925f071efd104e868b2024df693b6, type: 2}
+    - target: {fileID: 268077960707905636, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: projectilePoolService
+      value: 
+      objectReference: {fileID: 11400000, guid: ce3ddc5f4e5e8a0448bb71a60425d031, type: 2}
     - target: {fileID: 1199352295357701012, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0173
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.028
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689647260500057775, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0047
       objectReference: {fileID: 0}
     - target: {fileID: 5823952448549545447, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -126,6 +142,18 @@ PrefabInstance:
     - target: {fileID: 5839448279943375158, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.0119
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.018
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0433
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571995859590647996, guid: f50625acd6d1a1b4da8772d64a1a90d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0147
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

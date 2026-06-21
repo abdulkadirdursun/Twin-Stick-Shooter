@@ -4,51 +4,55 @@ using UnityEngine;
 
 namespace AKD.AnimationEvents
 {
+    /// <summary>Bridges designer-authored <see cref="AnimationEventBinding"/>s to the dispatcher at runtime.</summary>
     public class AnimationEventListener : MonoBehaviour
     {
-        [SerializeField] private AnimationEventDispatcher _dispatcher;
-        [SerializeField] private List<AnimationEventBinding> _bindings = new();
+        [SerializeField] private AnimationEventDispatcher dispatcher;
+        [SerializeField] private List<AnimationEventBinding> bindings = new();
 
-        private Action[] _cachedCallbacks;
-
-        #region MonoBehaviour Methods
+        private Action<AnimationEventContext>[] _cachedCallbacks;
 
         private void OnEnable()
         {
-            if (_dispatcher == null)
+            if (dispatcher == null)
             {
-                Debug.LogWarning(
-                    $"<color=#FF5F5D>[AnimationEvents]</color> AnimationEventListener on '{gameObject.name}' has no dispatcher assigned.");
+                Debug.LogWarning($"<color=#FF5F5D>[AnimationEvents]</color> AnimationEventListener on '{gameObject.name}' has no dispatcher assigned.", this);
                 return;
             }
 
-            _cachedCallbacks = new Action[_bindings.Count];
+            _cachedCallbacks = new Action<AnimationEventContext>[bindings.Count];
 
-            for (int i = 0; i < _bindings.Count; i++)
+            for (int i = 0; i < bindings.Count; i++)
             {
-                var binding = _bindings[i];
-                int index = i;
-                _cachedCallbacks[index] = () => binding.response?.Invoke();
+                var binding = bindings[i];
+                _cachedCallbacks[i] = _ => binding.response?.Invoke();
 
-                _dispatcher.Register(binding.layerIndex, binding.eventName, _cachedCallbacks[index]);
+                var scope = binding.ToScope();
+                if (binding.eventType == AnimationEventType.OnTime)
+                    dispatcher.Register(scope, binding.normalizedTime, _cachedCallbacks[i]);
+                else
+                    dispatcher.Register(scope, binding.eventType, _cachedCallbacks[i]);
             }
         }
 
         private void OnDisable()
         {
-            if (_dispatcher == null || _cachedCallbacks == null) return;
+            if (dispatcher == null || _cachedCallbacks == null) return;
 
-            for (int i = 0; i < _bindings.Count; i++)
+            for (int i = 0; i < bindings.Count && i < _cachedCallbacks.Length; i++)
             {
-                if (i >= _cachedCallbacks.Length || _cachedCallbacks[i] == null) continue;
+                if (_cachedCallbacks[i] == null) continue;
 
-                var binding = _bindings[i];
-                _dispatcher.Unregister(binding.layerIndex, binding.eventName, _cachedCallbacks[i]);
+                var binding = bindings[i];
+                var scope = binding.ToScope();
+
+                if (binding.eventType == AnimationEventType.OnTime)
+                    dispatcher.Unregister(scope, binding.normalizedTime, _cachedCallbacks[i]);
+                else
+                    dispatcher.Unregister(scope, binding.eventType, _cachedCallbacks[i]);
             }
 
             _cachedCallbacks = null;
         }
-
-        #endregion
     }
 }
