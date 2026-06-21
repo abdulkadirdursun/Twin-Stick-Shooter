@@ -21,24 +21,22 @@ namespace TwinStickShooter.AnimationSystem
             var profile = data.IKProfile;
             ikRigController.ApplyAimProfile(
                 profile.AimOffset,
-                profile.AimLimits,
                 profile.AimAxis,
                 profile.UpAxis);
-            
+            ikRigController.ApplySpineProfile(profile.SpineOffset);
+
             ikRigController.SetActiveSupportHand(profile.UseSupportHand);
 
             if (profile.UseSupportHand)
             {
                 weaponIKDriver.SetWeaponRigPoints(weapon.RigPoints);
-                ikRigController.ApplySupportHandHintWeight(profile.HintWeight);
             }
             else
             {
                 weaponIKDriver.Clear();
             }
 
-            _targetSupport = profile.UseSupportHand ? profile.SupportHandWeight : 0f;
-            _aimWeight = profile.AimWeight;
+            _targetSupport = profile.UseSupportHand ? 1f : 0f;
             _blend = Tween.Custom(0f, 1f, profile.BlendInTime, BlendWeights);
         }
 

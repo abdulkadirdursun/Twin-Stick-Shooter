@@ -31,4 +31,5 @@ MonoBehaviour:
     supportHandWeight: 1
     hintWeight: 1
     blendInTime: 0.15
+    spineOffset: {x: -10, y: 0, z: 0}
   hitWindowCloseTime: 0.6

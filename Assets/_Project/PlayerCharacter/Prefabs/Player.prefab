@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.AnimationSystem.IKAimTargetPlacer
   weaponRig: {fileID: 886739214433813498}
   aimConstraint: {fileID: 705164704260757686}
+  spineConstraint: {fileID: 1847601763547951107}
   supportHandConstraint: {fileID: 7271094184519802285}
 --- !u!114 &1373215447687763949
 MonoBehaviour:
@@ -507,7 +508,7 @@ MonoBehaviour:
     m_Target: {fileID: 6281124697025335132}
     m_Hint: {fileID: 8313894743413659687}
     m_TargetPositionWeight: 1
-    m_TargetRotationWeight: 1
+    m_TargetRotationWeight: 0
     m_HintWeight: 1
     m_MaintainTargetPositionOffset: 0
     m_MaintainTargetRotationOffset: 0
@@ -584,7 +585,7 @@ MonoBehaviour:
       m_Item7:
         transform: {fileID: 0}
         weight: 0
-    m_Offset: {x: -10, y: 0, z: 0}
+    m_Offset: {x: 0, y: 0, z: 0}
     m_MinLimit: -45
     m_MaxLimit: 45
     m_AimAxis: 3

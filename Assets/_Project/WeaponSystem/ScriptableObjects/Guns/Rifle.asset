@@ -23,14 +23,11 @@ MonoBehaviour:
   holdRotation: {x: 1.560466, y: 320.8182, z: 241.3636}
   ikProfile:
     useSupportHand: 1
-    aimOffset: {x: -8, y: 18.15, z: -30}
-    aimLimits: {x: -30, y: 30}
+    aimOffset: {x: -1, y: 20, z: -8.5}
     aimAxis: 0
     upAxis: 2
-    aimWeight: 1
-    supportHandWeight: 1
-    hintWeight: 1
     blendInTime: 0.15
+    spineOffset: {x: -25, y: 0, z: 0}
   isAutomatic: 1
   ammoCapacity: 30
   effectiveDistance: 75

@@ -10,6 +10,7 @@ namespace TwinStickShooter.AnimationSystem
         [SerializeField] private Rig weaponRig;
         [Header("Constraints")]
         [SerializeField] private MultiAimConstraint aimConstraint;
+        [SerializeField] private MultiAimConstraint spineConstraint;
         [SerializeField] private TwoBoneIKConstraint supportHandConstraint;
 
         public void SetActive(bool value)
@@ -24,23 +25,21 @@ namespace TwinStickShooter.AnimationSystem
 
         public void ApplyAimProfile(
             Vector3 offset,
-            Vector2 limits,
             Axis aimAxis,
             Axis upAxis)
         {
             var data = aimConstraint.data;
             data.offset = offset;
-            data.limits = limits;
             data.aimAxis = MapAxis(aimAxis);
             data.upAxis = MapAxis(upAxis);
             aimConstraint.data = data;
         }
 
-        public void ApplySupportHandHintWeight(float hintWeight)
+        public void ApplySpineProfile(Vector3 offset)
         {
-            var data = supportHandConstraint.data;
-            data.hintWeight = hintWeight;
-            supportHandConstraint.data = data;
+            var data=spineConstraint.data;
+            data.offset = offset;
+            spineConstraint.data = data;
         }
 
         private static MultiAimConstraintData.Axis MapAxis(Axis axis) => axis switch
