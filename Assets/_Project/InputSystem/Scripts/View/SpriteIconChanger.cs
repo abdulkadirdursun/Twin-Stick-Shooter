@@ -17,6 +17,7 @@ namespace TwinStickShooter.InputSystem.View
 
         #endregion
 
+        [SerializeField] private InputControlSchemeData inputControlScheme;
         [SerializeField] private IconInfo[] iconInfos;
         [SerializeField] private GameObject contentParent;
 
@@ -27,15 +28,15 @@ namespace TwinStickShooter.InputSystem.View
         public void Show()
         {
             _isActive = true;
-            InputControlScheme.OnControlSchemeTypeChanged += SetControlSchemeIcon;
-            SetControlSchemeIcon(InputControlScheme.CurrentControlType);
+            inputControlScheme.ControlSchemeTypeChanged += SetControlSchemeIcon;
+            SetControlSchemeIcon(inputControlScheme.CurrentControlType);
             contentParent.SetActive(true);
         }
 
         public void Hide()
         {
             _isActive = false;
-            InputControlScheme.OnControlSchemeTypeChanged -= SetControlSchemeIcon;
+            inputControlScheme.ControlSchemeTypeChanged -= SetControlSchemeIcon;
             contentParent.SetActive(false);
         }
 

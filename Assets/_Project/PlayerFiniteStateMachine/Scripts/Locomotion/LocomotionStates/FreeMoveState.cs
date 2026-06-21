@@ -17,7 +17,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public override void StateEnter()
         {
             base.StateEnter();
-            PlayerInputs.OnStartAiming += ChangeToAimingState;
+            Blackboard.GameplayInputs.StartAiming += ChangeToAimingState;
         }
 
         public override void StateUpdate()
@@ -29,7 +29,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public override void StateExit()
         {
             base.StateExit();
-            PlayerInputs.OnStartAiming -= ChangeToAimingState;
+            Blackboard.GameplayInputs.StartAiming -= ChangeToAimingState;
         }
 
         private void ChangeToAimingState()

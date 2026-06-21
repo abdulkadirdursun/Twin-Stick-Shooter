@@ -798,6 +798,75 @@ Transform:
   - {fileID: 873080402}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &981979363
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1085810905007006049, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: afe81e76fafea3643ad4f453f1857686, type: 2}
+    - target: {fileID: 1085810905007006049, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 1280892515059965649, guid: 2b2552c5e814c5244b3bad53b28fd073, type: 3}
+    - target: {fileID: 1085810905007006049, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: weaponPreviewPrefab
+      value: 
+      objectReference: {fileID: 1720152226819544, guid: 133f932775f5bff43a09e7bcb2f346dc, type: 3}
+    - target: {fileID: 3834851664097289147, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_Name
+      value: WeaponStand_Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425645595225204581, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bdffb60804f222745a695a1658ef27a1, type: 3}
 --- !u!1 &1040955718
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1040955720}
-  - component: {fileID: 1040955719}
+  - component: {fileID: 1040955721}
   m_Layer: 0
   m_Name: ProjectilePool
   m_TagString: Untagged
@@ -815,21 +884,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1040955719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040955718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b15461691552411398da57ef7e7698fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.Projectiles.ProjectilePool
-  projectilePrefab: {fileID: 4351963612161590686, guid: 4f96f0c5c0a7e8c4381d2b6cd570bee5, type: 3}
-  startPoolSize: 5
-  maxPoolSize: 35
 --- !u!4 &1040955720
 Transform:
   m_ObjectHideFlags: 0
@@ -845,6 +899,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1040955721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040955718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53f9654e0741b785b503e9855776bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.WeaponSystem.Projectiles.ProjectilePoolManager
+  pools:
+  - {fileID: 11400000, guid: ce3ddc5f4e5e8a0448bb71a60425d031, type: 2}
 --- !u!1 &1046074707
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1064,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac798fd733a4d5c8e2b40ba1546512a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TwinStickShooter.InputSystem.PlayerInputs
+  inputControlSchemeData: {fileID: 11400000, guid: 049dd89543a706b43b03b74e62ee64ac, type: 2}
+  gameplayInputs: {fileID: 11400000, guid: e12e647f4411ff344b8a6677b6e380af, type: 2}
 --- !u!4 &1592268504
 Transform:
   m_ObjectHideFlags: 0
@@ -1446,6 +1516,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1146158694434482792, guid: 613bb62c72f4d4b4a96ccb4a7cca6784, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Elbow_R'\n\tTransform 'Elbow_L'\n\tTransform
+        'Hand_L'\n\tTransform 'Shoulder_L'\n\tTransform 'Spine_01'\n\tTransform 'Hips'\n\tTransform
+        'Hand_R'\n\tTransform 'Elbow_R'\n\tTransform 'Elbow_L'\n\tTransform 'Hand_L'\n\tand
+        more ..."
+      objectReference: {fileID: 0}
     - target: {fileID: 3278666455597025988, guid: 613bb62c72f4d4b4a96ccb4a7cca6784, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1471,5 +1550,6 @@ SceneRoots:
   - {fileID: 4144292037752079915}
   - {fileID: 1781025852203635867}
   - {fileID: 400388931}
+  - {fileID: 981979363}
   - {fileID: 1060144527135840402}
   - {fileID: 134456942}

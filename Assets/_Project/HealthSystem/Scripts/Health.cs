@@ -1,5 +1,5 @@
 using System;
-using TwinStickShooter.DamageableSystem;
+using TwinStickShooter.Core;
 using UnityEngine;
 
 namespace AKD.HealthSystem
@@ -27,14 +27,14 @@ namespace AKD.HealthSystem
         public void Damage(float damage)
         {
             _currentHealth -= damage;
+            OnDamaged?.Invoke();
+            OnHealthChanged?.Invoke(_currentHealth, maxHealth);
+            
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0f;
                 OnDied?.Invoke();
             }
-
-            OnDamaged?.Invoke();
-            OnHealthChanged?.Invoke(_currentHealth, maxHealth);
         }
 
         #region MonoBehaviour Methods

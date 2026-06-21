@@ -1,4 +1,5 @@
 ﻿using TwinStickShooter.AnimationSystem;
+using TwinStickShooter.InputSystem;
 using TwinStickShooter.MovementSystem;
 using UnityEngine;
 
@@ -12,12 +13,14 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
             MovementController movementController, 
             AnimationController animationController, 
             IKRigController ikRigController,
-            Transform aimTarget)
+            Transform aimTarget,
+            GameplayInputs gameplayInputs)
         {
             MovementController = movementController;
             AnimationController = animationController;
             IKRigController = ikRigController;
             AimTarget = aimTarget;
+            GameplayInputs = gameplayInputs;
         }
 
         #endregion
@@ -26,6 +29,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Locomotion
         public AnimationController AnimationController { get; }
         public IKRigController IKRigController { get; }
         public Transform AimTarget { get; }
+        public GameplayInputs GameplayInputs { get; }
 
         public Vector3 MoveDirection { get; set; }
         public Vector3 LookDirection { get; set; }

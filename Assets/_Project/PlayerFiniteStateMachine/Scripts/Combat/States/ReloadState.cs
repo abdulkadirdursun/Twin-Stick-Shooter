@@ -1,5 +1,4 @@
 ﻿using AKD.AnimationEvents;
-using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
@@ -14,17 +13,14 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         #endregion
 
-        private static readonly int ReloadId = Animator.StringToHash("Reload");
-        private static readonly string ReloadEndEventName = "ReloadEnd";
+        private readonly int _reloadId = Animator.StringToHash("Reload");
 
         private int _reloadLayerId;
 
         public override void StateEnter()
         {
-            _reloadLayerId = Blackboard.AnimationController.GetActiveLayerId();
-            Blackboard.AnimationEventDispatcher.Register(_reloadLayerId, ReloadEndEventName, OnReloadAnimationEnd);
-            Blackboard.AnimationController.SetTrigger(ReloadId);
-            //TODO: When animation end change state to last
+            Blackboard.AnimationController.SetTrigger(_reloadId);
+            Blackboard.AnimationEventDispatcher.Register(AnimationEventScope.State(_reloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
         }
 
         public override void StateUpdate()
@@ -33,21 +29,13 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         public override void StateExit()
         {
-            Blackboard.AnimationEventDispatcher.Unregister(_reloadLayerId, ReloadEndEventName, OnReloadAnimationEnd);
+            Blackboard.AnimationEventDispatcher.Unregister(AnimationEventScope.State(_reloadId), AnimationEventType.OnComplete, OnReloadAnimationEnd);
         }
 
-        private void OnReloadAnimationEnd()
+        private void OnReloadAnimationEnd(AnimationEventContext context)
         {
-            if (Blackboard.WeaponSlots.ActiveSlot?.Weapon)
-            {
-                var weapon = Blackboard.WeaponSlots.ActiveSlot.Weapon;
-                if (weapon is Gun gun)
-                {
-                    gun.Reload();
-                }
-            }
-
-            StateMachine.ReturnToPreviousState<IdleState>();
+            Debug.LogWarning("[ReloadState] OnReloadAnimationEnd");
+            StateMachine.ChangeState<IdleState>();
         }
     }
 }

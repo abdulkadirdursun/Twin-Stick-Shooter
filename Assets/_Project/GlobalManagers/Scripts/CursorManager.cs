@@ -9,6 +9,7 @@ namespace TwinStickShooter.GlobalManagers
         private void Awake()
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         #endregion

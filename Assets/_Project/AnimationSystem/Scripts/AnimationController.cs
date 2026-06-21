@@ -1,10 +1,12 @@
 using TwinStickShooter.AnimationSystem.Enums;
+using TwinStickShooter.WeaponSystem;
 using UnityEngine;
 
 namespace TwinStickShooter.AnimationSystem
 {
     public class AnimationController : MonoBehaviour
     {
+        [SerializeField] private SelectedPlayerWeaponData selectedPlayerWeaponData;
         [SerializeField] private Animator animator;
 
         private AnimatorLayerController _animatorLayerController;
@@ -18,6 +20,8 @@ namespace TwinStickShooter.AnimationSystem
         {
             return _animatorLayerController.ActiveAnimatorLayer;
         }
+
+        #region Animator Calls
 
         public void SetBool(int id, bool value)
         {
@@ -34,11 +38,13 @@ namespace TwinStickShooter.AnimationSystem
             animator.SetTrigger(id);
         }
 
-        #region MonoBehaviour Methods
+        #endregion
 
+        #region MonoBehaviour Methods
+        
         private void Start()
         {
-            _animatorLayerController = new AnimatorLayerController(animator);
+            _animatorLayerController = new AnimatorLayerController(animator, selectedPlayerWeaponData);
         }
 
         private void OnDestroy()

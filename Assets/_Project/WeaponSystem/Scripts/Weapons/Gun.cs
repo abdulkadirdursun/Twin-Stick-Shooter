@@ -1,4 +1,5 @@
-﻿using TwinStickShooter.WeaponSystem.Projectiles;
+﻿using AKD.AnimationEvents;
+using TwinStickShooter.WeaponSystem.Projectiles;
 using UnityEngine;
 
 namespace TwinStickShooter.WeaponSystem
@@ -8,26 +9,16 @@ namespace TwinStickShooter.WeaponSystem
         [SerializeField] private Transform firePoint;
         [SerializeField] private WeaponAimLineDrawer weaponAimLineDrawer;
         [SerializeField] private GunData gunData;
+        [SerializeField] private ProjectilePoolService projectilePoolService;
         protected override float AttackRate => gunData.AttackRate;
-        protected override bool RapidAttack => gunData.IsAutomatic;
+        protected override bool RapidAttack => gunData.IsAutomatic; //TODO: Implement rapid fire
         private int _currentAmmo;
-        private bool _reloading;
-        private WaitForSeconds _waitForSecond;
-        protected bool HasAmmo => _currentAmmo > 0;
 
-        public override void OnStartAim()
-        {
-            weaponAimLineDrawer.SetActive(true);
-        }
+        private readonly int _reloadAnimationId = Animator.StringToHash("Reload");
 
-        public override void OnStopAim()
+        protected override void PerformAttack()
         {
-            weaponAimLineDrawer.SetActive(false);
-        }
-
-        public void Shoot()
-        {
-            var projectile = ProjectilePool.Instance.GetProjectile();
+            var projectile = projectilePoolService.Get();
             projectile.transform.position = firePoint.position;
             projectile.transform.forward = firePoint.forward;
             projectile.Fire(gunData.Damage, gunData.EffectiveDistance, TargetLayers);
@@ -35,36 +26,47 @@ namespace TwinStickShooter.WeaponSystem
             Debug.LogError($"Fire: {_currentAmmo}/{gunData.AmmoCapacity}");
         }
 
-        public override void OnEquipped(LayerMask targetLayers)
+        protected override bool CanAttack()
         {
-            base.OnEquipped(targetLayers);
+            if (!base.CanAttack() || _currentAmmo == 0) return false;
+
+            return true;
+        }
+
+        public override void ShowDamageAreaPreview(bool isVisible)
+        {
+            weaponAimLineDrawer.SetActive(isVisible);
+        }
+
+        protected override void OnEquipped()
+        {
             _currentAmmo = gunData.AmmoCapacity;
             weaponAimLineDrawer.Configure(gunData.EffectiveDistance);
         }
 
-        public override void OnUnequipped()
+        protected override void OnUnequipped()
         {
-            base.OnUnequipped();
             weaponAimLineDrawer.SetActive(false);
         }
 
-        public override bool CanAttack(out FailedAttackReason failedAttackReason)
+        protected override void OnDropped()
         {
-            if (!HasAmmo)
-            {
-                failedAttackReason = FailedAttackReason.NoAmmo;
-                return false;
-            }
-
-            return base.CanAttack(out failedAttackReason);
+            weaponAimLineDrawer.SetActive(false);
         }
 
-        public void Reload()
+        protected override void SubscribeAnimationEvents()
         {
-            if (_reloading) return;
-            _reloading = true;
+            AnimationEventDispatcher.Register(AnimationEventScope.State(_reloadAnimationId), AnimationEventType.OnComplete, OnReloadAnimationComplete);
+        }
+
+        protected override void UnsubscribeAnimationEvents()
+        {
+            AnimationEventDispatcher.Unregister(AnimationEventScope.State(_reloadAnimationId), AnimationEventType.OnComplete, OnReloadAnimationComplete);
+        }
+
+        private void OnReloadAnimationComplete(AnimationEventContext context)
+        {
             _currentAmmo = gunData.AmmoCapacity;
-            _reloading = false;
         }
     }
 }

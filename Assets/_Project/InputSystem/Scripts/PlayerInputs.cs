@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 
 namespace TwinStickShooter.InputSystem
 {
@@ -10,100 +8,17 @@ namespace TwinStickShooter.InputSystem
      */
     public class PlayerInputs : MonoBehaviour
     {
+        [SerializeField] private InputControlSchemeData inputControlSchemeData;
+        [SerializeField] private GameplayInputs gameplayInputs;
         private PlayerInputActions _playerInputActions;
-        private InputControlScheme _inputControlScheme;
 
         private void Initialize()
         {
             _playerInputActions = new PlayerInputActions();
-            _inputControlScheme = new InputControlScheme(_playerInputActions);
-            //Gameplay
-            _playerInputActions.Gameplay.Movement.performed += ReadMovementInput;
-            _playerInputActions.Gameplay.AimTrigger.performed += OnMouseRightClickPerformed;
-            _playerInputActions.Gameplay.AimTrigger.canceled += OnMouseRightClickCancelled;
-            _playerInputActions.Gameplay.LookTargetMovement.performed += ReadLookTargetMovement;
-            _playerInputActions.Gameplay.Aim.performed += ReadAim;
-            _playerInputActions.Gameplay.Interact.performed += OnInteractButtonClicked;
-            _playerInputActions.Gameplay.WeaponSlot1.performed += OnWeaponSlot1Selected;
-            _playerInputActions.Gameplay.WeaponSlot2.performed += OnWeaponSlot2Selected;
-            _playerInputActions.Gameplay.WeaponSlot3.performed += OnWeaponSlot3Selected;
-            _playerInputActions.Gameplay.Attack.performed += AttackInputPerformed;
-            _playerInputActions.Gameplay.Attack.canceled += AttackInputCancelled;
-
-            _playerInputActions.Gameplay.Enable();
+            inputControlSchemeData.Initialize(_playerInputActions);
+            gameplayInputs.Initialize(_playerInputActions.Gameplay);
         }
 
-        #region Gameplay Inputs
-
-        public static event Action<Vector2> MoveInput;
-        public static event Action OnStartAiming;
-        public static event Action OnStopAiming;
-        public static event Action<Vector2> LookTargetMovement;
-        public static event Action<Vector2> CursorPositionInput;
-        public static event Action Interact;
-        public static event Action<int> OnWeaponSlotSelected;
-        public static event Action OnAttackPressed;
-        public static event Action OnAttackReleased;
-
-        private void ReadMovementInput(InputAction.CallbackContext context)
-        {
-            var movementInput = context.ReadValue<Vector2>();
-            MoveInput?.Invoke(movementInput);
-        }
-
-        private void OnMouseRightClickPerformed(InputAction.CallbackContext context)
-        {
-            OnStartAiming?.Invoke();
-        }
-
-        private void OnMouseRightClickCancelled(InputAction.CallbackContext context)
-        {
-            OnStopAiming?.Invoke();
-        }
-
-        private void ReadLookTargetMovement(InputAction.CallbackContext context)
-        {
-            var value = context.ReadValue<Vector2>();
-            LookTargetMovement?.Invoke(value);
-        }
-
-        private void ReadAim(InputAction.CallbackContext context)
-        {
-            var aimPosition = context.ReadValue<Vector2>();
-            CursorPositionInput?.Invoke(aimPosition);
-        }
-
-        private void OnInteractButtonClicked(InputAction.CallbackContext context)
-        {
-            Interact?.Invoke();
-        }
-
-        private void OnWeaponSlot1Selected(InputAction.CallbackContext context)
-        {
-            OnWeaponSlotSelected?.Invoke(1);
-        }
-
-        private void OnWeaponSlot2Selected(InputAction.CallbackContext context)
-        {
-            OnWeaponSlotSelected?.Invoke(2);
-        }
-
-        private void OnWeaponSlot3Selected(InputAction.CallbackContext context)
-        {
-            OnWeaponSlotSelected?.Invoke(3);
-        }
-
-        private void AttackInputPerformed(InputAction.CallbackContext context)
-        {
-            OnAttackPressed?.Invoke();
-        }
-
-        private void AttackInputCancelled(InputAction.CallbackContext context)
-        {
-            OnAttackReleased?.Invoke();
-        }
-
-        #endregion
 
         #region MonoBehaviour Methods
 
@@ -114,7 +29,7 @@ namespace TwinStickShooter.InputSystem
 
         private void OnDestroy()
         {
-            _inputControlScheme.Dispose();
+            inputControlSchemeData.Dispose();
             _playerInputActions.Dispose();
         }
 

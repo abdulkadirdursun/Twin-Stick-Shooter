@@ -1,6 +1,4 @@
-﻿using TwinStickShooter.InputSystem;
-
-namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
+﻿namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 {
     public class IdleState : AbstractCombatState
     {
@@ -14,7 +12,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         public override void StateEnter()
         {
-            PlayerInputs.OnStartAiming += ChangeToAimedState;
+            Blackboard.GameplayInputs.StartAiming += ChangeToAimedState;
         }
 
         public override void StateUpdate()
@@ -23,7 +21,7 @@ namespace TwinStickShooter.PlayerFiniteStateMachine.Combat
 
         public override void StateExit()
         {
-            PlayerInputs.OnStartAiming -= ChangeToAimedState;
+            Blackboard.GameplayInputs.StartAiming -= ChangeToAimedState;
         }
 
         private void ChangeToAimedState()
